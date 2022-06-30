@@ -1,0 +1,2 @@
+- search: /directory\=\'.*dataset\'/
+  replacement: directory='dataset'

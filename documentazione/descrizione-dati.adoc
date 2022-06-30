@@ -1,0 +1,154 @@
+= Analisi della semantica dei dataset
+
+== _Dataset SDO Regione Lombardia_
+
+=== Descrizione dei campi della tabella
+
+[cols="<.<1m,<.<2a,<.<2a"]
+|===
+|Campo |Descrizione |Note
+
+|ANNO
+|Anno in cui si è presentato quel paziente per quella specifica malattia
+|
+
+|ATS STRUTTURA
+|Nome dell'agenzia di tutela della salute della regione Lombardia
+|
+.Sono:
+. ATS Milano Città Metropolitana
+. ATS Insubria
+. ATS Montagna
+. ATS Brianza
+. ATS Bergamo
+. ATS Brescia
+. ATS Val Padana
+. ATS Pavia
+
+|CODICE STRUTTURA DI RICOVERO
+| Identificatore unico della struttura di ricovero appartenente a un ATS
+|
+
+|DESCRIZIONE STRUTTURA DI RICOVERO
+|Descrizione della struttura, solitamente indica il nome della stessa
+|
+
+|COORDINATA GEOGRAFICA X
+|Coordinata geografica X della struttura di ricovero
+|
+
+|COORDINATA GEOGRAFICA Y
+|Coordinata geografica Y della struttura di ricovero
+|
+
+|POSIZIONE ATS
+|Punto di coordinate X e Y dell'ATS specificato
+|Riassume le Coordinate X e Y viste sopra
+
+|CODICE DISCIPLINA
+|Identificatore unico della disciplina che riguarda la malattia del paziente
+|
+
+|DESCRIZIONE DISCIPLINA
+|Descrizione della disciplina che si occupa di quella malattia, solitamente indica il nome della stessa
+|
+
+|TIPOLOGIA ASSISTENZA
+|Tipologia di assistenza
+|
+.Suddiviso in:
+. A: acuzie
+. R: riabilitazione
+. L: lungodegenza
+
+|TIPO DRG
+|Tipo riguardante il gruppo di diagnosi secondo il sistema DRG (Diagnosis Related Group)
+|*N.B.*: Il sistema DRG permette di classificare tutti i pazienti dimessi da un ospedale in gruppi omogenei per assorbimento di risorse impegnate (isorisorse)
+
+|CODICE DRG
+|Identificatore unico del gruppo di diagnosi secondo il sistema DRG
+|
+
+|DESCRIZIONE DRG
+|Descrizione fornita relativa al gruppo di appartenenza secondo il sistema DRG
+|
+
+|CODICE ACC DI DIAGNOSI
+|Identificatore unico di diagnosi o procedura secondo il sistema ACC (Aggregati clinici di codici)
+|Gli ACC (aggregati clinici di codici) sono stati sviluppati a partire dal 1993 dall’agenzia americana  AHQR (Agency for Healthcare Quality and Research), con lo scopo di raggruppare i codici  ICD-9-CM in un set ristretto di classi relativamente omogenee e di utilità per i ricercatori ed analisti di politica sanitaria
+
+|DESCRIZIONE ACC DI DIAGNOSI
+|Descrizione fornita relativa alla malattia identificata dal codice di appartenenza secondo il sistema Acc
+|
+
+|CODICE MDC
+|Identificatore unico facente parte delle categorie diagnostiche maggiori (MDC, Major Diagnostic Category)
+|*N.B*: I DRG sono raggruppati a loro volta in MDC
+
+|DESCRIZIONE MDC
+|Descrizione del gruppo appartenente all'MDC riguardante il caso trattato
+|
+
+|TOTALE RICOVERI
+|Totale ricoveri DO/DH/DS del paziente
+|
+
+|RICOVERI DO
+|Numero di ricoveri in regime di degenza ordinaria
+|*N.B*: Il ricovero in regime di degenza ordinaria avviene per persone con disabilità rilevante, modificabile, che possano essere sottoposti a trattamento riabilitativo e che non siano gestibili in altro contesto riabilitativo (ricovero diurno o ambulatoriale)
+
+|RICOVERI ORDINARI 01 GIORNI
+|Numero di ricoveri in degenza ordinaria che non si sono dilungati più di 1 giorno
+|
+
+|RICOVERI DH
+|Numero di ricoveri Day Hospital (ricoveri di tipo non chirurgico)
+|*N.B*: Il day hospital (DH) o ricovero diurno è una forma di assistenza, garantita dal Servizio sanitario nazionale, che permette al paziente di usufruire di cure ospedaliere nell'arco di uno o più ricoveri programmati (tutti di durata inferiore a un giorno e senza pernottamento) per lo svolgimento di accertamenti diagnostici
+
+|RICOVERI DS
+|Numero di ricoveri Day Surgery (ricoveri di tipo chirurgici)
+|*N.B*: Il day surgery, o “chirurgia di un giorno”, rappresenta la modalità clinico-organizzativa per effettuare interventi chirurgici o procedure diagnostiche e/o terapeutiche invasive, in regime di ricovero limitato alle sole ore del giorno, in anestesia generale, loco-regionale o locale. +
+Ciò consente un precoce ritorno al proprio ambiente familiare, riducendo al minimo il disagio generato dall’ospedalizzazione.
+
+|GIORNATE DEGENZA DO
+|Periodo di 24 ore durante il quale un posto letto è occupato da un ricovero DO
+|
+
+|ACCESSI DH
+|Numero di accessi Day Hospital
+|
+
+|ACCESSI DS
+|Numero di accessi Day Surgery
+|
+
+|GIORNATE DEGENZA TOTALI
+|Numero di giorni totali in cui quel paziente ha occupato un posto letto
+|
+
+|DIMISSIONI VOLONTARIE
+|Numero di volte in cui un paziente si è dimesso volontariamente dal ricovero
+|
+
+|TRASFERIMENTI
+|Numero di trasferimenti del paziente
+|
+
+|RICOVERI RIPETUTI
+|Numero di ricoveri ripetuti (0 implica che è bastata un solo ricovero per quella malattia)
+|
+
+|RITORNI IN SALA OPERATORIA
+|Numero di volte in cui il paziente è entrato in sala operatoria
+|
+
+|===
+
+== _dataset SDO filtrata_
+
+* Questo dataset è una "vista" filtrata della tabella "_Dataset SDO Regione Lombardia_", da cui sono stati rimossi i seguenti campi:
+** `ANNO`
+** `POSIZIONE ATS`
+** `CODICE ACC DI DIAGNOSI`
+** `DESCRIZIONE ACC DI DIAGNOSI`
+* Perciò i restanti campi seguono la tabella precedente
