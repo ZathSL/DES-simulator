@@ -1,0 +1,106 @@
+DIFFERENCE HCBD FILTRATA E NON
+- Anno
+- Posizione ATS
+- Codice Acc di diagnosi
+- Descrizione Acc di diagnosi
+
+
+DESCRIZIONE DELLE ESTENSIONI DEI FILE
+
+SHP - contenente dati vettoriali
+SHX - file di indice
+DBF - tabella degli attributi
+PRJ - sistema delle coordinate
+
+DESCRIZIONE CAMPI
+
+Anno: Anno in cui si è presentato quel paziente per quella specifica malattia
+
+ATS struttura: Nome dell'agenzia di tutela della salute della regione Lombardia (sono 8)
+	- ATS Milano Città Metropolitana
+	- ATS Insubria
+	- ATS Montagna
+	- ATS Brianza
+	- ATS Bergamo
+	- ATS Brescia
+	- ATS Val Padana
+	- ATS Pavia
+	
+Codice struttura di ricovero: Identificatore unico della struttura di ricovero appartenente a un ATS
+
+Descrizione struttura di ricovero: Descrizione della struttura, solitamente indica il nome della stessa
+
+Coordinata geografica X: Coordinata geografica X della struttura di ricovero
+
+Coordinata geografica Y: Coordinata geografica Y della struttura di ricovero
+
+Posizione ATS: Punto di coordinate X e Y dell'ATS specificato, riassume le Coordinate X e Y viste sopra
+
+Codice disciplina: Identificatore unico della disciplina che riguarda la malattia del paziente
+
+Descrizione disciplina: Descrizione della disciplina che si occupa di quella malattia, solitamente indica il nome della stessa
+
+Tipologia assistenza: Tipologia di assistenza suddiviso in A (acuzie), R (riabilitazione) e L (lungodegenza)
+
+Tipo DRG: Tipo riguardante il gruppo di diagnosi secondo il sistema DRG (Diagnosis Related Group)
+
+	N.B.: Il sistema DRG permette di classificare tutti i pazienti dimessi da un ospedale in gruppi omogenei per assorbimento di risorse impegnate (isorisorse)
+
+Codice DRG: Identificatore unico del gruppo di diagnosi secondo il sistema DRG
+
+Descrizione DRG: Descrizione fornita relativa al gruppo di appartenenza secondo il sistema DRG
+
+Codice acc di diagnosi: Identificatore unico di diagnosi o procedura secondo il sistema ACC (Aggregati clinici di codici)
+
+Descrizione acc di diagnosi: Descrizione fornita relativa alla malattia identificata dal codice di appartenenza secondo il sistema Acc
+
+Codice MDC: Identificatore unico facente parte delle categorie diagnostiche maggiori (MDC, Major Diagnostic Category)
+
+	N.B: I DRG sono raggruppati, a loro volta, in MDC
+	
+Descrizione MDC: Descrizione del gruppo appartenente all'MDC riguardante il caso trattato
+
+Totale Ricoveri: Totale ricoveri DO/DH/DS del paziente
+
+Ricoveri DO: Numero di ricoveri in regime di degenza ordinaria
+
+	N.B: Il ricovero in regime di degenza ordinaria avviene per persone con disabilità rilevante, 
+	modificabile, che possano essere sottoposti 
+	a trattamento riabilitativo e che non siano gestibili in altro contesto 
+	riabilitativo (ricovero diurno o ambulatoriale).
+	
+Ricoveri ordinari 01 giorni: ricoveri in degenza ordinaria che non si sono dilungati più di 1 giorno
+
+Ricoveri DH: Numero di ricoveri Day Hospital (ricoveri di tipo non chirugico)
+
+	N.B: Il day hospital (DH) o ricovero diurno è una forma di assistenza, garantita dal Servizio sanitario nazionale
+	, che permette al paziente di usufruire di cure ospedaliere nell'arco di uno o 
+	più ricoveri programmati (tutti di durata inferiore a un giorno e senza pernottamento)
+	per lo svolgimento di accertamenti diagnostici
+
+Ricoveri DS: Numero di ricoveri Day Surgery (ricoveri di tipo chirurgici)
+
+	N.B: Il day surgery, o “chirurgia di un giorno”, rappresenta la modalità clinico-organizzativa per effettuare interventi 
+	chirurgici o procedure diagnostiche e/o terapeutiche invasive, in regime di ricovero 
+	limitato alle sole ore del giorno, in anestesia generale, loco-regionale o locale. 
+	Ciò consente un precoce ritorno al proprio ambiente familiare, riducendo al minimo 
+	il disagio generato dall’ospedalizzazione.
+
+Giornate degenza DO: Periodo di 24 ore durante il quale un posto letto è occupato da un ricovero DO
+
+Accessi DH: Numero di accessi Day Hospital
+
+Accessi DS: Numero di accessi Day Surgery
+
+Giornate degenza totali: Numero di giorni totali in cui quel paziente ha occupato un posto letto
+
+Dimissioni volontarie: Numero di volte in cui un paziente si è dimesso volotantariamente dal ricovero
+ 
+Trasferimenti: Numero di trasferimenti del paziente
+
+Ricoveri ripetuti: Numero di ricoveri ripetuti (0 implica che è bastata un solo ricovero per quella malattia)
+
+Ritorni in sala operatoria: Numero di volte in cui il paziente è entrato in sala operatoria
+
+
+
