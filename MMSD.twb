@@ -28,7 +28,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='Dataset_SDO_Regione_Lombardia' name='textscan.1yza3hk1kwa7z21boapdj066xw2l'>
-            <connection class='textscan' directory='D:/DATA/università/unito/magistrale/MMSD/progetto/dataset' filename='Dataset_SDO_Regione_Lombardia.tsv' password='' server='' />
+            <connection class='textscan' directory='dataset' filename='Dataset_SDO_Regione_Lombardia.tsv' password='' server='' />
           </named-connection>
         </named-connections>
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1yza3hk1kwa7z21boapdj066xw2l' name='Dataset_SDO_Regione_Lombardia.tsv' table='[Dataset_SDO_Regione_Lombardia#tsv]' type='table'>

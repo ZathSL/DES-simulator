@@ -2,8 +2,9 @@
 
 ## Setup
 
-La prima volta che si clona questa repository è necessario lanciare il seguente comando:
+Quando si clona questa repository è necessario lanciare i seguenti comandi:
 
 ```shell
-python pre-commit.pyz install
+pipenv install
+pre-commit install
 ```
