@@ -73,8 +73,8 @@ Ricoveri ordinari 01 giorni: ricoveri in degenza ordinaria che non si sono dilun
 
 Ricoveri DH: Numero di ricoveri Day Hospital (ricoveri di tipo non chirugico)
 
-	N.B: Il day hospital (DH) o ricovero diurno è una forma di assistenza, garantita dal Servizio sanitario nazionale
-	, che permette al paziente di usufruire di cure ospedaliere nell'arco di uno o 
+	N.B: Il day hospital (DH) o ricovero diurno è una forma di assistenza, garantita dal Servizio sanitario nazionale,
+	che permette al paziente di usufruire di cure ospedaliere nell'arco di uno o
 	più ricoveri programmati (tutti di durata inferiore a un giorno e senza pernottamento)
 	per lo svolgimento di accertamenti diagnostici
 

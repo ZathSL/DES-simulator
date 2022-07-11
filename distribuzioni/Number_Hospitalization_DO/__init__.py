@@ -1,11 +1,12 @@
+import csv
 import warnings
+
+import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.stats as st
 from scipy.stats._continuous_distns import _distn_names
-import matplotlib.pyplot as plt
-import matplotlib
-import csv
 
 matplotlib.rcParams['figure.figsize'] = (16.0, 12.0)
 matplotlib.style.use('ggplot')
@@ -14,19 +15,30 @@ matplotlib.style.use('ggplot')
 def get_dataset():
     file = open('dataset/Dataset_SDO_Regione_Lombardia.csv')
     csvreader = csv.reader(file)
-    filter_numberDH(csvreader)
+    filter_issues(csvreader)
 
 
-def filter_numberDH(csvreader):
+def filter_days_do(csvreader):
     data = []
     code = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
             '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
             '21', '22', '23', '24', '25', 'PR', 'NA']
+    for index in code:
+        for row in csvreader:
+            if row[15] == index and int(row[18]) != 0:
+                data.append(int(row[22]) / int(row[18]))
+        plot_data(data, index)
 
+
+def filter_issues(csvreader):
+    data = []
+    code = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+            '21', '22', '23', '24', '25', 'PR', 'NA']
     for index in code:
         for row in csvreader:
             if row[15] == index:
-                data.append(int(row[20]))
+                data.append(int(row[18]))
         plot_data(data, index, np.mean(data), np.var(data))
 
 
@@ -133,9 +145,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DH')
+    ax.set_xlabel('Number of hospitalization DO')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDHDistributeLOGLOG' + name + '.jpg')
+    plt.savefig('NumDODistributeLOGLOG' + name + '.jpg')
 
     # Display2
     plt.figure(figsize=(12, 8))
@@ -148,9 +160,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DH')
+    ax.set_xlabel('Number of hospitalization DO')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDHDistributeLOG' + name + '.jpg')
+    plt.savefig('NumDODistributeLOG' + name + '.jpg')
 
 
 def main():

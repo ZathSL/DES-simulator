@@ -1,43 +1,41 @@
+import csv
 import warnings
+
+import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.stats as st
 from scipy.stats._continuous_distns import _distn_names
-import matplotlib.pyplot as plt
-import matplotlib
-import csv
 
 matplotlib.rcParams['figure.figsize'] = (16.0, 12.0)
 matplotlib.style.use('ggplot')
 
 
 def get_dataset():
-    file = open('../dataset/Dataset_SDO_Regione_Lombardia.csv')
+    file = open('dataset/Dataset_SDO_Regione_Lombardia.csv')
     csvreader = csv.reader(file)
-    filter_Issues_MDC(csvreader)
+    filter_days_do(csvreader)
 
 
-def filter_Issues_MDC(csvreader):
-    data = {}
-    for row in csvreader:
-        if row[16] != 'DESCRIZIONE MDC':
-            if not row[16] in data:
-                data[row[16]] = 0
-            else:
-                data[row[16]] = data[row[16]]+1
-    temp = list(data.values())
-    plot_data(data, np.mean(temp), np.var(temp))
+def filter_days_do(csvreader):
+    data = []
+    code = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+            '21', '22', '23', '24', '25', 'PR', 'NA']
+    for index in code:
+        for row in csvreader:
+            if row[15] == index and int(row[18]) != 0:
+                data.append(int(row[22]) / int(row[18]))
+        plot_data(data, index, np.mean(data), np.var(data))
 
 
-def best_fit_distribution(data, ax):
+def best_fit_distribution(data, bins, ax):
     print("Model data by finding best fit distribution to data")
-    # Get bar diagram of original data
-    #y = plt.bar(range(len(data)), list(data.values()), tick_label=list(data.keys()))
-    #y, x = np.histogram(list(data.values()), bins = list(data.keys()))
-    #x = (x + np.roll(x, -1))[:-1] / 2.0
-    y = np.array(list(data.values()))
-    x = np.array(list(data.keys()))
-    print(y,x)
+    # Get histogram of original data
+    y, x = np.histogram(data, bins, density=True)
+    x = (x + np.roll(x, -1))[:-1] / 2.0
+
     # Best holders
     best_distributions = []
 
@@ -76,7 +74,7 @@ def best_fit_distribution(data, ax):
 
         except Exception:
             pass
-    print(best_distributions)
+
     return sorted(best_distributions, key=lambda x: x[2])
 
 
@@ -100,27 +98,25 @@ def make_pdf(dist, params, size=10000):
     return pdf
 
 
-def plot_data(data, mean, var):
+def plot_data(data, name, mean, var):
     # Plot for comparison
-    plt.figure(figsize=(12, 8))
-    code = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
-            '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
-            '21', '22', '23', '24', '25', 'PR', 'NA']
-    print(data)
-    df = pd.DataFrame.from_dict([data])
-    ax = df.plot.bar()
+    df = pd.DataFrame(data)
+    ax = df.plot(kind='hist', bins=int(len(data) ** (1 / 2)) + 1, density=True, alpha=0.5,
+                 color=list(plt.rcParams['axes.prop_cycle'])[1]['color'])
+
     ax.set_yscale('log')
+
     # Save plot limits
     dataYLim = ax.get_ylim()
 
     # Find best fit distribution
-    best_distributions = best_fit_distribution(data, ax)
+    best_distributions = best_fit_distribution(data, 'auto', ax)
     best_dist = best_distributions[0]
 
     # Update plots
     ax.set_ylim(dataYLim)
     ax.set_title('Fitted distribution')
-    ax.set_xlabel('Issues')
+    ax.set_xlabel('Days in DO')
     ax.set_ylabel('Frequency')
 
     # Make PDF with best params
@@ -129,30 +125,33 @@ def plot_data(data, mean, var):
     # Display
     plt.figure(figsize=(12, 8))
     ax = pdf.plot(lw=2, label='PDF', legend=True)
-    ax.set_yscale('log')
-    df.plot.bar()
+    df.plot(kind='hist', bins=int(len(data) ** (1 / 2)) + 1, density=True, alpha=0.5, label='Data', legend=True, ax=ax)
+
     param_names = (best_dist[0].shapes + ', loc, scale').split(', ') if best_dist[0].shapes else ['loc', 'scale']
     param_str = ', '.join(['{}={:0.2f}'.format(k, v) for k, v in zip(param_names, best_dist[1])])
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Issues MDC')
+    ax.set_xlabel('Days in DO')
     ax.set_ylabel('Frequency')
-    plt.savefig('IssuesMDCDistributeLOGLOG.jpg')
+    ax.set_yscale('log')
+    plt.savefig('Distribution_Days_DO/DistributeLOG' + name + '.jpg')
 
-    # Display2
+    # Display
     plt.figure(figsize=(12, 8))
     ax = pdf.plot(lw=2, label='PDF', legend=True)
-    ax.set_yscale('log')
-    df.plot.bar()
+    df.plot(kind='hist', bins=int(len(data) ** (1 / 2)) + 1, density=True, alpha=0.5, label='Data', legend=True, ax=ax)
+
     param_names = (best_dist[0].shapes + ', loc, scale').split(', ') if best_dist[0].shapes else ['loc', 'scale']
     param_str = ', '.join(['{}={:0.2f}'.format(k, v) for k, v in zip(param_names, best_dist[1])])
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Issues MDC')
+    ax.set_xlabel('Days in DO')
     ax.set_ylabel('Frequency')
-    plt.savefig('IssuesMDCDistributeLOG.jpg')
+    ax.set_yscale('log')
+    ax.set_xscale('log')
+    plt.savefig('Distribution_Days_DO/DistributeLOGLOG' + name + '.jpg')
 
 
 def main():
