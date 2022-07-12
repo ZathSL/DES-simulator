@@ -129,6 +129,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>ATS STRUTTURA</remote-name>
@@ -143,6 +144,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODICE STRUTTURA DI RICOVERO</remote-name>
@@ -157,6 +159,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DESCRIZIONE STRUTTURA DI RICOVERO</remote-name>
@@ -171,6 +174,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>COORDINATA GEOGRAFICA X</remote-name>
@@ -185,6 +189,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>COORDINATA GEOGRAFICA Y</remote-name>
@@ -199,6 +204,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>POSIZIONE ATS</remote-name>
@@ -212,6 +218,7 @@
             <precision>-1</precision>
             <scale>1</scale>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODICE DISCIPLINA</remote-name>
@@ -223,6 +230,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DESCRIZIONE DISCIPLINA</remote-name>
@@ -237,6 +245,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>TIPOLOGIA ASSISTENZA</remote-name>
@@ -251,6 +260,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>TIPO DRG</remote-name>
@@ -265,6 +275,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODICE DRG</remote-name>
@@ -279,6 +290,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DESCRIZIONE DRG</remote-name>
@@ -293,6 +305,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODICE ACC DI DIAGNOSI</remote-name>
@@ -304,6 +317,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DESCRIZIONE ACC DI DIAGNOSI</remote-name>
@@ -318,6 +332,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>CODICE MDC</remote-name>
@@ -332,6 +347,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DESCRIZIONE MDC</remote-name>
@@ -346,6 +362,7 @@
             <width>1073741823</width>
             <contains-null>true</contains-null>
             <collation flag='0' name='LIT_RIT' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>TOTALE RICOVERI</remote-name>
@@ -357,6 +374,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RICOVERI DO</remote-name>
@@ -368,6 +386,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RICOVERI ORDINARI 01 GIORNI</remote-name>
@@ -379,6 +398,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RICOVERI DH</remote-name>
@@ -390,6 +410,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RICOVERI DS</remote-name>
@@ -401,6 +422,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>GIORNATE DEGENZA DO</remote-name>
@@ -412,6 +434,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>ACCESSI DH</remote-name>
@@ -423,6 +446,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>ACCESSI DS</remote-name>
@@ -434,6 +458,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>GIORNATE DEGENZA TOTALI</remote-name>
@@ -445,6 +470,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>DIMISSIONI VOLONTARIE</remote-name>
@@ -456,6 +482,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>TRASFERIMENTI</remote-name>
@@ -467,6 +494,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RICOVERI RIPETUTI</remote-name>
@@ -478,6 +506,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
           <metadata-record class='column'>
             <remote-name>RITORNI IN SALA OPERATORIA</remote-name>
@@ -489,6 +518,7 @@
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dataset_SDO_Regione_Lombardia.tsv_91A22E65A98A4BF8BE228DAEDC7A1871]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
           </metadata-record>
         </metadata-records>
       </connection>
@@ -606,10 +636,10 @@
             <column caption='Codice Mdc' datatype='string' name='[CODICE MDC]' role='dimension' type='nominal' />
             <column caption='Descrizione Mdc' datatype='string' name='[DESCRIZIONE MDC]' role='dimension' type='nominal' />
             <column-instance column='[DESCRIZIONE MDC]' derivation='Count' name='[cnt:DESCRIZIONE MDC:vtsum:ok]' pivot='key' type='ordinal' visual-totals='Sum' />
-            <column-instance column='[CODICE MDC]' derivation='None' name='[none:CODICE MDC:ok]' pivot='key' type='nominal' />
+            <column-instance column='[CODICE MDC]' derivation='None' name='[none:CODICE MDC:nk]' pivot='key' type='nominal' />
             <column-instance column='[DESCRIZIONE MDC]' derivation='None' name='[none:DESCRIZIONE MDC:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
-          <alphabetic-sort column='[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]' direction='ASC' />
+          <alphabetic-sort column='[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]' direction='ASC' />
           <aggregation value='true' />
         </view>
         <style>
@@ -625,7 +655,7 @@
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows>([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok] / ([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk] / [federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]))</rows>
+        <rows>([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk] / ([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk] / [federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]))</rows>
         <cols />
       </table>
       <simple-id uuid='{87F30F68-52A5-494C-B197-E08252E8A508}' />
@@ -948,6 +978,54 @@
       </table>
       <simple-id uuid='{D85C97C4-5517-44BE-9E84-E43FB7AE37BA}' />
     </worksheet>
+    <worksheet name='Strutture'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Dataset SDO Regione Lombardia' name='federated.1vmf0eb08g05rn11sm8061p21tl3' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1vmf0eb08g05rn11sm8061p21tl3'>
+            <column caption='Codice Mdc' datatype='string' name='[CODICE MDC]' role='dimension' type='nominal' />
+            <column caption='Codice Struttura Di Ricovero' datatype='string' name='[CODICE STRUTTURA DI RICOVERO]' role='dimension' type='nominal' />
+            <column caption='Descrizione Mdc' datatype='string' name='[DESCRIZIONE MDC]' role='dimension' type='nominal' />
+            <column caption='Descrizione Struttura Di Ricovero' datatype='string' name='[DESCRIZIONE STRUTTURA DI RICOVERO]' role='dimension' type='nominal' />
+            <column caption='Totale Ricoveri' datatype='integer' name='[TOTALE RICOVERI]' role='measure' type='quantitative' />
+            <column-instance column='[CODICE MDC]' derivation='None' name='[none:CODICE MDC:nk]' pivot='key' type='nominal' />
+            <column-instance column='[CODICE STRUTTURA DI RICOVERO]' derivation='None' name='[none:CODICE STRUTTURA DI RICOVERO:nk]' pivot='key' type='nominal' />
+            <column-instance column='[DESCRIZIONE MDC]' derivation='None' name='[none:DESCRIZIONE MDC:nk]' pivot='key' type='nominal' />
+            <column-instance column='[DESCRIZIONE STRUTTURA DI RICOVERO]' derivation='None' name='[none:DESCRIZIONE STRUTTURA DI RICOVERO:nk]' pivot='key' type='nominal' />
+            <column-instance column='[TOTALE RICOVERI]' derivation='Sum' name='[sum:TOTALE RICOVERI:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <alphabetic-sort column='[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]' direction='ASC' />
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]' value='120' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1vmf0eb08g05rn11sm8061p21tl3].[sum:TOTALE RICOVERI:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk] / [federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk])</rows>
+        <cols total='true'>([federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE STRUTTURA DI RICOVERO:nk] / [federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE STRUTTURA DI RICOVERO:nk])</cols>
+      </table>
+      <simple-id uuid='{95BABA17-DD89-4951-BDE3-8EBCF662D81E}' />
+    </worksheet>
     <worksheet name='Tipologie ricovero'>
       <table>
         <view>
@@ -1216,7 +1294,7 @@
       </viewpoint>
       <simple-id uuid='{819666DB-ECB7-46C1-8EAA-7D062468B8B0}' />
     </window>
-    <window class='worksheet' maximized='true' name='Codici MDC'>
+    <window class='worksheet' name='Codici MDC'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1246,608 +1324,14 @@
                 <pane-descriptor>
                   <x-fields />
                   <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
+                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]</field>
                     <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
                     <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
                   </y-fields>
                 </pane-descriptor>
                 <columns>
                   <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>17</value>
-                <value>&quot;\#&quot;</value>
-                <value>&quot;DATO ERRATO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>103125</value>
-                <value>&quot;01&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI SISTEMA NERVOSO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>21111</value>
-                <value>&quot;02&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI OCCHIO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>52576</value>
-                <value>&quot;03&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI ORECCHIO, NASO E GOLA&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>93271</value>
-                <value>&quot;04&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI APPARATO RESPIRATORIO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>156342</value>
-                <value>&quot;05&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI SISTEMA CARDIOCIRCOLATORIO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>165648</value>
-                <value>&quot;06&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI APPARATO DIGERENTE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>47155</value>
-                <value>&quot;07&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI EPATOBILIARI E PANCREAS&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>175683</value>
-                <value>&quot;08&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI APPARATO OSTEOMUSCOLARE E TESSUTO CONNETTIVO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>68466</value>
-                <value>&quot;09&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI PELLE, TESSUTO SOTTOCUTANEO E MAMMELLA&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>28871</value>
-                <value>&quot;10&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI ENDOCRINI, METABOLICI E NUTRIZIONALI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>68905</value>
-                <value>&quot;11&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI RENE E VIE URINARIE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>26980</value>
-                <value>&quot;12&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI APPARATO RIPRODUTTIVO MASCHILE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>41818</value>
-                <value>&quot;13&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI APPARATO RIPRODUTTIVO FEMMINILE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>35493</value>
-                <value>&quot;14&quot;</value>
-                <value>&quot;GRAVIDANZA, PARTO E PUERPERIO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>12091</value>
-                <value>&quot;15&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI PERIODO PERINATALE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>22478</value>
-                <value>&quot;16&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI SANGUE ED ORGANI EMATOPOIETICI E SISTEMA IMMUNITARIO&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>48395</value>
-                <value>&quot;17&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI MIELOPROLIFERATIVI E NEOPLASIE SCARSAMENTE DIFFERENZIATE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>26134</value>
-                <value>&quot;18&quot;</value>
-                <value>&quot;MALATTIE INFETTIVE E PARASSITARIE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>19425</value>
-                <value>&quot;19&quot;</value>
-                <value>&quot;MALATTIE E DISTURBI MENTALI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>5197</value>
-                <value>&quot;20&quot;</value>
-                <value>&quot;USO DI ALCOOL/FARMACI E DISTURBI MENTALI ORGANICI INDOTTI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>32355</value>
-                <value>&quot;21&quot;</value>
-                <value>&quot;TRAUMATISMI, AVVELENAMENTI ED EFFETTI TOSSICI DEI FARMACI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>1682</value>
-                <value>&quot;22&quot;</value>
-                <value>&quot;USTIONI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>35303</value>
-                <value>&quot;23&quot;</value>
-                <value>&quot;FATTORI INFLUENZANTI LO STATO DI SALUTE ED IL RICORSO AI SERVIZI SANITARI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>5637</value>
-                <value>&quot;24&quot;</value>
-                <value>&quot;TRAUMATISMI MULTIPLI&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>1971</value>
-                <value>&quot;25&quot;</value>
-                <value>&quot;INFEZIONI DA HIV&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>3470</value>
-                <value>&quot;NA&quot;</value>
-                <value>&quot;MDC NON APPLICABILE&quot;</value>
-              </tuple>
-            </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
+                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]</field>
                   <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
                 </columns>
               </tuple-descriptor>
@@ -1857,33 +1341,11 @@
                 <value>&quot;PREMDC (DRG SENZA SPECIFICA MDC)&quot;</value>
               </tuple>
             </tuple-reference>
-            <tuple-reference>
-              <tuple-descriptor>
-                <pane-descriptor>
-                  <x-fields />
-                  <y-fields>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                    <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  </y-fields>
-                </pane-descriptor>
-                <columns>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[cnt:DESCRIZIONE MDC:vtsum:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
-                  <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
-                </columns>
-              </tuple-descriptor>
-              <tuple>
-                <value>15945</value>
-                <value>&quot;PR&quot;</value>
-                <value>&quot;PREMDC (DRG SENZA SPECIFICA MDC)&quot;</value>
-              </tuple>
-            </tuple-reference>
           </tuple-selection>
         </selection-collection>
         <highlight>
           <color-one-way>
-            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:ok]</field>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]</field>
             <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:Calculation_1172061857829777409:qk]</field>
             <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:Calculation_1172061857829810178:qk]</field>
             <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
@@ -1891,6 +1353,46 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{E77B9A21-CEFB-42DF-9821-C573160CD64B}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Strutture'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <current-page>
+          <multibucket>
+            <bucket>&quot;FATTORI INFLUENZANTI LO STATO DI SALUTE ED IL RICORSO AI SERVIZI SANITARI&quot;</bucket>
+          </multibucket>
+        </current-page>
+        <zoom type='fit-height' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE MDC:nk]</field>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:CODICE STRUTTURA DI RICOVERO:nk]</field>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:Calculation_1117455712635211777:qk]</field>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE MDC:nk]</field>
+            <field>[federated.1vmf0eb08g05rn11sm8061p21tl3].[none:DESCRIZIONE STRUTTURA DI RICOVERO:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{429DEBAB-C03A-43C9-B302-1483A790F327}' />
     </window>
     <window class='dashboard' name='Storia 1'>
       <viewpoints />
@@ -4767,6 +4269,614 @@
       QjTY0bUEldQRhkCQH93bIvYkSr1YpS+Mc+edzUHu6ZBLxAAzwUk2bt6hWUmjCxYKmSTlmnL2
       bLNeIZHKA3B9IUAongdOc79lRaeQjGISnWdzgUfnl0nFE3itZlq1An2DianlNTKxEJ/c/xj3
       qJtMqkyxmB3UXg65hAxN8JArzf8C6TPPNo4ib/sAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Strutture' width='192'>
+      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
+      6wj7HzpFhS7xYcjxAAAAAElFTkSuQmCC
     </thumbnail>
     <thumbnail height='192' name='Tipologie ricovero' width='192'>
       iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
