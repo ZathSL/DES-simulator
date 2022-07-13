@@ -8,7 +8,7 @@ matplotlib.style.use('ggplot')
 
 def get_dataset():
     df = pd.read_csv("../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
-    df = df[["CODICE MDC", "DESCRIZIONE MDC"]]
+    df = df[["ANNO", "CODICE MDC", "DESCRIZIONE MDC"]]
     missing = df["CODICE MDC"].isna()
     df.loc[missing, "CODICE MDC"] = df.loc[missing, "DESCRIZIONE MDC"].map({
         "MDC NON APPLICABILE": "NA",
@@ -18,9 +18,16 @@ def get_dataset():
 
 
 def plot_data(data: pd.DataFrame):
-    data = data.value_counts(sort=False, dropna=False).to_frame("CONTEGGIO")
-    data = data.reset_index(level="DESCRIZIONE MDC").drop("#").sort_index()
+    data = data.value_counts(sort=False, dropna=False).to_frame("CONTEGGIO").reset_index()
+    data = data.groupby("CODICE MDC", as_index=False).agg({
+        "CODICE MDC": "last",
+        "ANNO": "last",
+        "DESCRIZIONE MDC": "last",
+        "CONTEGGIO": "mean",
+    })
+    data = data.set_index("CODICE MDC").drop(columns="ANNO").drop("#").sort_index()
     freq = data["FREQUENZA"] = data["CONTEGGIO"] / data["CONTEGGIO"].sum()
+    data.rename(columns={"CONTEGGIO": "CONTEGGIO PER ANNO"}, inplace=True)
     # Display
     fig, ax = plt.subplots(1, 1)
     freq.plot(kind='bar', ax=ax)
