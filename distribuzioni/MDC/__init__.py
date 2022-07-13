@@ -20,8 +20,8 @@ def get_dataset():
 def plot_data(data: pd.DataFrame):
     data = data.value_counts(sort=False, dropna=False).to_frame("CONTEGGIO").reset_index()
     data = data.groupby("CODICE MDC", as_index=False).agg({
-        "CODICE MDC": "last",
         "ANNO": "last",
+        "CODICE MDC": "last",
         "DESCRIZIONE MDC": "last",
         "CONTEGGIO": "mean",
     })
@@ -29,6 +29,7 @@ def plot_data(data: pd.DataFrame):
     data.rename(columns={"CONTEGGIO": "CONTEGGIO PER ANNO"}, inplace=True)
     data["CONTEGGIO PER GIORNO"] = data["CONTEGGIO PER ANNO"] / 365.0
     freq = data["FREQUENZA"] = data["CONTEGGIO PER ANNO"] / data["CONTEGGIO PER ANNO"].sum()
+
     # Display
     fig, ax = plt.subplots(1, 1)
     freq.plot(kind='bar', ax=ax)
