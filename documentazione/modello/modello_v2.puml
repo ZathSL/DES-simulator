@@ -1,0 +1,29 @@
+@startuml
+skinparam componentStyle rectangle
+'skinparam lineType polyline
+
+(ESTERNO) -left-> [Arrivo paziente] : \t\t\t\t\t\t
+[Arrivo paziente] -up--> (CODA ACCETTAZIONE)
+(CODA ACCETTAZIONE) -up-> [Accettazione]
+[Accettazione] -up-> (CODA VISITA)
+(CODA VISITA) -right-> [VISITA MEDICA]
+[VISITA MEDICA] -down-> (ESTERNO) : Dimissione\npaziente
+[VISITA MEDICA] -right-> (CODA RICOVERO) : Ricovero paziente
+(CODA RICOVERO) ---> [RICOVERO DH]
+(CODA RICOVERO) ---> [ACCESSO DS]
+(CODA RICOVERO) ---> [ACCESSO DH]
+(CODA RICOVERO) ---> [RICOVERO DS]
+(CODA RICOVERO) ---> [RICOVERO DO]
+[RICOVERO DO] -down--> [ATTESA DI CURE] : convalescenza a casa
+[RICOVERO DS] -down--> [ATTESA DI CURE]
+[RICOVERO DH] -down--> [ATTESA DI CURE]
+[ACCESSO DH] -down--> [ATTESA DI CURE]
+[ACCESSO DS] -down--> [ATTESA DI CURE]
+[ATTESA DI CURE] -up--> [CODA RICOVERO]
+[RICOVERO DH] ---> [ESTERNO] : Dimissione\npaziente
+[RICOVERO DS] ---> [ESTERNO]
+[RICOVERO DO] ---> [ESTERNO]
+[ACCESSO DH] --down-> [ESTERNO]
+[ACCESSO DS] --down-> [ESTERNO]
+[RICOVERO DH] -[hidden]right- [RICOVERO DO]
+@enduml
