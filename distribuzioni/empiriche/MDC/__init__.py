@@ -7,7 +7,7 @@ matplotlib.style.use('ggplot')
 
 
 def get_dataset():
-    df = pd.read_csv("../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
     df = df[["ANNO", "CODICE MDC", "DESCRIZIONE MDC"]]
     missing = df["CODICE MDC"].isna()
     df.loc[missing, "CODICE MDC"] = df.loc[missing, "DESCRIZIONE MDC"].map({

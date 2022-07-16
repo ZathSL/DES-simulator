@@ -11,7 +11,7 @@ cwd = path.dirname(path.abspath(__file__))
 
 
 def get_dataset(*columns: str):
-    df = pd.read_csv("../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
     df = df[["CODICE MDC", "DESCRIZIONE MDC", *columns]]
     missing = df["CODICE MDC"].isna()
     df.loc[missing, "CODICE MDC"] = df.loc[missing, "DESCRIZIONE MDC"].map({

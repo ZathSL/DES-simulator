@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def get_dataset(*columns: str):
-    df = pd.read_csv("../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype={
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype={
         "CODICE MDC": str,
         "DESCRIZIONE MDC": str,
     })
