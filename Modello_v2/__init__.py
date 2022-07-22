@@ -2,12 +2,13 @@ import salabim as sim
 import scipy.stats.distributions as st
 
 
-gennorm = sim.External(st.gennorm.rvs(beta=0.16, size=1000, loc=1, scale=0))
-# norminvgauss = sim.External(st.norminvgauss.rvs(a=4.06, b=4.06, size=1000, loc=1.51, scale=1.76))
-kappa3_1 = sim.External(st.kappa3.rvs(a=1.99, size=1000, loc=1, scale=9.82))
-kappa3_2 = sim.External(st.kappa3.rvs(a=3.14, size=1000, loc=1, scale=7.68))
-genhalf = sim.External(st.genhalflogistic.rvs(c=0.02, size=1000, loc=-8.14, scale=69))
-foldnorm = sim.External(st.foldnorm.rvs(c=0.03, size=1000, loc=0, scale=5.52))
+gennorm = iter(sim.External(st.gennorm.rvs(beta=0.16, size=1000, loc=1, scale=0)).dis)
+print(next(gennorm))
+# norminvgauss = iter(sim.External(st.norminvgauss.rvs(a=4.06, b=4.06, size=1000, loc=1.51, scale=1.76)).dis)
+kappa3_1 = iter(sim.External(st.kappa3.rvs(a=1.99, size=1000, loc=1, scale=9.82)).dis)
+kappa3_2 = iter(sim.External(st.kappa3.rvs(a=3.14, size=1000, loc=1, scale=7.68)).dis)
+genhalf = iter(sim.External(st.genhalflogistic.rvs(c=0.02, size=1000, loc=-8.14, scale=69)).dis)
+foldnorm = iter(sim.External(st.foldnorm.rvs(c=0.03, size=1000, loc=0, scale=5.52)).dis)
 
 
 # patient component
@@ -51,16 +52,16 @@ class Structure(sim.Component):
     def visit_patient(self, patient):
         if not patient.enqueue:
             if 1 <= patient.mdc <= 13 or 15 <= patient.mdc <= 20:
-                do = gennorm()
+                do = next(gennorm)
             else:
-                do = gennorm()
+                do = next(gennorm)
             if 1 <= patient.mdc <= 15:
-                tot_days_do = kappa3_1()
+                tot_days_do = next(kappa3_1)
             else:
-                tot_days_do = kappa3_2()
+                tot_days_do = next(kappa3_2)
             days_do = tot_days_do / do
-            ds = abs(foldnorm())
-            dh = abs(genhalf())
+            ds = abs(next(foldnorm))
+            dh = abs(next(genhalf))
             patient.assign(ds, dh, do, days_do)
         self.hospitalization_waiting.append(patient)
 
@@ -74,23 +75,23 @@ class Structure(sim.Component):
                 if patient.do > 0:
                     unit = unit + patient.days_do
                     patient.hospitalization(unit)
-                    patient.dec(ds=1, dh=0, do=1)
+                    patient.dec(dec_ds=1, dec_dh=0, dec_do=1)
                 else:
                     patient.hospitalization(unit)
-                    patient.dec(ds=1, dh=0, do=0)
+                    patient.dec(dec_ds=1, dec_dh=0, dec_do=0)
             elif patient.dh > 0:
                 unit = unit + 1
                 if patient.dh > 0:
                     unit = unit + patient.days_do
                     patient.hospitalization(unit)
-                    patient.dec(ds=0, dh=1, do=1)
+                    patient.dec(dec_ds=0, dec_dh=1, dec_do=1)
                 else:
                     patient.hospitalization(unit)
-                    patient.dec(ds=0, dh=1, do=0)
+                    patient.dec(dec_ds=0, dec_dh=1, dec_do=0)
             elif patient.do > 0:
                 unit = patient.days_do
                 patient.hospitalization(unit)
-                patient.dec(ds=0, dh=0, do=1)
+                patient.dec(dec_ds=0, dec_dh=0, dec_do=1)
 
     def running_process(self):
         while True:
