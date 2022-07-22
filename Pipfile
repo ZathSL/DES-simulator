@@ -9,6 +9,13 @@ pandas = "*"
 scipy = "*"
 matplotlib = "*"
 pre-commit = "*"
+Pillow = "*"
+pyopengl = "*"
+pyopengl_accelerate = "*"
+opencv-python = "*"
+pywavefront = "*"
+pyglet = "*"
+salabim = "*"
 
 [dev-packages]
 

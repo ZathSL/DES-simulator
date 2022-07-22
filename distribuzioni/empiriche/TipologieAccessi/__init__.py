@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def get_dataset(*columns: str):
-    df = pd.read_csv("../../fitted/Number_Hospitalization_DS/Dataset_SDO_Regione_Lombardia.csv", dtype={
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype={
         "CODICE MDC": str,
         "DESCRIZIONE MDC": str,
     })
@@ -16,25 +16,18 @@ def get_dataset(*columns: str):
 
 
 def plot_data(data: pd.DataFrame):
-    data["VISITE DH"] = data["ACCESSI DH"] - data["RICOVERI DH"]
-    data["VISITE DS"] = data["ACCESSI DS"] - data["RICOVERI DS"]
     data["TOTALE ACCESSI"] = data["RICOVERI DO"] + data["ACCESSI DH"] + data["ACCESSI DS"]
-    data.drop(columns=["ACCESSI DH", "ACCESSI DS"], inplace=True)
     data = data.groupby(["CODICE MDC"], as_index=False).agg({
         "CODICE MDC": "last",
         "DESCRIZIONE MDC": "last",
         "RICOVERI DO": "sum",
-        "RICOVERI DH": "sum",
-        "RICOVERI DS": "sum",
-        "VISITE DH": "sum",
-        "VISITE DS": "sum",
+        "ACCESSI DH": "sum",
+        "ACCESSI DS": "sum",
         "TOTALE ACCESSI": "sum",
     })
     data["RICOVERI DO"] /= data["TOTALE ACCESSI"]
-    data["RICOVERI DH"] /= data["TOTALE ACCESSI"]
-    data["RICOVERI DS"] /= data["TOTALE ACCESSI"]
-    data["VISITE DH"] /= data["TOTALE ACCESSI"]
-    data["VISITE DS"] /= data["TOTALE ACCESSI"]
+    data["ACCESSI DH"] /= data["TOTALE ACCESSI"]
+    data["ACCESSI DS"] /= data["TOTALE ACCESSI"]
     data = data.set_index("CODICE MDC").drop("#").sort_index()
 
     # Export CSV
@@ -42,7 +35,7 @@ def plot_data(data: pd.DataFrame):
 
 
 def main():
-    df = get_dataset("RICOVERI DO", "RICOVERI DH", "RICOVERI DS", "ACCESSI DH", "ACCESSI DS")
+    df = get_dataset("RICOVERI DO", "ACCESSI DH", "ACCESSI DS")
     plot_data(df)
 
 
