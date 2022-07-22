@@ -13,7 +13,7 @@ matplotlib.style.use('ggplot')
 
 
 def get_dataset():
-    file = open('dataset/Dataset_SDO_Regione_Lombardia.csv')
+    file = open('../../../dataset/Dataset_SDO_Regione_Lombardia.csv')
     csvreader = csv.reader(file)
     filter_numberDH(csvreader)
 
@@ -27,7 +27,7 @@ def filter_numberDH(csvreader):
     for index in code:
         for row in csvreader:
             if row[15] == index:
-                data.append(int(row[20]))
+                data.append(int(row[23]))
         plot_data(data, index, np.mean(data), np.var(data))
 
 
@@ -134,9 +134,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DH')
+    ax.set_xlabel('Access of hospitalization DH')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDHDistributeLOGLOG' + name + '.jpg')
+    plt.savefig('./Distribution_Access_DH/AccessDHDistributeLOGLOG' + name + '.jpg')
 
     # Display2
     plt.figure(figsize=(12, 8))
@@ -149,9 +149,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DH')
+    ax.set_xlabel('Access of hospitalization DH')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDHDistributeLOG' + name + '.jpg')
+    plt.savefig('./Distribution_Access_DH/AccessDHDistributeLOG' + name + '.jpg')
 
 
 def main():

@@ -27,7 +27,7 @@ def filter_numberDS(csvreader):
     for index in code:
         for row in csvreader:
             if row[15] == index:
-                data.append(int(row[21]))
+                data.append(int(row[24]))
         plot_data(data, index, np.mean(data), np.var(data))
 
 
@@ -134,9 +134,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DS')
+    ax.set_xlabel('Access of hospitalization DS')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDSDistributeLOGLOG' + name + '.jpg')
+    plt.savefig('./Distribution_Access_DS/AccessDSDistributeLOGLOG' + name + '.jpg')
 
     # Display2
     plt.figure(figsize=(12, 8))
@@ -149,9 +149,9 @@ def plot_data(data, name, mean, var):
     dist_str = '{}({})'.format(best_dist[0].name, param_str)
 
     ax.set_title('Best distribution (mu=' + str(mean) + ', var=' + str(var) + ') \n' + dist_str)
-    ax.set_xlabel('Number of hospitalization DS')
+    ax.set_xlabel('Access of hospitalization DS')
     ax.set_ylabel('Frequency')
-    plt.savefig('NumDSDistributeLOG' + name + '.jpg')
+    plt.savefig('./Distribution_Access_DS/AccessDSDistributeLOG' + name + '.jpg')
 
 
 def main():
