@@ -107,21 +107,21 @@ class Patient(sim.Component):
             self.dec(dec_ds=1, dec_dh=0, dec_do=0)
             yield self.request(self.structure.beds)
             self.structure.visit_waiting.append(self)
-            yield self.hold(1)
+            yield self.hold(0.001)
             yield self.release(self.structure.beds)
             self.release_patient()
         elif self.dh > 0:
             self.dec(dec_ds=0, dec_dh=1, dec_do=0)
             yield self.request(self.structure.beds)
             self.structure.visit_waiting.append(self)
-            yield self.hold(1)
+            yield self.hold(0.001)
             yield self.release(self.structure.beds)
             self.release_patient()
         elif self.do > 0:
             self.dec(dec_ds=0, dec_dh=0, dec_do=1)
             yield self.request(self.structure.beds)
             self.structure.visit_waiting.append(self)
-            yield self.hold(self.days_do)
+            yield self.hold(self.days_do/1000)
             yield self.release(self.structure.beds)
             self.release_patient()
 
@@ -160,8 +160,6 @@ def main():
 
     sim_time_days = 1
     env.run(till=sim_time_days)
-
-    print()
 
 
 if __name__ == '__main__':
