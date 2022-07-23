@@ -3,7 +3,8 @@ from salabim import Pdf
 
 
 def get_TipologieAccessi_distributions():
-    csv_type = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv")
+    csv_type = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
+                           keep_default_na=False)
     return {
         row["CODICE MDC"]: Pdf(("DO", "DH", "DS"), (row["RICOVERI DO"], row["ACCESSI DH"], row["ACCESSI DS"]))
         for _, row in csv_type.iterrows()
@@ -12,7 +13,8 @@ def get_TipologieAccessi_distributions():
 
 def get_GiornateDegenzaDO_distributions(codici_mdc):
     csvs = {
-        mdc: pd.read_csv(f"../distribuzioni/empiriche/GiornateDegenzaDO/MDC_{mdc}/GiornateDegenzaDO-{mdc}.csv")
+        mdc: pd.read_csv(f"../distribuzioni/empiriche/GiornateDegenzaDO/MDC_{mdc}/GiornateDegenzaDO-{mdc}.csv",
+                         keep_default_na=False)
         for mdc in codici_mdc
     }
     return {
@@ -24,7 +26,8 @@ def get_GiornateDegenzaDO_distributions(codici_mdc):
 def get_Strutture_distributions(codici_mdc):
     strutture = {}
     csvs = {
-        mdc: pd.read_csv(f"../distribuzioni/empiriche/Strutture/MDC_{mdc}/StruttureDistribution.csv")
+        mdc: pd.read_csv(f"../distribuzioni/empiriche/Strutture/MDC_{mdc}/StruttureDistribution.csv",
+                         keep_default_na=False)
         for mdc in codici_mdc
     }
     for mdc, csv in csvs.items():

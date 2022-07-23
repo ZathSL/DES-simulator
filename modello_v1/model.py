@@ -1,5 +1,5 @@
 import pandas as pd
-from salabim import Component, Environment, ComponentGenerator, Pdf, Queue, Resource
+from salabim import Component, Environment, ComponentGenerator, Pdf, Queue, Resource, State
 
 from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, get_Strutture_distributions
 
@@ -11,26 +11,23 @@ GiornateDegenzaDO_distributions: dict[str, Pdf]
 class Struttura(Component):
     codice: str
     nome: str
+    n_letti: int
     coda_accettazione: Queue
-    coda_visita: Queue
-    coda_ricovero: Queue
-    personale_accettazione: Resource
-    medici: Resource
     letti: Resource
 
-    def setup(self, codice: str, nome: str):
+    def setup(self, codice: str, nome: str, n_letti: int):
         self.codice = codice
         self.nome = nome
+        self.n_letti = n_letti
         self.coda_accettazione = Queue(codice + ".coda_accettazione")
-        self.coda_visita = Queue(codice + ".coda_visita")
-        self.coda_ricovero = Queue(codice + ".coda_ricovero")
-        self.personale_accettazione = Resource(codice + ".personale_accettazione", 10)
-        self.medici = Resource(codice + ".medici", 10)
-        self.letti = Resource(codice + ".letti", 10)
+        self.letti = Resource(codice + ".letti", self.n_letti)
 
     def process(self):
         while True:
-            yield self.hold(1)
+            while len(self.coda_accettazione) == 0:
+                yield self.passivate()
+            paziente: Paziente = self.coda_accettazione.pop()
+            paziente.ricoverato.set()
 
 
 strutture: dict[str, Struttura] = {}
@@ -42,28 +39,27 @@ class Paziente(Component):
     tipologia_ricovero: str
     giornate_degenza: int
     struttura: Struttura
+    ricoverato: State
 
     def setup(self, mdc: str, mdc_desc: str):
         self.mdc = mdc
         self.mdc_desc = mdc_desc
         self.struttura = strutture[Strutture_distributions[mdc].sample()]
-
-    def process(self):
-        yield self.enter(self.struttura.coda_accettazione)
-        yield self.request(self.struttura.personale_accettazione)
-        yield self.hold(10)
-        yield self.release(self.struttura.personale_accettazione)
-        yield self.enter(self.struttura.coda_visita)
-        yield self.request(self.struttura.medici)
-        yield self.hold(10)
         self.tipologia_ricovero = TipologieAccessi_distributions[self.mdc].sample()
-        self.giornate_degenza = 1
         if self.tipologia_ricovero == "DO":
             self.giornate_degenza = GiornateDegenzaDO_distributions[self.mdc].sample()
-        yield self.release(self.struttura.medici)
-        yield self.enter(self.struttura.coda_ricovero)
+        else:
+            self.giornate_degenza = 1
+        self.ricoverato = State(self.name() + ".ricoverato")
+
+    def process(self):
+        self.enter(self.struttura.coda_accettazione)
+        if self.struttura.ispassive():
+            self.struttura.activate()
+        yield self.wait((self.ricoverato, True))
         yield self.request(self.struttura.letti)
-        yield self.hold(self.giornate_degenza * 60 * 24)
+        yield self.hold(self.giornate_degenza)
+        yield self.release(self.struttura.letti)
 
 
 def setup():
@@ -71,7 +67,7 @@ def setup():
     csv_mdc = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False)
     codici_mdc = csv_mdc["CODICE MDC"].to_numpy()
     info_mdc = dict(zip(codici_mdc, csv_mdc["DESCRIZIONE MDC"].to_numpy()))
-    iat_mdc = dict(zip(codici_mdc, csv_mdc["CONTEGGIO PER GIORNO"].astype(float).to_numpy()))
+    iat_mdc = dict(zip(codici_mdc, csv_mdc["INTERARRIVO IN GIORNI"].astype(float).to_numpy()))
     Strutture_distributions, info_strutture = get_Strutture_distributions(codici_mdc)
     TipologieAccessi_distributions = get_TipologieAccessi_distributions()
     GiornateDegenzaDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
@@ -80,17 +76,19 @@ def setup():
 
 def main():
     global strutture
-    env = Environment(trace=True, time_unit="minutes")
+    env = Environment(trace=True, time_unit="days")
 
     iat_mdc, info_strutture, info_mdc = setup()
     for struttura, nome in info_strutture.items():  # creo le strutture
-        strutture[struttura] = Struttura(name="Struttura." + struttura, codice=struttura, nome=nome)
+        n_letti = 10  # TODO: quanti letti ci sono per struttura?
+        strutture[struttura] = Struttura(name="Struttura." + struttura, codice=struttura, nome=nome, n_letti=n_letti)
 
     for mdc, iat in iat_mdc.items():  # creo un generatore di pazienti per ogni MDC
-        ComponentGenerator(Paziente, iat=iat, mdc=mdc, mdc_desc=info_mdc[mdc])
+        ComponentGenerator(Paziente, generator_name="Paziente.generator.mdc-" + mdc, iat=iat, mdc=mdc,
+                           mdc_desc=info_mdc[mdc])
 
-    env.run(till=50)
-    print()
+    sim_time_days = 1
+    env.run(till=sim_time_days)
 
 
 if __name__ == '__main__':

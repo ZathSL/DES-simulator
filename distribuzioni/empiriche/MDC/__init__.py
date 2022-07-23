@@ -28,7 +28,8 @@ def plot_data(data: pd.DataFrame):
     data = data.set_index("CODICE MDC").drop(columns="ANNO").drop("#").sort_index()
     data.rename(columns={"CONTEGGIO": "CONTEGGIO PER ANNO"}, inplace=True)
     data["CONTEGGIO PER GIORNO"] = data["CONTEGGIO PER ANNO"] / 365.0
-    freq = data["FREQUENZA"] = data["CONTEGGIO PER ANNO"] / data["CONTEGGIO PER ANNO"].sum()
+    data["INTERARRIVO IN GIORNI"] = 365.0 / data["CONTEGGIO PER ANNO"]
+    freq = data["FREQUENZA"] = data["CONTEGGIO PER ANNO"] / (data["CONTEGGIO PER ANNO"].sum())
 
     # Display
     fig, ax = plt.subplots(1, 1)
