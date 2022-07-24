@@ -1,3 +1,4 @@
 *.shapefile/
 .idea/
 *.twbr
+~*.xlsx

@@ -23,6 +23,19 @@ def get_dataset(*columns: str):
     return df, mdcs
 
 
+def aggr_data(data: pd.DataFrame):
+    data = data.value_counts(sort=False).to_frame("CONTEGGIO")
+    data = data.reset_index()
+    data = data.groupby(["CODICE STRUTTURA DI RICOVERO"], as_index=False).agg({
+        "CODICE STRUTTURA DI RICOVERO": "last",
+        "DESCRIZIONE STRUTTURA DI RICOVERO": "last",
+        "CONTEGGIO": "sum",
+    })
+    data = data.set_index("CODICE STRUTTURA DI RICOVERO").sort_index()
+    data["FREQUENZA"] = data["CONTEGGIO"] / data["CONTEGGIO"].sum()
+    data.to_csv(path.join(cwd, "StruttureDistribution.csv"), float_format="%.15f", encoding="utf-8")
+
+
 def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
     data = data.value_counts(sort=False).to_frame("CONTEGGIO")
     data = data.reset_index()
@@ -58,6 +71,7 @@ def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
 
 def main():
     df, mdcs = get_dataset("CODICE STRUTTURA DI RICOVERO", "DESCRIZIONE STRUTTURA DI RICOVERO")
+    aggr_data(df.drop(["CODICE MDC", "DESCRIZIONE MDC"], axis=1))
     for i, mdc in mdcs.iterrows():
         codice, descrizione = mdc["CODICE MDC"], mdc["DESCRIZIONE MDC"]
         print(i + 1, codice, descrizione)
