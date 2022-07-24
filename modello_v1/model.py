@@ -15,12 +15,13 @@ class Struttura(Component):
     coda_accettazione: Queue
     letti: Resource
 
+    # noinspection PyMethodOverriding
     def setup(self, codice: str, nome: str, n_letti: int):
         self.codice = codice
         self.nome = nome
         self.n_letti = n_letti
-        self.coda_accettazione = Queue(codice + ".coda_accettazione")
-        self.letti = Resource(codice + ".letti", self.n_letti)
+        self.coda_accettazione = Queue(self.name() + ".coda_accettazione")
+        self.letti = Resource(self.name() + ".letti", self.n_letti)
 
     def process(self):
         while True:
@@ -41,6 +42,7 @@ class Paziente(Component):
     struttura: Struttura
     ricoverato: State
 
+    # noinspection PyMethodOverriding
     def setup(self, mdc: str, mdc_desc: str):
         self.mdc = mdc
         self.mdc_desc = mdc_desc
@@ -65,26 +67,30 @@ class Paziente(Component):
 def setup():
     global Strutture_distributions, TipologieAccessi_distributions, GiornateDegenzaDO_distributions
     csv_mdc = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False)
+    info_letti = pd.read_csv("../dataset/Letti_per_struttura_sanitaria_completo.csv", keep_default_na=False)
+    info_letti.set_index("CODICE STRUTTURA DI RICOVERO", inplace=True)
     codici_mdc = csv_mdc["CODICE MDC"].to_numpy()
     info_mdc = dict(zip(codici_mdc, csv_mdc["DESCRIZIONE MDC"].to_numpy()))
     iat_mdc = dict(zip(codici_mdc, csv_mdc["INTERARRIVO IN GIORNI"].astype(float).to_numpy()))
     Strutture_distributions, info_strutture = get_Strutture_distributions(codici_mdc)
     TipologieAccessi_distributions = get_TipologieAccessi_distributions()
     GiornateDegenzaDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
-    return iat_mdc, info_strutture, info_mdc
+    return iat_mdc, info_strutture, info_mdc, info_letti
 
 
 def main():
     global strutture
     env = Environment(trace=True, time_unit="days")
 
-    iat_mdc, info_strutture, info_mdc = setup()
-    for struttura, nome in info_strutture.items():  # creo le strutture
-        n_letti = 10  # TODO: quanti letti ci sono per struttura?
-        strutture[struttura] = Struttura(name="Struttura." + struttura, codice=struttura, nome=nome, n_letti=n_letti)
+    iat_mdc, info_strutture, info_mdc, info_letti = setup()
+    for codice, nome in info_strutture.items():  # creo le strutture
+        if codice:
+            n_letti = info_letti.at[codice, "LETTI"]
+            struttura = Struttura(name="struttura." + codice, codice=codice, nome=nome, n_letti=n_letti)
+            strutture[codice] = struttura
 
     for mdc, iat in iat_mdc.items():  # creo un generatore di pazienti per ogni MDC
-        ComponentGenerator(Paziente, generator_name="Paziente.generator.mdc-" + mdc, iat=iat, mdc=mdc,
+        ComponentGenerator(Paziente, generator_name="generator.paziente.mdc-" + mdc, iat=iat, mdc=mdc,
                            mdc_desc=info_mdc[mdc])
 
     sim_time_days = 1
