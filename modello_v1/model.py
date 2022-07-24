@@ -1,3 +1,7 @@
+import timeit
+from datetime import timedelta
+from typing import Union, TextIO
+
 import pandas as pd
 from salabim import Component, Environment, ComponentGenerator, Pdf, Queue, Resource, State
 
@@ -78,9 +82,12 @@ def setup():
     return iat_mdc, info_strutture, info_mdc, info_letti
 
 
-def main():
+def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float):
     global strutture
-    env = Environment(trace=True, time_unit="days")
+    env = Environment(trace=trace, time_unit="days")
+    env.animate(animate)
+    env.speed(speed)
+    env.modelname("Simulatore SSR lombardo - Modello V1")
 
     iat_mdc, info_strutture, info_mdc, info_letti = setup()
     for codice, nome in info_strutture.items():  # creo le strutture
@@ -88,14 +95,22 @@ def main():
             n_letti = info_letti.at[codice, "LETTI"]
             struttura = Struttura(name="struttura." + codice, codice=codice, nome=nome, n_letti=n_letti)
             strutture[codice] = struttura
-
     for mdc, iat in iat_mdc.items():  # creo un generatore di pazienti per ogni MDC
         ComponentGenerator(Paziente, generator_name="generator.paziente.mdc-" + mdc, iat=iat, mdc=mdc,
                            mdc_desc=info_mdc[mdc])
-
-    sim_time_days = 1
     env.run(till=sim_time_days)
 
 
-if __name__ == '__main__':
+def main():
+    start = timeit.default_timer()
+    logfile = False  # open("sim_trace.log", "w")
+    sim_time_days = 365
+    animate = False
+    speed = 10
+    simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed)
+    stop = timeit.default_timer()
+    print("Tempo di esecuzione: ", timedelta(seconds=stop - start))
+
+
+if __name__ == "__main__":
     main()

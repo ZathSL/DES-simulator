@@ -2,3 +2,4 @@
 .idea/
 *.twbr
 ~*.xlsx
+*.log
