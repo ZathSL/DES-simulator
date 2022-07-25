@@ -1,4 +1,3 @@
-import math
 import timeit
 from datetime import timedelta
 from typing import Union, TextIO
@@ -28,7 +27,6 @@ class Structure(sim.Component):
     beds: sim.Resource
     n_beds: int
     patient_treated: list
-    patient: any
     patient_released: list
 
     # noinspection PyMethodOverriding
@@ -36,6 +34,7 @@ class Structure(sim.Component):
         self.hospitalization_waiting = sim.Queue("recovery")
         self.beds = sim.Resource('beds', capacity=n_beds)
         self.patient_treated = []
+        self.patient_released = []
 
     def process(self):
         while True:
@@ -70,6 +69,7 @@ class Structure(sim.Component):
 
 
 structures: dict[str, Structure] = {}
+
 
 def select_type_recovery(ds, dh, do, mdc):
     while True:
@@ -143,7 +143,8 @@ class Patient(sim.Component):
             self.release(self.structure.beds)
             self.structure = structures[Structures_distributions[self.mdc].sample()]
             self.structure.hospitalization_waiting.append(self)
-            self.passivate()
+            yield self.passivate()
+        yield self.structure.activate()
 
 
 def setup():
