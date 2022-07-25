@@ -12,6 +12,11 @@ TypeAccess_distributions: dict[str, sim.Pdf]
 DayHospitalizationDO_distributions: dict[str, sim.Pdf]
 NumberAccess_mean: dict[str, int]
 
+monitor_mdc: sim.Monitor
+monitor_recovery: dict[str, sim.Monitor] = {}
+monitor_days_do: dict[str, sim.Monitor] = {}
+monitor_treated_patients: sim.Monitor
+
 
 class Structure(sim.Component):
     code: str
@@ -20,14 +25,15 @@ class Structure(sim.Component):
     visit_waiting: sim.Queue
     beds: sim.Resource
     n_beds: int
-    treated_patients: list
+    patient_treated: list
+    patient: any
 
     # noinspection PyMethodOverriding
     def setup(self, code: str, name_s: str, n_beds: int):
         self.acceptance_waiting = sim.Queue("acceptance")
         self.visit_waiting = sim.Queue("visit")
         self.beds = sim.Resource('beds', capacity=n_beds)
-        self.treated_patients = []
+        self.patient_treated = []
 
     def entry_patient(self, patient):
         patient.enter(self.acceptance_waiting)
@@ -39,6 +45,7 @@ class Structure(sim.Component):
             dh = 0
             for _ in range(int(NumberAccess_mean[patient.mdc])):
                 type_recovery = TypeAccess_distributions[patient.mdc].sample()
+                monitor_recovery[patient.mdc].tally(type_recovery) # salvo il numero di ricoveri di ogni tipo
                 if type_recovery == "DS":
                     ds += 1
                 elif type_recovery == "DH":
@@ -47,17 +54,20 @@ class Structure(sim.Component):
                     do += 1
                 if ds > 0 and dh > 0:
                     if sim.IntUniform(0, 1) == 0:
-                        ds += dh
                         dh = 0
                     else:
-                        dh += ds
                         ds = 0
             tot_days_do = DayHospitalizationDO_distributions[patient.mdc].sample()
+            monitor_days_do[patient.mdc].tally(tot_days_do)
             days_do = 0
             if do != 0:
                 days_do = math.ceil(tot_days_do / do) + 1
-            patient.assign(ds, dh, do, days_do)
-        patient.activate(process='hospitalization')
+            patient.ds = ds
+            patient.dh = dh
+            patient.do = do
+            patient.days_do = days_do
+            patient.visited_already = True
+        patient.activate(process="hospitalization")
 
     def process(self):
         while True:
@@ -94,48 +104,31 @@ class Patient(sim.Component):
         self.ds = 0
         self.days_do = 0
         self.structure = structures[Structures_distributions[mdc].sample()]
+        monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.structure.entry_patient(self)
         self.structure.activate()
 
-    def assign(self, ds, dh, do, days_do):
-        self.visited_already = True
-        self.ds = math.ceil(ds)
-        self.dh = math.ceil(dh)
-        self.do = math.ceil(do)
-        self.days_do = math.ceil(days_do)
-
-    def dec(self, dec_ds, dec_dh, dec_do):
-        self.ds = self.ds - dec_ds
-        self.dh = self.dh - dec_dh
-        self.do = self.do - dec_do
-
     def hospitalization(self):
         if self.ds > 0:
-            self.dec(dec_ds=1, dec_dh=0, dec_do=0)
+            self.ds -= 1
             yield self.request(self.structure.beds)
-            self.structure.visit_waiting.append(self)
+            self.structure.visit_waiting.add_at_head(self)
             yield self.hold(1)
             yield self.release(self.structure.beds)
-            self.release_patient()
         elif self.dh > 0:
-            self.dec(dec_ds=0, dec_dh=1, dec_do=0)
+            self.dh -= 1
             yield self.request(self.structure.beds)
-            self.structure.visit_waiting.append(self)
+            self.structure.visit_waiting.add_at_head(self)
             yield self.hold(1)
             yield self.release(self.structure.beds)
-            self.release_patient()
         elif self.do > 0:
-            self.dec(dec_ds=0, dec_dh=0, dec_do=1)
+            self.do -= 1
             yield self.request(self.structure.beds)
-            self.structure.visit_waiting.append(self)
+            self.structure.visit_waiting.add_at_head(self)
             yield self.hold(self.days_do)
             yield self.release(self.structure.beds)
-            self.release_patient()
-
-    def release_patient(self):
         if self.ds == 0 and self.dh == 0 and self.do == 0:
-            self.structure.treated_patients.append("p")
-            yield self.cancel()
+            self.structure.patient_treated.append(self)
 
 
 def setup():
@@ -154,33 +147,57 @@ def setup():
 
 
 def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float):
-    global structures
+    global structures, monitor_mdc, monitor_recovery, monitor_days_do
+    iat_mdc, info_structures, info_mdc, info_beds = setup()
     env = sim.Environment(trace=trace, time_unit="days")
+
+    monitor_mdc = sim.Monitor(name='mdc')
+    for mdc in iat_mdc:
+        monitor_recovery[mdc] = sim.Monitor(name='recovery ' + mdc)
+        monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
+
     env.animate(animate)
     env.speed(speed)
     env.modelname("Simulatore SSR lombardo - Modello V2")
 
-    iat_mdc, info_structures, info_mdc, info_beds = setup()
     for code, name in info_structures.items():
         if code:
             n_beds = info_beds.at[code, "LETTI"]
             structure = Structure(name="structure." + code, code=code, name_s=name, n_beds=n_beds)
             structures[code] = structure
+
     for mdc, iat in iat_mdc.items():
         sim.ComponentGenerator(Patient, generator_name="Patient.generator.mdc-" + mdc, iat=iat, mdc=mdc,
                                mdc_desc=info_mdc[mdc])
     env.run(till=sim_time_days)
+    calculate_statistics(iat_mdc=iat_mdc)
 
-# def calculate_statistics():
-# Numero di pazienti in entrata per ogni struttura per ogni mdc
 
-# Numero di pazienti curati in ogni struttura per ogni mdc
+def calculate_statistics(iat_mdc: dict):
+    # INPUT
+    # Numero di pazienti in entrata per ogni struttura
+    for key, value in structures.items():
+        value.acceptance_waiting.print_statistics() # statistiche delle entrate
 
-# Numero di ricoveri DS/DH/DO per ogni mdc
+    # Numero di pazienti per ogni mdc
+    monitor_mdc.print_histograms(values=True)
 
-# Statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
+    # Numero di ricoveri DS/DH/DO e numero di giorni ricovero DO per ogni mdc
+    for mdc in iat_mdc:
+        monitor_recovery[mdc].print_histograms(values=True)
+        monitor_days_do[mdc].print_histograms(values=True)
 
-# Statistiche sui letti in ogni struttura
+    # OUTPUT
+    # Numero di pazienti curati in ogni struttura e
+    # statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
+    for key, value in structures.items():
+        print('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)))
+
+    # Statistiche sui letti in ogni struttura
+    for key, value in structures.items():
+        print(key)
+        value.beds.print_statistics()
+
 
 def main():
     start = timeit.default_timer()
