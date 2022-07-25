@@ -1,0 +1,13 @@
+@startuml
+skinparam componentStyle rectangle
+'skinparam lineType polyline
+
+(ESTERNO) ---> [ARRIVO PAZIENTE]
+[ARRIVO PAZIENTE] -right-> (CODA RICOVERO) : Ricovero
+(CODA RICOVERO) ---> [RICOVERO DH]
+(CODA RICOVERO) ---> [RICOVERO DS]
+(CODA RICOVERO) ---> [RICOVERO DO]
+[RICOVERO DH] ---> [ESTERNO] : Dimissione
+[RICOVERO DS] ---> [ESTERNO] : Dimissione
+[RICOVERO DO] ---> [ESTERNO] : Dimissione
+@enduml
