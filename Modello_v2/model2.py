@@ -109,24 +109,25 @@ class Patient(sim.Component):
         self.structure.activate()
 
     def hospitalization(self):
-        if self.ds > 0:
-            self.ds -= 1
-            yield self.request(self.structure.beds)
-            self.structure.visit_waiting.add_at_head(self)
-            yield self.hold(1)
-            yield self.release(self.structure.beds)
-        elif self.dh > 0:
-            self.dh -= 1
-            yield self.request(self.structure.beds)
-            self.structure.visit_waiting.add_at_head(self)
-            yield self.hold(1)
-            yield self.release(self.structure.beds)
-        elif self.do > 0:
-            self.do -= 1
-            yield self.request(self.structure.beds)
-            self.structure.visit_waiting.add_at_head(self)
-            yield self.hold(self.days_do)
-            yield self.release(self.structure.beds)
+        while self.ds > 0 or self.dh > 0 or self.do > 0:
+            if self.ds > 0:
+                self.ds -= 1
+                yield self.request(self.structure.beds)
+                yield self.hold(1)
+                self.release(self.structure.beds)
+            elif self.dh > 0:
+                self.dh -= 1
+                yield self.request(self.structure.beds)
+                yield self.hold(1)
+                self.release(self.structure.beds)
+            elif self.do > 0:
+                self.do -= 1
+                yield self.request(self.structure.beds)
+                yield self.hold(self.days_do)
+                self.release(self.structure.beds)
+            if True:  # TODO: se deve essere fatto un ricovero ripetuto restituisce true e viene messo in coda
+                self.structure.visit_waiting.append(self)
+                break
         if self.ds == 0 and self.dh == 0 and self.do == 0:
             self.structure.patient_treated.append(self)
 
