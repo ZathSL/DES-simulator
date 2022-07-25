@@ -12,7 +12,8 @@ def get_TipologieAccessi_distributions():
 
 
 def get_NumeroAccessi_media():
-    dict_from_csv = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution2.csv", delimiter=";", header=None, index_col=0).to_dict()
+    dict_from_csv = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution2.csv",
+                                delimiter=";", header=None, index_col=0).to_dict()
     dict_from_csv[8].pop('Codice Mdc', None)
     dict_from_csv[8]['NA'] = dict_from_csv[8]['N']
     dict_from_csv[8].pop('N', None)

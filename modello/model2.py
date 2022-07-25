@@ -1,11 +1,13 @@
+import math
 import timeit
 from datetime import timedelta
 from typing import Union, TextIO
-import salabim as sim
-import math
-from modello_v1.util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions,\
-    get_Strutture_distributions, get_NumeroAccessi_media
+
 import pandas as pd
+import salabim as sim
+
+from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, \
+    get_Strutture_distributions, get_NumeroAccessi_media
 
 Structures_distributions: dict[str, sim.Pdf]
 TypeAccess_distributions: dict[str, sim.Pdf]
@@ -202,7 +204,7 @@ def calculate_statistics(iat_mdc: dict):
 
 def main():
     start = timeit.default_timer()
-    logfile = False
+    logfile = False  # open("sim_trace.log", "w")
     sim_time_days = 365
     animate = False
     speed = 10
