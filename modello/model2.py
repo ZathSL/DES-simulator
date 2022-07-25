@@ -17,13 +17,13 @@ RepeatHospitalization_distributions: dict[str, sim.Pdf]
 monitor_mdc: sim.Monitor
 monitor_recovery: dict[str, sim.Monitor] = {}
 monitor_days_do: dict[str, sim.Monitor] = {}
-monitor_treated_patients: sim.Monitor
-
+monitor_repeat_do: dict[str, sim.Monitor] = {}
 
 class Structure(sim.Component):
     code: str
     name: str
     hospitalization_waiting: sim.Queue
+    under_treatment: sim.Queue
     beds: sim.Resource
     n_beds: int
     patient_treated: list
@@ -35,6 +35,7 @@ class Structure(sim.Component):
         self.beds = sim.Resource('beds', capacity=n_beds)
         self.patient_treated = []
         self.patient_released = []
+        self.under_treatment = sim.Queue("undertreatment")
 
     def process(self):
         while True:
@@ -65,6 +66,7 @@ class Structure(sim.Component):
                     patient.dh = dh
                     patient.do = do
                     patient.visited_already = True
+                self.under_treatment.append(patient)
                 patient.activate(process="hospitalization")
 
 
@@ -125,14 +127,17 @@ class Patient(sim.Component):
             # se non ho già generato da un precedente ricovero i giorni di degenza DO, genero il numero di giorni
             if self.days_do == 0:
                 self.days_do = DayHospitalizationDO_distributions[self.mdc].sample()
+                monitor_days_do[self.mdc].tally(self.days_do)
             # finché non ho terminato di scontare tutti i giorni di degenza DO
             while self.days_do > 0:
                 self.hold(1)
                 self.days_do -= 1
                 # se ho ancora giorni di degenza DO da scontare, controllo se devo eseguire dei ricoveri ripetuti
-                if self.days_do > 0 and bernoulli.rvs(size=1, p=RepeatHospitalization_distributions[self.mdc]) == 1:
+                repeat_result = bernoulli.rvs(size=1, p=RepeatHospitalization_distributions[self.mdc])
+                monitor_repeat_do[self.mdc].tally(repeat_result)
+                if self.days_do > 0 and repeat_result == 1:
                     break
-            # se ho terminatoo di scontare tutti i giorni, decremento il numero di ricoveri DO
+            # se ho terminato di scontare tutti i giorni, decremento il numero di ricoveri DO
             if self.days_do <= 0:
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
@@ -141,6 +146,7 @@ class Patient(sim.Component):
         else:
             self.structure.patient_released.append(self)
             self.release(self.structure.beds)
+            self.structure.under_treatment.remove(self)
             self.structure = structures[Structures_distributions[self.mdc].sample()]
             self.structure.hospitalization_waiting.append(self)
             yield self.passivate()
@@ -165,7 +171,7 @@ def setup():
 
 
 def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float):
-    global structures, monitor_mdc, monitor_recovery, monitor_days_do
+    global structures, monitor_mdc, monitor_recovery, monitor_days_do, monitor_repeat_do
     iat_mdc, info_structures, info_mdc, info_beds = setup()
     env = sim.Environment(trace=trace, time_unit="days")
 
@@ -173,6 +179,7 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
     for mdc in iat_mdc:
         monitor_recovery[mdc] = sim.Monitor(name='recovery ' + mdc)
         monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
+        monitor_repeat_do[mdc] = sim.Monitor(name='repeat do ' + mdc)
 
     env.animate(animate)
     env.speed(speed)
@@ -200,10 +207,11 @@ def calculate_statistics(iat_mdc: dict):
     # Numero di pazienti per ogni mdc
     monitor_mdc.print_histograms(values=True)
 
-    # Numero di ricoveri DS/DH/DO e numero di giorni ricovero DO per ogni mdc
+    # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
     for mdc in iat_mdc:
         monitor_recovery[mdc].print_histograms(values=True)
         monitor_days_do[mdc].print_histograms(values=True)
+        monitor_repeat_do[mdc].print_histograms(values=True)
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
@@ -214,6 +222,8 @@ def calculate_statistics(iat_mdc: dict):
     # statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
     for key, value in structures.items():
         print('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)))
+        print('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)))
+        value.under_treatment.print_statistics()
 
 
 def main():
