@@ -195,35 +195,55 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
         sim.ComponentGenerator(Patient, generator_name="Patient.generator.mdc-" + mdc, iat=iat, mdc=mdc,
                                mdc_desc=info_mdc[mdc])
     env.run(till=sim_time_days)
+
     calculate_statistics(iat_mdc=iat_mdc)
 
 
 def calculate_statistics(iat_mdc: dict):
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
+    file_number_patient = open("../statistiche/number_patients.txt", "a")
     for key, value in structures.items():
-        value.hospitalization_waiting.print_statistics() # statistiche delle entrate
+        value.hospitalization_waiting.print_statistics(file=file_number_patient)# statistiche delle entrate
+        file_number_patient.write("\n")
+    file_number_patient.close()
 
     # Numero di pazienti per ogni mdc
-    monitor_mdc.print_histograms(values=True)
+    file_number_mdc = open("../statistiche/number_patient_mdc.txt", "w")
+    monitor_mdc.print_histograms(values=True, file=file_number_mdc)
+    file_number_mdc.close()
 
     # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
+    file_stats_recovery = open("../statistiche/stats_recovery_mdc.txt", "a")
     for mdc in iat_mdc:
-        monitor_recovery[mdc].print_histograms(values=True)
-        monitor_days_do[mdc].print_histograms(values=True)
-        monitor_repeat_do[mdc].print_histograms(values=True)
+        file_stats_recovery.write("STATISTICS MDC " + mdc + "\n")
+        monitor_recovery[mdc].print_histograms(values=True, file=file_stats_recovery)
+        file_stats_recovery.write("\n")
+        monitor_days_do[mdc].print_histograms(values=True, file=file_stats_recovery)
+        file_stats_recovery.write("\n")
+        monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_recovery)
+        file_stats_recovery.write("\n")
+    file_stats_recovery.close()
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
+    file_stats_beds = open("../statistiche/stats_beds.txt", "a")
     for key, value in structures.items():
-        print(key)
-        value.beds.print_statistics()
+        file_stats_beds.write("STATISTICS STRUCTURE " + key)
+        value.beds.print_statistics(file=file_stats_beds)
+    file_stats_beds.close()
     # Numero di pazienti curati in ogni struttura e
     # statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
+    file_number_patients_released = open("../statistiche/number_patients_released.txt", "a")
+    file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
+    file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment", "a")
     for key, value in structures.items():
-        print('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)))
-        print('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)))
-        value.under_treatment.print_statistics()
+        file_number_patients_treated.write('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
+        file_number_patients_released.write('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
+        value.under_treatment.print_statistics(file=file_stats_patients_undertreatment)
+    file_number_patients_released.close()
+    file_number_patients_treated.close()
+    file_stats_patients_undertreatment.close()
 
 
 def main():
