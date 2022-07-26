@@ -204,6 +204,7 @@ def calculate_statistics(iat_mdc: dict):
     # Numero di pazienti in entrata per ogni struttura
     file_number_patient = open("../statistiche/number_patients.txt", "a")
     for key, value in structures.items():
+        file_number_patient.write("Structure " + key + "\n")
         value.hospitalization_waiting.print_statistics(file=file_number_patient)# statistiche delle entrate
         file_number_patient.write("\n")
     file_number_patient.close()
@@ -236,7 +237,7 @@ def calculate_statistics(iat_mdc: dict):
     # statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
     file_number_patients_released = open("../statistiche/number_patients_released.txt", "a")
     file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
-    file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment", "a")
+    file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment.txt", "a")
     for key, value in structures.items():
         file_number_patients_treated.write('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
         file_number_patients_released.write('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")

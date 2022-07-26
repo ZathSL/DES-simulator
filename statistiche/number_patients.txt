@@ -1,3 +1,4 @@
+Structure 030003-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -21,6 +22,7 @@ Length of stay in recovery                   entries            1615         161
                                              95% percentile        5.042        5.042
                                              maximum               7.576        7.576
 
+Structure 030004-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -44,6 +46,7 @@ Length of stay in recovery                   entries           14854        1485
                                              95% percentile        0.371        0.371
                                              maximum               1.310        1.310
 
+Structure 030006-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -67,6 +70,7 @@ Length of stay in recovery                   entries           12667        1266
                                              95% percentile        0.430        0.430
                                              maximum               1.404        1.404
 
+Structure 030008-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -90,6 +94,7 @@ Length of stay in recovery                   entries           10428        1042
                                              95% percentile        0.542        0.542
                                              maximum               1.363        1.363
 
+Structure 030009-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -113,6 +118,7 @@ Length of stay in recovery                   entries            1445         144
                                              95% percentile        4.202        4.202
                                              maximum               8.417        8.417
 
+Structure 030010-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -136,6 +142,7 @@ Length of stay in recovery                   entries            6227         622
                                              95% percentile        0.834        0.834
                                              maximum               2.443        2.443
 
+Structure 030011-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -159,6 +166,7 @@ Length of stay in recovery                   entries             136          13
                                              95% percentile       62.941       62.941
                                              maximum              69.594       69.594
 
+Structure 030012-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -182,6 +190,7 @@ Length of stay in recovery                   entries            3635         363
                                              95% percentile        1.372        1.372
                                              maximum               3.441        3.441
 
+Structure 030015-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -205,6 +214,7 @@ Length of stay in recovery                   entries            3743         374
                                              95% percentile        1.752        1.752
                                              maximum               5.214        5.214
 
+Structure 030017-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -228,6 +238,7 @@ Length of stay in recovery                   entries            5334         533
                                              95% percentile        1.017        1.017
                                              maximum               2.531        2.531
 
+Structure 030022-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -251,6 +262,7 @@ Length of stay in recovery                   entries            4303         430
                                              95% percentile        1.203        1.203
                                              maximum               2.858        2.858
 
+Structure 030023-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -274,6 +286,7 @@ Length of stay in recovery                   entries             204          20
                                              95% percentile       34.429       34.429
                                              maximum              44.370       44.370
 
+Structure 030024-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -297,6 +310,7 @@ Length of stay in recovery                   entries            8508         850
                                              95% percentile        0.635        0.635
                                              maximum               1.656        1.656
 
+Structure 030025-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -320,6 +334,7 @@ Length of stay in recovery                   entries             372          37
                                              95% percentile       24.498       24.498
                                              maximum              31.934       31.934
 
+Structure 030026-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -343,6 +358,7 @@ Length of stay in recovery                   entries            2383         238
                                              95% percentile        2.366        2.366
                                              maximum               4.792        4.792
 
+Structure 030029-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -366,6 +382,7 @@ Length of stay in recovery                   entries            6558         655
                                              95% percentile        0.828        0.828
                                              maximum               2.628        2.628
 
+Structure 030030-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -389,6 +406,7 @@ Length of stay in recovery                   entries            7862         786
                                              95% percentile        0.724        0.724
                                              maximum               2.297        2.297
 
+Structure 030031-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -412,6 +430,7 @@ Length of stay in recovery                   entries            8588         858
                                              95% percentile        0.687        0.687
                                              maximum               1.927        1.927
 
+Structure 030032-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -435,6 +454,7 @@ Length of stay in recovery                   entries            3245         324
                                              95% percentile        1.528        1.528
                                              maximum               3.393        3.393
 
+Structure 030033-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -458,6 +478,7 @@ Length of stay in recovery                   entries            1715         171
                                              95% percentile        3.570        3.570
                                              maximum               7.098        7.098
 
+Structure 030034-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -481,6 +502,7 @@ Length of stay in recovery                   entries            2591         259
                                              95% percentile        2.186        2.186
                                              maximum               4.006        4.006
 
+Structure 030035-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -504,6 +526,7 @@ Length of stay in recovery                   entries            1584         158
                                              95% percentile        3.640        3.640
                                              maximum               7.266        7.266
 
+Structure 030037-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -527,6 +550,7 @@ Length of stay in recovery                   entries             236          23
                                              95% percentile       22.782       22.782
                                              maximum              31.530       31.530
 
+Structure 030038-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -550,6 +574,7 @@ Length of stay in recovery                   entries             669          66
                                              95% percentile        7.724        7.724
                                              maximum              16.915       16.915
 
+Structure 030042-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -573,6 +598,7 @@ Length of stay in recovery                   entries           11226        1122
                                              95% percentile        0.489        0.489
                                              maximum               1.720        1.720
 
+Structure 030044-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -596,6 +622,7 @@ Length of stay in recovery                   entries            2296         229
                                              95% percentile        3.371        3.371
                                              maximum              10.163       10.163
 
+Structure 030045-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -619,6 +646,7 @@ Length of stay in recovery                   entries             664          66
                                              95% percentile       21.263       21.263
                                              maximum              32.749       32.749
 
+Structure 030051-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -642,6 +670,7 @@ Length of stay in recovery                   entries            5311         531
                                              95% percentile        0.986        0.986
                                              maximum               2.448        2.448
 
+Structure 030056-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -665,6 +694,7 @@ Length of stay in recovery                   entries            5992         599
                                              95% percentile        0.906        0.906
                                              maximum               3.034        3.034
 
+Structure 030057-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -688,6 +718,7 @@ Length of stay in recovery                   entries            2652         265
                                              95% percentile        2.499        2.499
                                              maximum               7.459        7.459
 
+Structure 030058-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -711,6 +742,7 @@ Length of stay in recovery                   entries            9683         968
                                              95% percentile        0.572        0.572
                                              maximum               2.461        2.461
 
+Structure 030066-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -734,6 +766,7 @@ Length of stay in recovery                   entries           11133        1113
                                              95% percentile        0.488        0.488
                                              maximum               2.359        2.359
 
+Structure 030067-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -757,6 +790,7 @@ Length of stay in recovery                   entries           11770        1177
                                              95% percentile        0.475        0.475
                                              maximum               1.393        1.393
 
+Structure 030068-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -780,6 +814,7 @@ Length of stay in recovery                   entries            9273         927
                                              95% percentile        0.572        0.572
                                              maximum               1.902        1.902
 
+Structure 030070-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -803,6 +838,7 @@ Length of stay in recovery                   entries            5744         574
                                              95% percentile        1.080        1.080
                                              maximum               4.491        4.491
 
+Structure 030071-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -826,6 +862,7 @@ Length of stay in recovery                   entries            2016         201
                                              95% percentile        2.648        2.648
                                              maximum               6.000        6.000
 
+Structure 030071-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -849,6 +886,7 @@ Length of stay in recovery                   entries            3488         348
                                              95% percentile        1.671        1.671
                                              maximum               3.764        3.764
 
+Structure 030071-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -872,6 +910,7 @@ Length of stay in recovery                   entries             235          23
                                              95% percentile       19.762       19.762
                                              maximum              28.598       28.598
 
+Structure 030072-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -895,6 +934,7 @@ Length of stay in recovery                   entries            4165         416
                                              95% percentile        1.400        1.400
                                              maximum               3.019        3.019
 
+Structure 030072-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -918,6 +958,7 @@ Length of stay in recovery                   entries            6565         656
                                              95% percentile        0.740        0.740
                                              maximum               1.777        1.777
 
+Structure 030072-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -941,6 +982,7 @@ Length of stay in recovery                   entries             156          15
                                              95% percentile       44.440       44.440
                                              maximum              61.624       61.624
 
+Structure 030073-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -964,6 +1006,7 @@ Length of stay in recovery                   entries            8638         863
                                              95% percentile        0.611        0.611
                                              maximum               1.505        1.505
 
+Structure 030074-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -987,6 +1030,7 @@ Length of stay in recovery                   entries            9260         926
                                              95% percentile        0.553        0.553
                                              maximum               1.920        1.920
 
+Structure 030075-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1010,6 +1054,7 @@ Length of stay in recovery                   entries            2554         255
                                              95% percentile        2.348        2.348
                                              maximum               5.010        5.010
 
+Structure 030077-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1033,6 +1078,7 @@ Length of stay in recovery                   entries             556          55
                                              95% percentile        9.758        9.758
                                              maximum              25.709       25.709
 
+Structure 030078-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1056,6 +1102,7 @@ Length of stay in recovery                   entries           11758        1175
                                              95% percentile        0.462        0.462
                                              maximum               1.228        1.228
 
+Structure 030079-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1079,6 +1126,7 @@ Length of stay in recovery                   entries            4267         426
                                              95% percentile        1.290        1.290
                                              maximum               3.579        3.579
 
+Structure 030080-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1102,6 +1150,7 @@ Length of stay in recovery                   entries            1510         151
                                              95% percentile        4.781        4.781
                                              maximum               8.691        8.691
 
+Structure 030081-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1125,6 +1174,7 @@ Length of stay in recovery                   entries            1191         119
                                              95% percentile        4.792        4.792
                                              maximum               7.972        7.972
 
+Structure 030082-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1148,6 +1198,7 @@ Length of stay in recovery                   entries             325          32
                                              95% percentile       14.513       14.513
                                              maximum              22.016       22.016
 
+Structure 030083-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1171,6 +1222,7 @@ Length of stay in recovery                   entries            1892         189
                                              95% percentile        3.348        3.348
                                              maximum               5.970        5.970
 
+Structure 030084-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1194,6 +1246,7 @@ Length of stay in recovery                   entries             114          11
                                              95% percentile       19.529       19.529
                                              maximum              27.293       27.293
 
+Structure 030085-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1217,6 +1270,7 @@ Length of stay in recovery                   entries            1964         196
                                              95% percentile        3.024        3.024
                                              maximum               8.932        8.932
 
+Structure 030085-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1240,6 +1294,7 @@ Length of stay in recovery                   entries            3024         302
                                              95% percentile        1.845        1.845
                                              maximum               4.663        4.663
 
+Structure 030085-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1263,6 +1318,7 @@ Length of stay in recovery                   entries             602          60
                                              95% percentile        8.789        8.789
                                              maximum              13.162       13.162
 
+Structure 030087-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1286,6 +1342,7 @@ Length of stay in recovery                   entries            1888         188
                                              95% percentile        3.505        3.505
                                              maximum               7.621        7.621
 
+Structure 030096-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1309,6 +1366,7 @@ Length of stay in recovery                   entries             228          22
                                              95% percentile       24.993       24.993
                                              maximum              30.584       30.584
 
+Structure 030097-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1332,6 +1390,7 @@ Length of stay in recovery                   entries            8887         888
                                              95% percentile        0.650        0.650
                                              maximum               2.055        2.055
 
+Structure 030100-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1355,6 +1414,7 @@ Length of stay in recovery                   entries            3111         311
                                              95% percentile        1.897        1.897
                                              maximum               5.180        5.180
 
+Structure 030101-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1378,6 +1438,7 @@ Length of stay in recovery                   entries             185          18
                                              95% percentile       32.631       32.631
                                              maximum              46.531       46.531
 
+Structure 030103-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1401,6 +1462,7 @@ Length of stay in recovery                   entries            1344         134
                                              95% percentile        4.163        4.163
                                              maximum               9.714        9.714
 
+Structure 030104-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1424,6 +1486,7 @@ Length of stay in recovery                   entries             962          96
                                              95% percentile        6.396        6.396
                                              maximum              13.027       13.027
 
+Structure 030105-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1447,6 +1510,7 @@ Length of stay in recovery                   entries            2566         256
                                              95% percentile        2.390        2.390
                                              maximum               7.101        7.101
 
+Structure 030106-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1470,6 +1534,7 @@ Length of stay in recovery                   entries            6670         667
                                              95% percentile        0.782        0.782
                                              maximum               1.756        1.756
 
+Structure 030107-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1493,6 +1558,7 @@ Length of stay in recovery                   entries            2842         284
                                              95% percentile        2.096        2.096
                                              maximum               4.616        4.616
 
+Structure 030108-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1516,6 +1582,7 @@ Length of stay in recovery                   entries             394          39
                                              95% percentile       20.066       20.066
                                              maximum              27.754       27.754
 
+Structure 030109-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1539,6 +1606,7 @@ Length of stay in recovery                   entries             272          27
                                              95% percentile       22.251       22.251
                                              maximum              30.825       30.825
 
+Structure 030110-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1562,6 +1630,7 @@ Length of stay in recovery                   entries             995          99
                                              95% percentile        4.421        4.421
                                              maximum              13.930       13.930
 
+Structure 030112-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1585,6 +1654,7 @@ Length of stay in recovery                   entries            3882         388
                                              95% percentile        1.283        1.283
                                              maximum               3.343        3.343
 
+Structure 030113-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1608,6 +1678,7 @@ Length of stay in recovery                   entries            1548         154
                                              95% percentile        3.517        3.517
                                              maximum               5.408        5.408
 
+Structure 030116-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1631,6 +1702,7 @@ Length of stay in recovery                   entries            5591         559
                                              95% percentile        0.898        0.898
                                              maximum               2.477        2.477
 
+Structure 030119-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1654,6 +1726,7 @@ Length of stay in recovery                   entries            1142         114
                                              95% percentile        5.872        5.872
                                              maximum              10.903       10.903
 
+Structure 030121-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1677,6 +1750,7 @@ Length of stay in recovery                   entries            5640         564
                                              95% percentile        1.044        1.044
                                              maximum               3.825        3.825
 
+Structure 030124-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1700,6 +1774,7 @@ Length of stay in recovery                   entries             343          34
                                              95% percentile       14.985       14.985
                                              maximum              32.106       32.106
 
+Structure 030125-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1723,6 +1798,7 @@ Length of stay in recovery                   entries            1876         187
                                              95% percentile        3.327        3.327
                                              maximum               8.968        8.968
 
+Structure 030129-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1746,6 +1822,7 @@ Length of stay in recovery                   entries             434          43
                                              95% percentile       13.527       13.527
                                              maximum              21.816       21.816
 
+Structure 030131-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1769,6 +1846,7 @@ Length of stay in recovery                   entries           10944        1094
                                              95% percentile        0.506        0.506
                                              maximum               1.134        1.134
 
+Structure 030132-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1792,6 +1870,7 @@ Length of stay in recovery                   entries            3302         330
                                              95% percentile        1.764        1.764
                                              maximum               4.246        4.246
 
+Structure 030133-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1815,6 +1894,7 @@ Length of stay in recovery                   entries            6607         660
                                              95% percentile        0.799        0.799
                                              maximum               1.820        1.820
 
+Structure 030134-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1838,6 +1918,7 @@ Length of stay in recovery                   entries            1135         113
                                              95% percentile        5.653        5.653
                                              maximum              10.045       10.045
 
+Structure 030136-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1861,6 +1942,7 @@ Length of stay in recovery                   entries             368          36
                                              95% percentile       14.862       14.862
                                              maximum              31.799       31.799
 
+Structure 030137-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1884,6 +1966,7 @@ Length of stay in recovery                   entries            3088         308
                                              95% percentile        1.826        1.826
                                              maximum               3.511        3.511
 
+Structure 030138-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1907,6 +1990,7 @@ Length of stay in recovery                   entries            3702         370
                                              95% percentile        1.563        1.563
                                              maximum               3.373        3.373
 
+Structure 030140-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1930,6 +2014,7 @@ Length of stay in recovery                   entries            8386         838
                                              95% percentile        0.633        0.633
                                              maximum               1.913        1.913
 
+Structure 030143-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1953,6 +2038,7 @@ Length of stay in recovery                   entries            9110         911
                                              95% percentile        0.618        0.618
                                              maximum               1.304        1.304
 
+Structure 030144-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1976,6 +2062,7 @@ Length of stay in recovery                   entries            2458         245
                                              95% percentile        2.315        2.315
                                              maximum               7.815        7.815
 
+Structure 030145-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -1999,6 +2086,7 @@ Length of stay in recovery                   entries            3275         327
                                              95% percentile        1.898        1.898
                                              maximum               4.533        4.533
 
+Structure 030146-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2022,6 +2110,7 @@ Length of stay in recovery                   entries            3260         326
                                              95% percentile        1.789        1.789
                                              maximum               3.769        3.769
 
+Structure 030147-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2045,6 +2134,7 @@ Length of stay in recovery                   entries            7163         716
                                              95% percentile        0.722        0.722
                                              maximum               2.062        2.062
 
+Structure 030148-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2068,6 +2158,7 @@ Length of stay in recovery                   entries            7757         775
                                              95% percentile        0.673        0.673
                                              maximum               2.164        2.164
 
+Structure 030149-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2091,6 +2182,7 @@ Length of stay in recovery                   entries             586          58
                                              95% percentile        8.849        8.849
                                              maximum              17.506       17.506
 
+Structure 030154-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2114,6 +2206,7 @@ Length of stay in recovery                   entries            7915         791
                                              95% percentile        0.651        0.651
                                              maximum               2.573        2.573
 
+Structure 030154-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2137,6 +2230,7 @@ Length of stay in recovery                   entries             111          11
                                              95% percentile       68.964       68.964
                                              maximum              77.345       77.345
 
+Structure 030156-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2160,6 +2254,7 @@ Length of stay in recovery                   entries            7951         795
                                              95% percentile        0.718        0.718
                                              maximum               1.686        1.686
 
+Structure 030157-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2183,6 +2278,7 @@ Length of stay in recovery                   entries            5708         570
                                              95% percentile        0.910        0.910
                                              maximum               2.002        2.002
 
+Structure 030158-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2206,6 +2302,7 @@ Length of stay in recovery                   entries             129          12
                                              95% percentile       31.933       31.933
                                              maximum              47.888       47.888
 
+Structure 030159-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2229,6 +2326,7 @@ Length of stay in recovery                   entries            4540         454
                                              95% percentile        1.238        1.238
                                              maximum               2.697        2.697
 
+Structure 030161-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2252,6 +2350,7 @@ Length of stay in recovery                   entries             149          14
                                              95% percentile       27.848       27.848
                                              maximum              41.866       41.866
 
+Structure 030162-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2275,6 +2374,7 @@ Length of stay in recovery                   entries            4337         433
                                              95% percentile        1.278        1.278
                                              maximum               3.187        3.187
 
+Structure 030163-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2298,6 +2398,7 @@ Length of stay in recovery                   entries            3682         368
                                              95% percentile        2.116        2.116
                                              maximum               4.335        4.335
 
+Structure 030167-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2321,6 +2422,7 @@ Length of stay in recovery                   entries            5934         593
                                              95% percentile        0.871        0.871
                                              maximum               2.121        2.121
 
+Structure 030171-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2344,6 +2446,7 @@ Length of stay in recovery                   entries             489          48
                                              95% percentile       12.616       12.616
                                              maximum              19.732       19.732
 
+Structure 030175-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2367,6 +2470,7 @@ Length of stay in recovery                   entries            2240         224
                                              95% percentile        2.583        2.583
                                              maximum               7.840        7.840
 
+Structure 030176-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2390,6 +2494,7 @@ Length of stay in recovery                   entries            8027         802
                                              95% percentile        0.726        0.726
                                              maximum               2.519        2.519
 
+Structure 030177-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2413,6 +2518,7 @@ Length of stay in recovery                   entries            1158         115
                                              95% percentile        5.293        5.293
                                              maximum              10.632       10.632
 
+Structure 030178-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2436,6 +2542,7 @@ Length of stay in recovery                   entries            6366         636
                                              95% percentile        0.784        0.784
                                              maximum               2.906        2.906
 
+Structure 030183-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2459,6 +2566,7 @@ Length of stay in recovery                   entries             282          28
                                              95% percentile       16.401       16.401
                                              maximum              29.568       29.568
 
+Structure 030184-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2482,6 +2590,7 @@ Length of stay in recovery                   entries            8110         811
                                              95% percentile        0.638        0.638
                                              maximum               1.912        1.912
 
+Structure 030189-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2505,6 +2614,7 @@ Length of stay in recovery                   entries              43           4
                                              95% percentile      216.554      216.554
                                              maximum             232.402      232.402
 
+Structure 030190-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2528,6 +2638,7 @@ Length of stay in recovery                   entries            1406         140
                                              95% percentile        3.928        3.928
                                              maximum               7.494        7.494
 
+Structure 030191-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2551,6 +2662,7 @@ Length of stay in recovery                   entries            1820         182
                                              95% percentile        4.208        4.208
                                              maximum               9.435        9.435
 
+Structure 030192-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2574,6 +2686,7 @@ Length of stay in recovery                   entries            1626         162
                                              95% percentile        3.786        3.786
                                              maximum               7.784        7.784
 
+Structure 030193-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2597,6 +2710,7 @@ Length of stay in recovery                   entries            8430         843
                                              95% percentile        0.671        0.671
                                              maximum               1.555        1.555
 
+Structure 030194-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2620,6 +2734,7 @@ Length of stay in recovery                   entries            9096         909
                                              95% percentile        0.588        0.588
                                              maximum               1.683        1.683
 
+Structure 030196-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2643,6 +2758,7 @@ Length of stay in recovery                   entries              12           1
                                              95% percentile      173.125      173.125
                                              maximum             175.974      175.974
 
+Structure 030197-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2666,6 +2782,7 @@ Length of stay in recovery                   entries             236          23
                                              95% percentile       28.147       28.147
                                              maximum              44.866       44.866
 
+Structure 030198-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2689,6 +2806,7 @@ Length of stay in recovery                   entries            5483         548
                                              95% percentile        1.024        1.024
                                              maximum               2.433        2.433
 
+Structure 030199-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2712,6 +2830,7 @@ Length of stay in recovery                   entries             315          31
                                              95% percentile       24.138       24.138
                                              maximum              42.805       42.805
 
+Structure 030201-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2735,6 +2854,7 @@ Length of stay in recovery                   entries             864          86
                                              95% percentile        8.345        8.345
                                              maximum              15.119       15.119
 
+Structure 030202-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2758,6 +2878,7 @@ Length of stay in recovery                   entries            3399         339
                                              95% percentile        1.638        1.638
                                              maximum               4.532        4.532
 
+Structure 030203-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2781,6 +2902,7 @@ Length of stay in recovery                   entries            2786         278
                                              95% percentile        2.622        2.622
                                              maximum               6.804        6.804
 
+Structure 030209-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2804,6 +2926,7 @@ Length of stay in recovery                   entries           12023        1202
                                              95% percentile        0.515        0.515
                                              maximum               1.850        1.850
 
+Structure 030215-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2827,6 +2950,7 @@ Length of stay in recovery                   entries             399          39
                                              95% percentile       26.167       26.167
                                              maximum              43.431       43.431
 
+Structure 030217-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2850,6 +2974,7 @@ Length of stay in recovery                   entries             406          40
                                              95% percentile       15.389       15.389
                                              maximum              19.044       19.044
 
+Structure 030218-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2873,6 +2998,7 @@ Length of stay in recovery                   entries            2665         266
                                              95% percentile        2.119        2.119
                                              maximum               4.659        4.659
 
+Structure 030219-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2896,6 +3022,7 @@ Length of stay in recovery                   entries            3852         385
                                              95% percentile        1.522        1.522
                                              maximum               3.441        3.441
 
+Structure 030227-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2919,6 +3046,7 @@ Length of stay in recovery                   entries             906          90
                                              95% percentile        7.579        7.579
                                              maximum              11.769       11.769
 
+Structure 030227-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2942,6 +3070,7 @@ Length of stay in recovery                   entries            2358         235
                                              95% percentile        2.589        2.589
                                              maximum               9.495        9.495
 
+Structure 030227-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2965,6 +3094,7 @@ Length of stay in recovery                   entries             202          20
                                              95% percentile       26.679       26.679
                                              maximum              35.226       35.226
 
+Structure 030228-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -2988,6 +3118,7 @@ Length of stay in recovery                   entries              63           6
                                              95% percentile       66.833       66.833
                                              maximum              76.136       76.136
 
+Structure 030239-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3011,6 +3142,7 @@ Length of stay in recovery                   entries            5998         599
                                              95% percentile        0.964        0.964
                                              maximum               2.484        2.484
 
+Structure 030259-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3034,6 +3166,7 @@ Length of stay in recovery                   entries            2554         255
                                              95% percentile        2.068        2.068
                                              maximum               5.068        5.068
 
+Structure 030266-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3057,6 +3190,7 @@ Length of stay in recovery                   entries             143          14
                                              95% percentile       70.276       70.276
                                              maximum              90.288       90.288
 
+Structure 030269-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3080,6 +3214,7 @@ Length of stay in recovery                   entries             622          62
                                              95% percentile        8.094        8.094
                                              maximum              16.205       16.205
 
+Structure 030273-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3103,6 +3238,7 @@ Length of stay in recovery                   entries            5971         597
                                              95% percentile        0.920        0.920
                                              maximum               3.545        3.545
 
+Structure 030274-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3126,6 +3262,7 @@ Length of stay in recovery                   entries            8850         885
                                              95% percentile        0.618        0.618
                                              maximum               2.103        2.103
 
+Structure 030274-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3149,6 +3286,7 @@ Length of stay in recovery                   entries            1851         185
                                              95% percentile        2.807        2.807
                                              maximum               7.001        7.001
 
+Structure 030275-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3172,6 +3310,7 @@ Length of stay in recovery                   entries            4664         466
                                              95% percentile        1.124        1.124
                                              maximum               3.975        3.975
 
+Structure 030281-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3195,6 +3334,7 @@ Length of stay in recovery                   entries           18017        1801
                                              95% percentile        0.291        0.291
                                              maximum               0.990        0.990
 
+Structure 030281-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3218,6 +3358,7 @@ Length of stay in recovery                   entries            2745         274
                                              95% percentile        2.232        2.232
                                              maximum               6.487        6.487
 
+Structure 030282-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3241,6 +3382,7 @@ Length of stay in recovery                   entries            5191         519
                                              95% percentile        0.990        0.990
                                              maximum               2.925        2.925
 
+Structure 030282-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3264,6 +3406,7 @@ Length of stay in recovery                   entries            2581         258
                                              95% percentile        2.250        2.250
                                              maximum               5.053        5.053
 
+Structure 030283-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3287,6 +3430,7 @@ Length of stay in recovery                   entries             753          75
                                              95% percentile        7.898        7.898
                                              maximum              19.273       19.273
 
+Structure 030284-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3310,6 +3454,7 @@ Length of stay in recovery                   entries             282          28
                                              95% percentile       18.398       18.398
                                              maximum              27.558       27.558
 
+Structure 030294-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3333,6 +3478,7 @@ Length of stay in recovery                   entries             732          73
                                              95% percentile       16.745       16.745
                                              maximum              26.162       26.162
 
+Structure 030295-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3356,6 +3502,7 @@ Length of stay in recovery                   entries           16790        1679
                                              95% percentile        0.359        0.359
                                              maximum               1.076        1.076
 
+Structure 030347-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3379,6 +3526,7 @@ Length of stay in recovery                   entries             369          36
                                              95% percentile       30.357       30.357
                                              maximum              44.333       44.333
 
+Structure 030348-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3402,6 +3550,7 @@ Length of stay in recovery                   entries             776          77
                                              95% percentile        8.696        8.696
                                              maximum              14.868       14.868
 
+Structure 030350-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3425,6 +3574,7 @@ Length of stay in recovery                   entries             963          96
                                              95% percentile        6.571        6.571
                                              maximum              10.215       10.215
 
+Structure 030352-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3448,6 +3598,7 @@ Length of stay in recovery                   entries             209          20
                                              95% percentile       36.158       36.158
                                              maximum              45.976       45.976
 
+Structure 030353-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3471,6 +3622,7 @@ Length of stay in recovery                   entries            1092         109
                                              95% percentile        4.876        4.876
                                              maximum               9.914        9.914
 
+Structure 030354-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3494,6 +3646,7 @@ Length of stay in recovery                   entries             372          37
                                              95% percentile       12.291       12.291
                                              maximum              16.895       16.895
 
+Structure 030355-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3517,6 +3670,7 @@ Length of stay in recovery                   entries            3933         393
                                              95% percentile        1.410        1.410
                                              maximum               5.049        5.049
 
+Structure 030356-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3540,6 +3694,7 @@ Length of stay in recovery                   entries             302          30
                                              95% percentile       17.215       17.215
                                              maximum              25.574       25.574
 
+Structure 030357-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3563,6 +3718,7 @@ Length of stay in recovery                   entries            4619         461
                                              95% percentile        1.187        1.187
                                              maximum               3.341        3.341
 
+Structure 030359-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3586,6 +3742,7 @@ Length of stay in recovery                   entries             300          30
                                              95% percentile       17.350       17.350
                                              maximum              24.084       24.084
 
+Structure 030360-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3609,6 +3766,7 @@ Length of stay in recovery                   entries              66           6
                                              95% percentile       54.085       54.085
                                              maximum              69.876       69.876
 
+Structure 030361-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3632,6 +3790,7 @@ Length of stay in recovery                   entries             214          21
                                              95% percentile       19.996       19.996
                                              maximum              26.592       26.592
 
+Structure 030362-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3655,6 +3814,7 @@ Length of stay in recovery                   entries             267          26
                                              95% percentile       34.610       34.610
                                              maximum              46.339       46.339
 
+Structure 030363-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3678,6 +3838,7 @@ Length of stay in recovery                   entries              77           7
                                              95% percentile       85.685       85.685
                                              maximum              91.394       91.394
 
+Structure 030364-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3701,6 +3862,7 @@ Length of stay in recovery                   entries             417          41
                                              95% percentile       16.949       16.949
                                              maximum              23.451       23.451
 
+Structure 030366-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3724,6 +3886,7 @@ Length of stay in recovery                   entries             285          28
                                              95% percentile       25.790       25.790
                                              maximum              34.740       34.740
 
+Structure 030367-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3747,6 +3910,7 @@ Length of stay in recovery                   entries            9080         908
                                              95% percentile        0.599        0.599
                                              maximum               1.600        1.600
 
+Structure 030368-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3770,6 +3934,7 @@ Length of stay in recovery                   entries             571          57
                                              95% percentile        8.319        8.319
                                              maximum              20.334       20.334
 
+Structure 030369-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3793,6 +3958,7 @@ Length of stay in recovery                   entries             855          85
                                              95% percentile        7.100        7.100
                                              maximum              13.180       13.180
 
+Structure 030372-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3816,6 +3982,7 @@ Length of stay in recovery                   entries              31           3
                                              95% percentile       66.950       66.950
                                              maximum              68.362       68.362
 
+Structure 030378-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3839,6 +4006,7 @@ Length of stay in recovery                   entries             116          11
                                              95% percentile       78.586       78.586
                                              maximum              91.933       91.933
 
+Structure 030379-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3862,6 +4030,7 @@ Length of stay in recovery                   entries            1195         119
                                              95% percentile        4.410        4.410
                                              maximum               8.103        8.103
 
+Structure 030380-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3885,6 +4054,7 @@ Length of stay in recovery                   entries             134          13
                                              95% percentile       40.223       40.223
                                              maximum              53.511       53.511
 
+Structure 030381-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3908,6 +4078,7 @@ Length of stay in recovery                   entries            3296         329
                                              95% percentile        1.736        1.736
                                              maximum               6.630        6.630
 
+Structure 030382-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3931,6 +4102,7 @@ Length of stay in recovery                   entries            3738         373
                                              95% percentile        1.335        1.335
                                              maximum               3.568        3.568
 
+Structure 030383-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3954,6 +4126,7 @@ Length of stay in recovery                   entries            4333         433
                                              95% percentile        1.224        1.224
                                              maximum               2.856        2.856
 
+Structure 030388-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -3977,6 +4150,7 @@ Length of stay in recovery                   entries             255          25
                                              95% percentile       21.260       21.260
                                              maximum              35.375       35.375
 
+Structure 030389-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4000,6 +4174,7 @@ Length of stay in recovery                   entries             339          33
                                              95% percentile       17.385       17.385
                                              maximum              22.293       22.293
 
+Structure 030389-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4023,6 +4198,7 @@ Length of stay in recovery                   entries            1667         166
                                              95% percentile        3.739        3.739
                                              maximum               9.968        9.968
 
+Structure 030397-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4046,6 +4222,7 @@ Length of stay in recovery                   entries             447          44
                                              95% percentile       11.086       11.086
                                              maximum              20.590       20.590
 
+Structure 030901-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4069,6 +4246,7 @@ Length of stay in recovery                   entries            9122         912
                                              95% percentile        0.568        0.568
                                              maximum               1.588        1.588
 
+Structure 030901-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4092,6 +4270,7 @@ Length of stay in recovery                   entries           14269        1426
                                              95% percentile        0.355        0.355
                                              maximum               1.043        1.043
 
+Structure 030901-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4115,6 +4294,7 @@ Length of stay in recovery                   entries            3162         316
                                              95% percentile        2.507        2.507
                                              maximum               5.704        5.704
 
+Structure 030901-03
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4138,6 +4318,7 @@ Length of stay in recovery                   entries             127          12
                                              95% percentile       44.093       44.093
                                              maximum              54.528       54.528
 
+Structure 030902-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4161,6 +4342,7 @@ Length of stay in recovery                   entries           18820        1882
                                              95% percentile        0.286        0.286
                                              maximum               0.766        0.766
 
+Structure 030903-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4184,6 +4366,7 @@ Length of stay in recovery                   entries           16897        1689
                                              95% percentile        0.330        0.330
                                              maximum               1.014        1.014
 
+Structure 030904-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4207,6 +4390,7 @@ Length of stay in recovery                   entries            8414         841
                                              95% percentile        0.594        0.594
                                              maximum               2.231        2.231
 
+Structure 030905-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4230,6 +4414,7 @@ Length of stay in recovery                   entries           26323        2632
                                              95% percentile        0.198        0.198
                                              maximum               0.831        0.831
 
+Structure 030906-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4253,6 +4438,7 @@ Length of stay in recovery                   entries           28458        2845
                                              95% percentile        0.181        0.181
                                              maximum               0.619        0.619
 
+Structure 030907-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4276,6 +4462,7 @@ Length of stay in recovery                   entries           17080        1708
                                              95% percentile        0.335        0.335
                                              maximum               0.969        0.969
 
+Structure 030908-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4299,6 +4486,7 @@ Length of stay in recovery                   entries           16614        1661
                                              95% percentile        0.325        0.325
                                              maximum               0.826        0.826
 
+Structure 030909-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4322,6 +4510,7 @@ Length of stay in recovery                   entries           21301        2130
                                              95% percentile        0.245        0.245
                                              maximum               0.699        0.699
 
+Structure 030910-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4345,6 +4534,7 @@ Length of stay in recovery                   entries           11163        1116
                                              95% percentile        0.489        0.489
                                              maximum               1.578        1.578
 
+Structure 030911-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4368,6 +4558,7 @@ Length of stay in recovery                   entries            3996         399
                                              95% percentile        1.362        1.362
                                              maximum               3.524        3.524
 
+Structure 030912-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4391,6 +4582,7 @@ Length of stay in recovery                   entries            1828         182
                                              95% percentile        3.371        3.371
                                              maximum               6.163        6.163
 
+Structure 030913-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4414,6 +4606,7 @@ Length of stay in recovery                   entries           28130        2813
                                              95% percentile        0.191        0.191
                                              maximum               0.625        0.625
 
+Structure 030914-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4437,6 +4630,7 @@ Length of stay in recovery                   entries           16686        1668
                                              95% percentile        0.368        0.368
                                              maximum               1.373        1.373
 
+Structure 030915-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4460,6 +4654,7 @@ Length of stay in recovery                   entries           13441        1344
                                              95% percentile        0.427        0.427
                                              maximum               1.264        1.264
 
+Structure 030916-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4483,6 +4678,7 @@ Length of stay in recovery                   entries           15233        1523
                                              95% percentile        0.359        0.359
                                              maximum               0.989        0.989
 
+Structure 030920-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4506,6 +4702,7 @@ Length of stay in recovery                   entries             563          56
                                              95% percentile       13.321       13.321
                                              maximum              18.024       18.024
 
+Structure 030922-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4529,6 +4726,7 @@ Length of stay in recovery                   entries           10455        1045
                                              95% percentile        0.483        0.483
                                              maximum               1.520        1.520
 
+Structure 030923-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4552,6 +4750,7 @@ Length of stay in recovery                   entries            3746         374
                                              95% percentile        1.607        1.607
                                              maximum               4.165        4.165
 
+Structure 030924-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4575,6 +4774,7 @@ Length of stay in recovery                   entries           27028        2702
                                              95% percentile        0.194        0.194
                                              maximum               0.590        0.590
 
+Structure 030925-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4598,6 +4798,7 @@ Length of stay in recovery                   entries           25579        2557
                                              95% percentile        0.218        0.218
                                              maximum               0.574        0.574
 
+Structure 030930-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4621,6 +4822,7 @@ Length of stay in recovery                   entries             687          68
                                              95% percentile       10.154       10.154
                                              maximum              14.821       14.821
 
+Structure 030931-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4644,6 +4846,7 @@ Length of stay in recovery                   entries             784          78
                                              95% percentile        8.254        8.254
                                              maximum              12.599       12.599
 
+Structure 030932-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4667,6 +4870,7 @@ Length of stay in recovery                   entries             498          49
                                              95% percentile        9.551        9.551
                                              maximum              28.771       28.771
 
+Structure 030933-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4690,6 +4894,7 @@ Length of stay in recovery                   entries             564          56
                                              95% percentile        9.135        9.135
                                              maximum              20.111       20.111
 
+Structure 030934-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4713,6 +4918,7 @@ Length of stay in recovery                   entries            3916         391
                                              95% percentile        1.514        1.514
                                              maximum               3.404        3.404
 
+Structure 030935-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4736,6 +4942,7 @@ Length of stay in recovery                   entries           26983        2698
                                              95% percentile        0.198        0.198
                                              maximum               0.658        0.658
 
+Structure 030936-01
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4759,6 +4966,7 @@ Length of stay in recovery                   entries            3064         306
                                              95% percentile        1.965        1.965
                                              maximum               4.814        4.814
 
+Structure 030936-02
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4782,6 +4990,7 @@ Length of stay in recovery                   entries              42           4
                                              95% percentile      138.823      138.823
                                              maximum             142.548      142.548
 
+Structure 030936-03
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4805,6 +5014,7 @@ Length of stay in recovery                   entries            1620         162
                                              95% percentile        3.419        3.419
                                              maximum               7.054        7.054
 
+Structure 030937-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4828,6 +5038,7 @@ Length of stay in recovery                   entries             491          49
                                              95% percentile       20.893       20.893
                                              maximum              28.797       28.797
 
+Structure 030938-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4851,6 +5062,7 @@ Length of stay in recovery                   entries            4628         462
                                              95% percentile        1.128        1.128
                                              maximum               2.925        2.925
 
+Structure 030939-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4874,6 +5086,7 @@ Length of stay in recovery                   entries            1978         197
                                              95% percentile        4.069        4.069
                                              maximum               7.277        7.277
 
+Structure 030940-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4897,6 +5110,7 @@ Length of stay in recovery                   entries             467          46
                                              95% percentile       14.127       14.127
                                              maximum              24.758       24.758
 
+Structure 030941-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4920,6 +5134,7 @@ Length of stay in recovery                   entries            7938         793
                                              95% percentile        0.630        0.630
                                              maximum               1.571        1.571
 
+Structure 030942-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4943,6 +5158,7 @@ Length of stay in recovery                   entries             163          16
                                              95% percentile       35.294       35.294
                                              maximum              58.129       58.129
 
+Structure 030943-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4966,6 +5182,7 @@ Length of stay in recovery                   entries           20510        2051
                                              95% percentile        0.260        0.260
                                              maximum               0.665        0.665
 
+Structure 030944-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -4989,6 +5206,7 @@ Length of stay in recovery                   entries             139          13
                                              95% percentile       54.637       54.637
                                              maximum              62.007       62.007
 
+Structure 030945-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5012,6 +5230,7 @@ Length of stay in recovery                   entries             199          19
                                              95% percentile       31.755       31.755
                                              maximum              49.508       49.508
 
+Structure 030946-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5035,6 +5254,7 @@ Length of stay in recovery                   entries            4174         417
                                              95% percentile        1.472        1.472
                                              maximum               3.684        3.684
 
+Structure 030947-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5058,6 +5278,7 @@ Length of stay in recovery                   entries            9907         990
                                              95% percentile        0.510        0.510
                                              maximum               1.961        1.961
 
+Structure 030948-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5081,6 +5302,7 @@ Length of stay in recovery                   entries            6568         656
                                              95% percentile        0.886        0.886
                                              maximum               2.627        2.627
 
+Structure 030949-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5104,6 +5326,7 @@ Length of stay in recovery                   entries             343          34
                                              95% percentile       36.381       36.381
                                              maximum              47.590       47.590
 
+Structure 030950-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5127,6 +5350,7 @@ Length of stay in recovery                   entries            1461         146
                                              95% percentile        4.726        4.726
                                              maximum              15.556       15.556
 
+Structure 030337-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5150,6 +5374,7 @@ Length of stay in recovery                   entries              55           5
                                              95% percentile       93.748       93.748
                                              maximum             110.077      110.077
 
+Structure 030169-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
@@ -5173,6 +5398,7 @@ Length of stay in recovery                   entries             122          12
                                              95% percentile       87.898       87.898
                                              maximum              98.248       98.248
 
+Structure 030384-00
 Statistics of recovery at       365    
                                                                      all    excl.zero         zero
 -------------------------------------------- -------------- ------------ ------------ ------------
