@@ -19,6 +19,7 @@ monitor_recovery: dict[str, sim.Monitor] = {}
 monitor_days_do: dict[str, sim.Monitor] = {}
 monitor_repeat_do: dict[str, sim.Monitor] = {}
 
+
 class Structure(sim.Component):
     code: str
     name: str
@@ -39,32 +40,21 @@ class Structure(sim.Component):
 
     def process(self):
         while True:
-            while len(self.hospitalization_waiting) == 0:
+            while len(self.hospitalization_waiting) <= 0:
                 yield self.passivate()
             if len(self.hospitalization_waiting) > 0:
                 # patient visit
                 patient = self.hospitalization_waiting.pop()
                 if not patient.visited_already:
-                    do = 0
-                    ds = 0
-                    dh = 0
-                    for _ in range(int(NumberAccess_mean[patient.mdc])):
-                        type_recovery = TypeAccess_distributions[patient.mdc].sample()
-                        monitor_recovery[patient.mdc].tally(type_recovery)  # salvo il numero di ricoveri di ogni tipo
-                        if type_recovery == "DS":
-                            ds += 1
-                        elif type_recovery == "DH":
-                            dh += 1
-                        elif type_recovery == "DO":
-                            do += 1
-                        if ds > 0 and dh > 0:
-                            if sim.IntUniform(0, 1) == 0:
-                                dh += ds
-                            else:
-                                ds += dh
-                    patient.ds = ds
-                    patient.dh = dh
-                    patient.do = do
+                    type_recovery = TypeAccess_distributions[patient.mdc].sample()
+                    monitor_recovery[patient.mdc].tally(type_recovery)
+                    if type_recovery == "DS":
+                        patient.ds += 1
+                        # aggiungo il numero di accessi ds in base all'mdc
+                    if type_recovery == "DH":
+                        patient.dh += 1
+                    if type_recovery == "DO":
+                        patient.do = 1
                     patient.visited_already = True
                 self.under_treatment.append(patient)
                 patient.activate(process="hospitalization")
@@ -73,15 +63,14 @@ class Structure(sim.Component):
 structures: dict[str, Structure] = {}
 
 
-def select_type_recovery(ds, dh, do, mdc):
-    while True:
-        type_recovery = TypeAccess_distributions[mdc].sample()
-        if type_recovery == "DH" and dh > 0:
-            return type_recovery
-        if type_recovery == "DS" and ds > 0:
-            return type_recovery
-        if type_recovery == "DO" and do > 0:
-            return type_recovery
+def select_type_recovery(mdc):
+    type_recovery = TypeAccess_distributions[mdc].sample()
+    if type_recovery == "DH":
+        return type_recovery
+    if type_recovery == "DS":
+        return type_recovery
+    if type_recovery == "DO":
+        return type_recovery
 
 
 # patient component
@@ -93,7 +82,6 @@ class Patient(sim.Component):
     dh: int
     do: int
     days_do: int
-    residual_days_do: int
     structure: Structure
 
     # noinspection PyMethodOverriding
@@ -104,7 +92,6 @@ class Patient(sim.Component):
         self.do = 0
         self.ds = 0
         self.days_do = 0
-        self.residual_days_do = 0
         self.structure = structures[Structures_distributions[mdc].sample()]
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.structure.hospitalization_waiting.append(self)
@@ -143,18 +130,16 @@ class Patient(sim.Component):
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
         if self.ds == 0 and self.dh == 0 and self.do == 0:
             self.structure.patient_treated.append(self)
-        else:
-            self.structure.patient_released.append(self)
-            self.release(self.structure.beds)
             self.structure.under_treatment.remove(self)
-            self.structure = structures[Structures_distributions[self.mdc].sample()]
+        else:
+            self.release(self.structure.beds)
             self.structure.hospitalization_waiting.append(self)
             yield self.passivate()
         yield self.structure.activate()
 
 
 def setup():
-    global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions,\
+    global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions, \
         NumberAccess_mean, RepeatHospitalization_distributions
     csv_mdc = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False)
     info_beds = pd.read_csv("../dataset/Letti_per_struttura_sanitaria_completo.csv", keep_default_na=False)
@@ -205,7 +190,7 @@ def calculate_statistics(iat_mdc: dict):
     file_number_patient = open("../statistiche/number_patients.txt", "a")
     for key, value in structures.items():
         file_number_patient.write("Structure " + key + "\n")
-        value.hospitalization_waiting.print_statistics(file=file_number_patient)# statistiche delle entrate
+        value.hospitalization_waiting.print_statistics(file=file_number_patient)  # statistiche delle entrate
         file_number_patient.write("\n")
     file_number_patient.close()
 
@@ -239,8 +224,10 @@ def calculate_statistics(iat_mdc: dict):
     file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
     file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment.txt", "a")
     for key, value in structures.items():
-        file_number_patients_treated.write('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
-        file_number_patients_released.write('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
+        file_number_patients_treated.write(
+            'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
+        file_number_patients_released.write(
+            'Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
         value.under_treatment.print_statistics(file=file_stats_patients_undertreatment)
     file_number_patients_released.close()
     file_number_patients_treated.close()
