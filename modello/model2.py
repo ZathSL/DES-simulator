@@ -1,12 +1,13 @@
 import timeit
 from datetime import timedelta
 from typing import Union, TextIO
-from scipy.stats import bernoulli
+
 import pandas as pd
 import salabim as sim
+from scipy.stats import bernoulli
 
 from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, \
-    get_Strutture_distributions, get_NumeroAccessi_media, get_RicoveriRipetuti_distributions
+    get_Strutture_distributions, get_MediaNumeroAccessi_distributions, get_RicoveriRipetuti_distributions
 
 Structures_distributions: dict[str, sim.Pdf]
 TypeAccess_distributions: dict[str, sim.Pdf]
@@ -18,6 +19,7 @@ monitor_mdc: sim.Monitor
 monitor_recovery: dict[str, sim.Monitor] = {}
 monitor_days_do: dict[str, sim.Monitor] = {}
 monitor_repeat_do: dict[str, sim.Monitor] = {}
+
 
 class Structure(sim.Component):
     code: str
@@ -154,7 +156,7 @@ class Patient(sim.Component):
 
 
 def setup():
-    global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions,\
+    global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions, \
         NumberAccess_mean, RepeatHospitalization_distributions
     csv_mdc = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False)
     info_beds = pd.read_csv("../dataset/Letti_per_struttura_sanitaria_completo.csv", keep_default_na=False)
@@ -165,7 +167,7 @@ def setup():
     Structures_distributions, info_structures = get_Strutture_distributions(codici_mdc)
     TypeAccess_distributions = get_TipologieAccessi_distributions()
     DayHospitalizationDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
-    NumberAccess_mean = get_NumeroAccessi_media()
+    NumberAccess_mean = get_MediaNumeroAccessi_distributions()
     RepeatHospitalization_distributions = get_RicoveriRipetuti_distributions()
     return iat_mdc, info_structures, info_mdc, info_beds
 
@@ -192,8 +194,8 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
             structures[code] = structure
 
     for mdc, iat in iat_mdc.items():
-        sim.ComponentGenerator(Patient, generator_name="Patient.generator.mdc-" + mdc, iat=iat, mdc=mdc,
-                               mdc_desc=info_mdc[mdc])
+        sim.ComponentGenerator(Patient, generator_name="Patient.generator.mdc-" + mdc, iat=sim.Exponential(iat),
+                               mdc=mdc, mdc_desc=info_mdc[mdc])
     env.run(till=sim_time_days)
 
     calculate_statistics(iat_mdc=iat_mdc)
@@ -205,7 +207,7 @@ def calculate_statistics(iat_mdc: dict):
     file_number_patient = open("../statistiche/number_patients.txt", "a")
     for key, value in structures.items():
         file_number_patient.write("Structure " + key + "\n")
-        value.hospitalization_waiting.print_statistics(file=file_number_patient)# statistiche delle entrate
+        value.hospitalization_waiting.print_statistics(file=file_number_patient)  # statistiche delle entrate
         file_number_patient.write("\n")
     file_number_patient.close()
 
@@ -239,8 +241,10 @@ def calculate_statistics(iat_mdc: dict):
     file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
     file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment.txt", "a")
     for key, value in structures.items():
-        file_number_patients_treated.write('Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
-        file_number_patients_released.write('Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
+        file_number_patients_treated.write(
+            'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
+        file_number_patients_released.write(
+            'Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
         value.under_treatment.print_statistics(file=file_stats_patients_undertreatment)
     file_number_patients_released.close()
     file_number_patients_treated.close()

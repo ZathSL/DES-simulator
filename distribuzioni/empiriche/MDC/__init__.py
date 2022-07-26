@@ -6,9 +6,12 @@ matplotlib.rcParams['figure.figsize'] = (12, 8)
 matplotlib.style.use('ggplot')
 
 
-def get_dataset():
-    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
-    df = df[["ANNO", "CODICE MDC", "DESCRIZIONE MDC"]]
+def get_dataset(*columns: str):
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype={
+        "CODICE MDC": str,
+        "DESCRIZIONE MDC": str,
+    })
+    df = df[["CODICE MDC", "DESCRIZIONE MDC", *columns]]
     missing = df["CODICE MDC"].isna()
     df.loc[missing, "CODICE MDC"] = df.loc[missing, "DESCRIZIONE MDC"].map({
         "MDC NON APPLICABILE": "NA",
@@ -18,18 +21,20 @@ def get_dataset():
 
 
 def plot_data(data: pd.DataFrame):
-    data = data.value_counts(sort=False, dropna=False).to_frame("CONTEGGIO").reset_index()
-    data = data.groupby("CODICE MDC", as_index=False).agg({
-        "ANNO": "last",
-        "CODICE MDC": "last",
-        "DESCRIZIONE MDC": "last",
-        "CONTEGGIO": "mean",
+    data["TOTALE ACCESSI"] = data["RICOVERI DO"] + data["ACCESSI DH"] + data["ACCESSI DS"]
+    data.drop(["RICOVERI DO", "ACCESSI DH", "ACCESSI DS"], axis=1, inplace=True)
+    data = data.groupby(["CODICE MDC", "DESCRIZIONE MDC", "ANNO"], as_index=False).agg({
+        "TOTALE ACCESSI": "sum",
     })
-    data = data.set_index("CODICE MDC").drop(columns="ANNO").drop("#").sort_index()
-    data.rename(columns={"CONTEGGIO": "CONTEGGIO PER ANNO"}, inplace=True)
-    data["CONTEGGIO PER GIORNO"] = data["CONTEGGIO PER ANNO"] / 365.0
-    data["INTERARRIVO IN GIORNI"] = 365.0 / data["CONTEGGIO PER ANNO"]
-    freq = data["FREQUENZA"] = data["CONTEGGIO PER ANNO"] / (data["CONTEGGIO PER ANNO"].sum())
+    data = data.groupby(["CODICE MDC", "DESCRIZIONE MDC"], as_index=False).agg({
+        "TOTALE ACCESSI": "mean",
+    })
+    data.set_index("CODICE MDC", inplace=True)
+    data = data.drop("#").sort_index()
+    data.rename(columns={"TOTALE ACCESSI": "ACCESSI PER ANNO"}, inplace=True)
+    data["ACCESSI PER GIORNO"] = data["ACCESSI PER ANNO"] / 365.0
+    data["INTERARRIVO IN GIORNI"] = 365.0 / data["ACCESSI PER ANNO"]
+    freq = data["FREQUENZA"] = data["ACCESSI PER ANNO"] / (data["ACCESSI PER ANNO"].sum())
 
     # Display
     fig, ax = plt.subplots(1, 1)
@@ -53,7 +58,7 @@ def plot_data(data: pd.DataFrame):
 
 
 def main():
-    df = get_dataset()
+    df = get_dataset("ANNO", "RICOVERI DO", "ACCESSI DH", "ACCESSI DS")
     plot_data(df)
 
 

@@ -18,11 +18,11 @@ def get_RicoveriRipetuti_distributions():
     return csv["PROBABILITA RICOVERI RIPETUTI"].to_dict()
 
 
-def get_NumeroAccessi_media():
-    csv = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution2.csv",
+def get_MediaNumeroAccessi_distributions():
+    csv = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
                       keep_default_na=False)
-    csv.set_index("Codice Mdc", inplace=True)
-    return csv["Proporzione accessi"].to_dict()
+    csv.set_index("CODICE MDC", inplace=True)
+    return csv["MEDIA NUMERO ACCESSI"].to_dict()
 
 
 def get_GiornateDegenzaDO_distributions(codici_mdc):

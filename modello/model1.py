@@ -3,7 +3,7 @@ from datetime import timedelta
 from typing import Union, TextIO
 
 import pandas as pd
-from salabim import Component, Environment, ComponentGenerator, Pdf, Queue, Resource, State
+from salabim import Component, Environment, ComponentGenerator, Pdf, Queue, Resource, State, Exponential
 
 from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, get_Strutture_distributions
 
@@ -96,7 +96,7 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
             struttura = Struttura(name="struttura." + codice, codice=codice, nome=nome, n_letti=n_letti)
             strutture[codice] = struttura
     for mdc, iat in iat_mdc.items():  # creo un generatore di pazienti per ogni MDC
-        ComponentGenerator(Paziente, generator_name="generator.paziente.mdc-" + mdc, iat=iat, mdc=mdc,
+        ComponentGenerator(Paziente, generator_name="generator.paziente.mdc-" + mdc, iat=Exponential(iat), mdc=mdc,
                            mdc_desc=info_mdc[mdc])
     env.run(till=sim_time_days)
 

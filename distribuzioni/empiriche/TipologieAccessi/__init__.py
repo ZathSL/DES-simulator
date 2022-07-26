@@ -25,10 +25,11 @@ def plot_data(data: pd.DataFrame):
         "ACCESSI DS": "sum",
         "TOTALE ACCESSI": "sum",
     })
+    data = data.set_index("CODICE MDC").drop("#").sort_index()
     data["RICOVERI DO"] /= data["TOTALE ACCESSI"]
     data["ACCESSI DH"] /= data["TOTALE ACCESSI"]
     data["ACCESSI DS"] /= data["TOTALE ACCESSI"]
-    data = data.set_index("CODICE MDC").drop("#").sort_index()
+    data.drop("TOTALE ACCESSI", axis=1, inplace=True)
 
     # Export CSV
     data.to_csv("TipologieAccessiDistribution.csv", float_format="%.15f", encoding="utf-8")
@@ -39,5 +40,5 @@ def main():
     plot_data(df)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
