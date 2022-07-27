@@ -16,23 +16,24 @@ def get_dataset(*columns: str):
 
 
 def plot_data(data: pd.DataFrame):
-    data = data.loc[(data["RICOVERI DO"] > 0) & (data["GIORNATE DEGENZA DO"] > 1), :].copy()
-    data.drop(["GIORNATE DEGENZA DO"], axis=1, inplace=True)
     data = data.groupby(["CODICE MDC"], as_index=False).agg({
         "CODICE MDC": "last",
         "DESCRIZIONE MDC": "last",
-        "RICOVERI DO": "sum",
-        "RICOVERI RIPETUTI": "sum",
+        "ACCESSI DH": "sum",
+        "ACCESSI DS": "sum",
+        "RICOVERI DH": "sum",
+        "RICOVERI DS": "sum",
     })
     data = data.set_index("CODICE MDC").drop("#").sort_index()
-    data["PROBABILITA RICOVERI RIPETUTI"] = data["RICOVERI RIPETUTI"] / data["RICOVERI DO"]
-
+    data["ACCESSI PER RICOVERO DH"] = data["ACCESSI DH"] / data["RICOVERI DH"]
+    data["ACCESSI PER RICOVERO DS"] = data["ACCESSI DS"] / data["RICOVERI DS"]
+    data.fillna(0, inplace=True)
     # Export CSV
-    data.to_csv("RicoveriRipetutiDistribution.csv", float_format="%.15f", encoding="utf-8")
+    data.to_csv("AccessiPerRicoveroDistribution.csv", float_format="%.15f", encoding="utf-8")
 
 
 def main():
-    df = get_dataset("RICOVERI DO", "GIORNATE DEGENZA DO", "RICOVERI RIPETUTI")
+    df = get_dataset("ACCESSI DH", "RICOVERI DH", "ACCESSI DS", "RICOVERI DS")
     plot_data(df)
 
 

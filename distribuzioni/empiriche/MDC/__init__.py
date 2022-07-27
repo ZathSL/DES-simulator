@@ -21,20 +21,20 @@ def get_dataset(*columns: str):
 
 
 def plot_data(data: pd.DataFrame):
-    data["TOTALE ACCESSI"] = data["RICOVERI DO"] + data["ACCESSI DH"] + data["ACCESSI DS"]
-    data.drop(["RICOVERI DO", "ACCESSI DH", "ACCESSI DS"], axis=1, inplace=True)
+    data["TOTALE RICOVERI"] = data["RICOVERI DO"] + data["RICOVERI DH"] + data["RICOVERI DS"]
+    data.drop(["RICOVERI DO", "RICOVERI DH", "RICOVERI DS"], axis=1, inplace=True)
     data = data.groupby(["CODICE MDC", "DESCRIZIONE MDC", "ANNO"], as_index=False).agg({
-        "TOTALE ACCESSI": "sum",
+        "TOTALE RICOVERI": "sum",
     })
     data = data.groupby(["CODICE MDC", "DESCRIZIONE MDC"], as_index=False).agg({
-        "TOTALE ACCESSI": "mean",
+        "TOTALE RICOVERI": "mean",
     })
     data.set_index("CODICE MDC", inplace=True)
     data = data.drop("#").sort_index()
-    data.rename(columns={"TOTALE ACCESSI": "ACCESSI PER ANNO"}, inplace=True)
-    data["ACCESSI PER GIORNO"] = data["ACCESSI PER ANNO"] / 365.0
-    data["INTERARRIVO IN GIORNI"] = 365.0 / data["ACCESSI PER ANNO"]
-    freq = data["FREQUENZA"] = data["ACCESSI PER ANNO"] / (data["ACCESSI PER ANNO"].sum())
+    data.rename(columns={"TOTALE RICOVERI": "RICOVERI PER ANNO"}, inplace=True)
+    data["RICOVERI PER GIORNO"] = data["RICOVERI PER ANNO"] / 365.0
+    data["INTERARRIVO IN GIORNI"] = 365.0 / data["RICOVERI PER ANNO"]
+    freq = data["FREQUENZA"] = data["RICOVERI PER ANNO"] / (data["RICOVERI PER ANNO"].sum())
 
     # Display
     fig, ax = plt.subplots(1, 1)
@@ -58,7 +58,7 @@ def plot_data(data: pd.DataFrame):
 
 
 def main():
-    df = get_dataset("ANNO", "RICOVERI DO", "ACCESSI DH", "ACCESSI DS")
+    df = get_dataset("ANNO", "RICOVERI DO", "RICOVERI DH", "RICOVERI DS")
     plot_data(df)
 
 
