@@ -207,12 +207,9 @@ def calculate_statistics(iat_mdc: dict):
     beds_tot = 0
 
     length_requesters = 0
-    length_stay_requesters = 0
     length_claimers = 0
-    length_stay_claimers = 0
     available_quantity = 0
     claimed_quantity = 0
-    capacity = 0
     occupancy = 0
     for key, value in structures.items():
         file_number_patients_treated.write(
@@ -220,18 +217,14 @@ def calculate_statistics(iat_mdc: dict):
         beds_tot += value.n_beds
         length_requesters += value.beds.requesters().length.mean()
         length_claimers += value.beds.claimers().length.mean()
-        length_stay_requesters += value.beds.requesters().length_of_stay.mean()
-        length_stay_claimers += value.beds.claimers().length_of_stay.mean()
-        capacity += value.beds.capacity
         available_quantity += value.beds.available_quantity.mean()
         claimed_quantity += value.beds.claimed_quantity.mean()
         occupancy += value.beds.occupancy.mean()
     file_number_patients_treated.close()
     file_stats_beds_mean.write("Length of requesters of beds (mean): " + str(length_requesters / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
+    # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of claimers of beds (mean): " + str(length_claimers / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of capacity of beds (mean): " + str(capacity / beds_tot) + "\n")
+    # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of available quantity of beds (mean): " + str(available_quantity / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of claimed quantity of beds (mean): " + str(claimed_quantity / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of occupancy of beds (mean): " + str(occupancy / beds_tot) + "\n")
