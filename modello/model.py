@@ -1,6 +1,8 @@
+import os
 import timeit
+from dataclasses import dataclass
 from datetime import timedelta
-from typing import Union, TextIO
+from typing import Union, TextIO, Any
 
 import salabim as sim
 from scipy.stats import bernoulli
@@ -15,6 +17,11 @@ DayHospitalizationDO_distributions: dict[str, sim.Pdf]
 AccessiPerRicoveroDH_distribution: dict[str, float]
 AccessiPerRicoveroDS_distribution: dict[str, float]
 RepeatHospitalization_distributions: dict[str, sim.Pdf]
+
+iat_mdc: dict[str, float]
+info_structures: dict[str, str]
+info_mdc: dict[str, str]
+info_beds: dict[str, int]
 
 monitor_mdc: sim.Monitor
 monitor_recovery: dict[str, sim.Monitor] = {}
@@ -125,7 +132,8 @@ class Patient(sim.Component):
 
 def setup():
     global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions, \
-        RepeatHospitalization_distributions, AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution
+        RepeatHospitalization_distributions, AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution, \
+        iat_mdc, info_structures, info_mdc, info_beds
     codici_mdc, info_mdc = get_mdc_data()
     info_beds = get_beds_info()
     iat_mdc = get_iat_distribution()
@@ -134,13 +142,56 @@ def setup():
     DayHospitalizationDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
     AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution = get_AccessiPerRicovero_distributions()
     RepeatHospitalization_distributions = get_RicoveriRipetuti_distributions()
-    return iat_mdc, info_structures, info_mdc, info_beds
 
 
-def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float):
-    global structures, monitor_mdc, monitor_recovery, monitor_days_do, monitor_repeat_do, monitor_beds
-    iat_mdc, info_structures, info_mdc, info_beds = setup()
+@dataclass
+class Mutation:
+    type: str
+    id: str
+    ops: dict[str, Any]
+
+
+def apply_mutations(mutations: list[Mutation]):
+    for mutation in mutations:
+        if mutation.type == "structure":
+            apply_structure_mutation(mutation.id, mutation.ops)
+        else:
+            raise ValueError("Unknown mutation type: " + mutation.type)
+
+
+def apply_structure_mutation(key: str, ops: dict):
+    keys = info_structures.keys() if key == "*" else [key]  # se key è "*" considero tutte le strutture
+    for key in keys:
+        for op, value in ops.items():
+            if op == "delete":  # elimino la struttura
+                if key in info_structures:
+                    del info_structures[key]
+                    del info_beds[key]
+                else:
+                    raise ValueError(key + " not found")
+            elif op == "beds":  # modifico il numero di letti
+                if key in info_structures:
+                    if isinstance(value, int):
+                        info_beds[key] = value  # imposto il numero di letti
+                    elif isinstance(value, float):
+                        info_beds[key] = round(value * info_beds[key])  # vario il numero di letti di una percentuale
+                    else:
+                        raise ValueError("Invalid value for beds")
+                else:
+                    raise ValueError(key + " not found")
+            else:
+                raise ValueError("Invalid mutation operation")
+
+
+def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float, mutations: list[Mutation]):
+    global monitor_mdc
+    setup()
+    apply_mutations(mutations)
+
     env = sim.Environment(trace=trace, time_unit="days")
+    env.animate(animate)
+    env.speed(speed)
+    env.modelname("Simulatore SSR lombardo")
 
     monitor_mdc = sim.Monitor(name='mdc')
     for mdc, _ in iat_mdc.items():
@@ -148,25 +199,22 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
         monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
         monitor_repeat_do[mdc] = sim.Monitor(name='repeat do ' + mdc)
 
-    env.animate(animate)
-    env.speed(speed)
-    env.modelname("Simulatore SSR lombardo - Modello V2")
-
-    for code, name in info_structures.items():
+    for code, name in info_structures.items():  # creo le strutture
         if code:
             n_beds = info_beds[code]
             structure = Structure(name="structure." + code, code=code, name_s=name, n_beds=n_beds)
             structures[code] = structure
 
-    for mdc, iat in iat_mdc.items():
+    for mdc, iat in iat_mdc.items():  # creo i generatori di pazienti
         sim.ComponentGenerator(Patient, generator_name="Patient.generator.mdc-" + mdc, iat=sim.Exponential(iat),
                                mdc=mdc, mdc_desc=info_mdc[mdc])
-    env.run(till=sim_time_days)
 
+    env.run(till=sim_time_days)
     calculate_statistics(iat_mdc=iat_mdc)
 
 
 def calculate_statistics(iat_mdc: dict):
+    os.makedirs("../statistiche/", exist_ok=True)
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
     file_number_patient = open("../statistiche/number_patients.txt", "a")
@@ -225,7 +273,8 @@ def calculate_statistics(iat_mdc: dict):
     # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of claimers of beds (mean): " + str(length_claimers / beds_tot) + "\n")
     # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of available quantity of beds (mean): " + str(available_quantity / beds_tot) + "\n")
+    file_stats_beds_mean.write(
+        "Length of available quantity of beds (mean): " + str(available_quantity / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of claimed quantity of beds (mean): " + str(claimed_quantity / beds_tot) + "\n")
     file_stats_beds_mean.write("Length of occupancy of beds (mean): " + str(occupancy / beds_tot) + "\n")
 
@@ -238,7 +287,14 @@ def main():
     sim_time_days = 365
     animate = False
     speed = 10
-    simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed)
+    mutations = [  # mutazioni di esempio, l'ordine delle mutazioni conta
+        Mutation(type="structure", id="030003-00", ops={"delete": True}),  # elimina la struttura
+        Mutation(type="structure", id="030017-00", ops={"beds": 10}),  # imposta i letti della struttura a 10
+        Mutation(type="structure", id="030038-00", ops={"beds": 0.50}),  # riduce i letti della struttura del 50%
+        Mutation(type="structure", id="*", ops={"beds": 0.90}),  # riduce i letti di tutte le strutture del 10%
+    ]
+    mutations.clear()  # commentare per attivare le mutazioni
+    simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed, mutations=mutations)
     stop = timeit.default_timer()
     print("Tempo di esecuzione: ", timedelta(seconds=stop - start))
 
