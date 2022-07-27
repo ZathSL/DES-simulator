@@ -16,27 +16,27 @@ def get_dataset(*columns: str):
 
 
 def plot_data(data: pd.DataFrame):
-    data["TOTALE ACCESSI"] = data["RICOVERI DO"] + data["ACCESSI DH"] + data["ACCESSI DS"]
+    data["TOTALE RICOVERI"] = data["RICOVERI DO"] + data["RICOVERI DH"] + data["RICOVERI DS"]
     data = data.groupby(["CODICE MDC"], as_index=False).agg({
         "CODICE MDC": "last",
         "DESCRIZIONE MDC": "last",
         "RICOVERI DO": "sum",
-        "ACCESSI DH": "sum",
-        "ACCESSI DS": "sum",
-        "TOTALE ACCESSI": "sum",
+        "RICOVERI DH": "sum",
+        "RICOVERI DS": "sum",
+        "TOTALE RICOVERI": "sum",
     })
     data = data.set_index("CODICE MDC").drop("#").sort_index()
-    data["RICOVERI DO"] /= data["TOTALE ACCESSI"]
-    data["ACCESSI DH"] /= data["TOTALE ACCESSI"]
-    data["ACCESSI DS"] /= data["TOTALE ACCESSI"]
-    data.drop("TOTALE ACCESSI", axis=1, inplace=True)
+    data["RICOVERI DO"] /= data["TOTALE RICOVERI"]
+    data["RICOVERI DH"] /= data["TOTALE RICOVERI"]
+    data["RICOVERI DS"] /= data["TOTALE RICOVERI"]
+    data.drop("TOTALE RICOVERI", axis=1, inplace=True)
 
     # Export CSV
     data.to_csv("TipologieAccessiDistribution.csv", float_format="%.15f", encoding="utf-8")
 
 
 def main():
-    df = get_dataset("RICOVERI DO", "ACCESSI DH", "ACCESSI DS")
+    df = get_dataset("RICOVERI DO", "RICOVERI DH", "RICOVERI DS")
     plot_data(df)
 
 
