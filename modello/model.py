@@ -20,6 +20,8 @@ monitor_mdc: sim.Monitor
 monitor_recovery: dict[str, sim.Monitor] = {}
 monitor_days_do: dict[str, sim.Monitor] = {}
 monitor_repeat_do: dict[str, sim.Monitor] = {}
+monitor_beds: dict[str, sim.Monitor] = {}
+
 
 class Structure(sim.Component):
     code: str
@@ -34,6 +36,7 @@ class Structure(sim.Component):
         self.hospitalization_waiting = sim.Queue("recovery")
         self.beds = sim.Resource('beds', capacity=n_beds)
         self.patient_treated = []
+        self.n_beds = n_beds
 
     def process(self):
         while True:
@@ -135,7 +138,7 @@ def setup():
 
 
 def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float):
-    global structures, monitor_mdc, monitor_recovery, monitor_days_do, monitor_repeat_do
+    global structures, monitor_mdc, monitor_recovery, monitor_days_do, monitor_repeat_do, monitor_beds
     iat_mdc, info_structures, info_mdc, info_beds = setup()
     env = sim.Environment(trace=trace, time_unit="days")
 
@@ -197,15 +200,43 @@ def calculate_statistics(iat_mdc: dict):
         file_stats_beds.write("STATISTICS STRUCTURE " + key)
         value.beds.print_statistics(file=file_stats_beds)
     file_stats_beds.close()
-    # Numero di pazienti curati in ogni struttura e
-    # statistiche sulla permanenza media dei pazienti ricoverati in ogni struttura
-    file_number_patients_released = open("../statistiche/number_patients_released.txt", "a")
+
+    # Numero di pazienti curati in ogni struttura
     file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
-    file_stats_patients_undertreatment = open("../statistiche/stats_patients_undertreatment.txt", "a")
+    file_stats_beds_mean = open("../statistiche/stats_beds_mean.txt", "a")
+    beds_tot = 0
+
+    length_requesters = 0
+    length_stay_requesters = 0
+    length_claimers = 0
+    length_stay_claimers = 0
+    available_quantity = 0
+    claimed_quantity = 0
+    capacity = 0
+    occupancy = 0
     for key, value in structures.items():
         file_number_patients_treated.write(
             'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
+        beds_tot += value.n_beds
+        length_requesters += value.beds.requesters().length.mean()
+        length_claimers += value.beds.claimers().length.mean()
+        length_stay_requesters += value.beds.requesters().length_of_stay.mean()
+        length_stay_claimers += value.beds.claimers().length_of_stay.mean()
+        capacity += value.beds.capacity
+        available_quantity += value.beds.available_quantity.mean()
+        claimed_quantity += value.beds.claimed_quantity.mean()
+        occupancy += value.beds.occupancy.mean()
     file_number_patients_treated.close()
+    file_stats_beds_mean.write("Length of requesters of beds (mean): " + str(length_requesters / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of claimers of beds (mean): " + str(length_claimers / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of capacity of beds (mean): " + str(capacity / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of available quantity of beds (mean): " + str(available_quantity / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of claimed quantity of beds (mean): " + str(claimed_quantity / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of occupancy of beds (mean): " + str(occupancy / beds_tot) + "\n")
+
+    file_stats_beds_mean.close()
 
 
 def main():
