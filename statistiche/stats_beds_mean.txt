@@ -1,0 +1,5 @@
+Length of requesters of beds (mean): 13.45850716415623
+Length of claimers of beds (mean): 0.8353689677796363
+Length of available quantity of beds (mean): 0.16463103222036368
+Length of claimed quantity of beds (mean): 0.8353689677796363
+Length of occupancy of beds (mean): 0.00453820311538169
