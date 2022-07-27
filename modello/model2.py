@@ -2,17 +2,18 @@ import timeit
 from datetime import timedelta
 from typing import Union, TextIO
 
-import pandas as pd
 import salabim as sim
 from scipy.stats import bernoulli
 
 from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, \
-    get_Strutture_distributions, get_MediaNumeroAccessi_distributions, get_RicoveriRipetuti_distributions
+    get_Strutture_distributions, get_RicoveriRipetuti_distributions, get_AccessiPerRicovero_distributions, \
+    get_iat_distribution, get_mdc_data, get_beds_info
 
 Structures_distributions: dict[str, sim.Pdf]
 TypeAccess_distributions: dict[str, sim.Pdf]
 DayHospitalizationDO_distributions: dict[str, sim.Pdf]
-NumberAccess_mean: dict[str, int]
+AccessiPerRicoveroDH_distribution: dict[str, float]
+AccessiPerRicoveroDS_distribution: dict[str, float]
 RepeatHospitalization_distributions: dict[str, sim.Pdf]
 
 monitor_mdc: sim.Monitor
@@ -45,15 +46,14 @@ class Structure(sim.Component):
                 yield self.passivate()
             if len(self.hospitalization_waiting) > 0:
                 # patient visit
-                patient = self.hospitalization_waiting.pop()
+                patient: Patient = self.hospitalization_waiting.pop()
                 if not patient.visited_already:
                     type_recovery = TypeAccess_distributions[patient.mdc].sample()
                     monitor_recovery[patient.mdc].tally(type_recovery)
                     if type_recovery == "DS":
-                        patient.ds += 1
-                        # aggiungo il numero di accessi ds in base all'mdc
+                        patient.ds += 1  # aggiungo il numero di accessi ds in base all'mdc
                     if type_recovery == "DH":
-                        patient.dh += 1
+                        patient.dh += 1  # aggiungo il numero di accessi dh in base all'mdc
                     if type_recovery == "DO":
                         patient.do = 1
                     patient.visited_already = True
@@ -62,16 +62,6 @@ class Structure(sim.Component):
 
 
 structures: dict[str, Structure] = {}
-
-
-def select_type_recovery(mdc):
-    type_recovery = TypeAccess_distributions[mdc].sample()
-    if type_recovery == "DH":
-        return type_recovery
-    if type_recovery == "DS":
-        return type_recovery
-    if type_recovery == "DO":
-        return type_recovery
 
 
 # patient component
@@ -101,7 +91,7 @@ class Patient(sim.Component):
     def hospitalization(self):
         yield self.request(self.structure.beds)
         # seleziono il tipo di ricovero da eseguire
-        selected_type = select_type_recovery(ds=self.ds, dh=self.dh, do=self.do, mdc=self.mdc)
+        selected_type = TypeAccess_distributions[self.mdc].sample()
         # è stato scelto il ricovero DS
         if selected_type == "DS":
             self.ds -= 1
@@ -141,17 +131,14 @@ class Patient(sim.Component):
 
 def setup():
     global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions, \
-        NumberAccess_mean, RepeatHospitalization_distributions
-    csv_mdc = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False)
-    info_beds = pd.read_csv("../dataset/Letti_per_struttura_sanitaria_completo.csv", keep_default_na=False)
-    info_beds.set_index("CODICE STRUTTURA DI RICOVERO", inplace=True)
-    codici_mdc = csv_mdc["CODICE MDC"].to_numpy()
-    info_mdc = dict(zip(codici_mdc, csv_mdc["DESCRIZIONE MDC"].to_numpy()))
-    iat_mdc = dict(zip(codici_mdc, csv_mdc["INTERARRIVO IN GIORNI"].astype(float).to_numpy()))
+        RepeatHospitalization_distributions, AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution
+    codici_mdc, info_mdc = get_mdc_data()
+    info_beds = get_beds_info()
+    iat_mdc = get_iat_distribution()
     Structures_distributions, info_structures = get_Strutture_distributions(codici_mdc)
     TypeAccess_distributions = get_TipologieAccessi_distributions()
     DayHospitalizationDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
-    NumberAccess_mean = get_MediaNumeroAccessi_distributions()
+    AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution = get_AccessiPerRicovero_distributions()
     RepeatHospitalization_distributions = get_RicoveriRipetuti_distributions()
     return iat_mdc, info_structures, info_mdc, info_beds
 
@@ -162,7 +149,7 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
     env = sim.Environment(trace=trace, time_unit="days")
 
     monitor_mdc = sim.Monitor(name='mdc')
-    for mdc in iat_mdc:
+    for mdc, _ in iat_mdc.items():
         monitor_recovery[mdc] = sim.Monitor(name='recovery ' + mdc)
         monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
         monitor_repeat_do[mdc] = sim.Monitor(name='repeat do ' + mdc)
@@ -173,7 +160,7 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
 
     for code, name in info_structures.items():
         if code:
-            n_beds = info_beds.at[code, "LETTI"]
+            n_beds = info_beds[code]
             structure = Structure(name="structure." + code, code=code, name_s=name, n_beds=n_beds)
             structures[code] = structure
 
