@@ -26,19 +26,17 @@ class Structure(sim.Component):
     code: str
     name: str
     hospitalization_waiting: sim.Queue
-    under_treatment: sim.Queue
+    under_treatment: sim.Resource
     beds: sim.Resource
     n_beds: int
     patient_treated: list
-    patient_released: list
 
     # noinspection PyMethodOverriding
     def setup(self, code: str, name_s: str, n_beds: int):
         self.hospitalization_waiting = sim.Queue("recovery")
         self.beds = sim.Resource('beds', capacity=n_beds)
         self.patient_treated = []
-        self.patient_released = []
-        self.under_treatment = sim.Queue("undertreatment")
+        self.under_treatment = sim.Resource("undertreatment")
 
     def process(self):
         while True:
@@ -51,13 +49,13 @@ class Structure(sim.Component):
                     type_recovery = TypeAccess_distributions[patient.mdc].sample()
                     monitor_recovery[patient.mdc].tally(type_recovery)
                     if type_recovery == "DS":
-                        patient.ds += 1  # aggiungo il numero di accessi ds in base all'mdc
+                        patient.ds += AccessiPerRicoveroDS_distribution[patient.mdc]
                     if type_recovery == "DH":
-                        patient.dh += 1  # aggiungo il numero di accessi dh in base all'mdc
+                        patient.dh += AccessiPerRicoveroDH_distribution[patient.mdc]
                     if type_recovery == "DO":
                         patient.do = 1
                     patient.visited_already = True
-                self.under_treatment.append(patient)
+                    patient.request(self.under_treatment)
                 patient.activate(process="hospitalization")
 
 
@@ -90,19 +88,15 @@ class Patient(sim.Component):
 
     def hospitalization(self):
         yield self.request(self.structure.beds)
-        # seleziono il tipo di ricovero da eseguire
-        selected_type = TypeAccess_distributions[self.mdc].sample()
-        # è stato scelto il ricovero DS
-        if selected_type == "DS":
+
+        if self.ds > 0:
+            yield self.hold(1)
             self.ds -= 1
+        elif self.dh > 0:
             yield self.hold(1)
-        # è stato scelto il ricovero DH
-        elif selected_type == "DH":
             self.dh -= 1
-            yield self.hold(1)
-        # è stato scelto il ricovero DO
-        elif selected_type == "DO":
-            # se non ho già generato da un precedente ricovero i giorni di degenza DO, genero il numero di giorni
+        elif self.do > 0:
+            # se non ho già generato i giorni di degenza DO, genero il numero di giorni
             if self.days_do == 0:
                 self.days_do = DayHospitalizationDO_distributions[self.mdc].sample()
                 monitor_days_do[self.mdc].tally(self.days_do)
@@ -119,11 +113,13 @@ class Patient(sim.Component):
             if self.days_do <= 0:
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
-        if self.ds == 0 and self.dh == 0 and self.do == 0:
+        if self.ds <= 0 and self.dh <= 0 and self.do <= 0:
             self.structure.patient_treated.append(self)
-            self.structure.under_treatment.remove(self)
+            self.release(self.structure.under_treatment)
         else:
             self.release(self.structure.beds)
+            # decido se attendere un tot tempo di convalescenza prima di riaccedere alla struttura
+            yield self.hold(sim.Exponential(7))
             self.structure.hospitalization_waiting.append(self)
             yield self.passivate()
         yield self.structure.activate()
@@ -214,12 +210,15 @@ def calculate_statistics(iat_mdc: dict):
     for key, value in structures.items():
         file_number_patients_treated.write(
             'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
-        file_number_patients_released.write(
-            'Numero di pazienti rilasciati dalla struttura ' + key + ': ' + str(len(value.patient_released)) + "\n")
         value.under_treatment.print_statistics(file=file_stats_patients_undertreatment)
-    file_number_patients_released.close()
     file_number_patients_treated.close()
     file_stats_patients_undertreatment.close()
+
+    mc = sim.Monitor("mean_beds")
+    for key, value in structures.items():
+        mc += value.beds.print_statistics()
+
+    print(mc.mean())
 
 
 def main():
