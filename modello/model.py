@@ -235,7 +235,7 @@ def calculate_statistics(iat_mdc: dict):
 def main():
     start = timeit.default_timer()
     logfile = False  # open("sim_trace.log", "w")
-    sim_time_days = 1
+    sim_time_days = 365
     animate = False
     speed = 10
     simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed)
