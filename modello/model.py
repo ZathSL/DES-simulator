@@ -265,7 +265,7 @@ def calculate_statistics(directory: str):
     # Numero di pazienti curati in ogni struttura
     file_number_patients_treated = open(directory + "number_patients_treated.txt", "a")
     file_stats_beds_mean = open(directory + "stats_beds_mean.txt", "a")
-    beds_tot = 0
+    duration_tot = len(structures)
 
     length_requesters = 0
     length_claimers = 0
@@ -275,20 +275,22 @@ def calculate_statistics(directory: str):
     for key, value in structures.items():
         file_number_patients_treated.write(
             'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
-        beds_tot += value.n_beds
         length_requesters += value.beds.requesters().length.mean()
         length_claimers += value.beds.claimers().length.mean()
         available_quantity += value.beds.available_quantity.mean()
         claimed_quantity += value.beds.claimed_quantity.mean()
         occupancy += value.beds.occupancy.mean()
     file_number_patients_treated.close()
-    file_stats_beds_mean.write("Length of requesters of beds (sum of mean): " + str(length_requesters) + "\n")
+    file_stats_beds_mean.write(
+        "Length of requesters of beds (sum of mean): " + str(length_requesters / duration_tot) + "\n")
     # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of claimers of beds (sum of mean): " + str(length_claimers) + "\n")
+    file_stats_beds_mean.write(
+        "Length of claimers of beds (sum of mean): " + str(length_claimers / duration_tot) + "\n")
     # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
     file_stats_beds_mean.write(
-        "Length of available quantity of beds (sum of mean): " + str(available_quantity) + "\n")
-    file_stats_beds_mean.write("Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity) + "\n")
-    file_stats_beds_mean.write("Length of occupancy of beds (sum of mean): " + str(occupancy) + "\n")
+        "Length of available quantity of beds (sum of mean): " + str(available_quantity / duration_tot) + "\n")
+    file_stats_beds_mean.write(
+        "Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity / duration_tot) + "\n")
+    file_stats_beds_mean.write("Length of occupancy of beds (sum of mean): " + str(occupancy / duration_tot) + "\n")
 
     file_stats_beds_mean.close()
