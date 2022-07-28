@@ -219,13 +219,13 @@ ulteriore ricovero DS/DH&gt;&gt;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>40</y>
+      <y>170</y>
       <w>470</w>
-      <h>550</h>
+      <h>420</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 &lt;&lt;ulteriore ricovero&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;330.0;10.0;330.0;530.0;90.0;530.0</additional_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0;330.0;400.0;90.0;400.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
