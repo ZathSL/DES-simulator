@@ -42,7 +42,7 @@
       <w>130</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Ricovero DO</panel_attributes>
+    <panel_attributes>Accesso DO</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -157,15 +157,15 @@ la struttura&gt;&gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>430</x>
+      <x>440</x>
       <y>450</y>
-      <w>300</w>
+      <w>280</w>
       <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-                               &lt;&lt;dimissione temporanea&gt;&gt;
+               &lt;&lt;necessità di ulteriore accesso&gt;&gt;
 </panel_attributes>
-    <additional_attributes>240.0;180.0;240.0;100.0;60.0;100.0;60.0;10.0</additional_attributes>
+    <additional_attributes>230.0;180.0;230.0;100.0;50.0;100.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
