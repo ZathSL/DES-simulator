@@ -12,7 +12,7 @@ from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distr
     get_iat_distribution, get_mdc_data, get_beds_info
 
 Structures_distributions: dict[str, sim.Pdf]
-TypeAccess_distributions: dict[str, sim.Pdf]
+TypeAccess_distributionsU: dict[str, sim.Pdf]
 DayHospitalizationDO_distributions: dict[str, sim.Pdf]
 AccessiPerRicoveroDH_distribution: dict[str, float]
 AccessiPerRicoveroDS_distribution: dict[str, float]
@@ -87,7 +87,11 @@ class Patient(sim.Component):
         self.do = 0
         self.ds = 0
         self.days_do = 0
-        self.structure = structures[Structures_distributions[mdc].sample()]
+        while True:
+            temp = Structures_distributions[mdc].sample()
+            if temp in info_structures:
+                self.structure = structures[temp]
+                break
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.structure.hospitalization_waiting.append(self)
         self.structure.activate()
@@ -214,23 +218,24 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
 
 
 def calculate_statistics(iat_mdc: dict):
-    os.makedirs("../statistiche/", exist_ok=True)
+    directory = "../statistiche_delete_5_structure/"
+    os.makedirs(directory, exist_ok=True)
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
-    file_number_patient = open("../statistiche/number_patients.txt", "a")
+    file_number_patient = open(directory + "number_patients.txt", "a")
     for key, value in structures.items():
         file_number_patient.write("Structure " + key + "\n")
-        value.hospitalization_waiting.print_statistics(file=file_number_patient)  # statistiche delle entrate
+        value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
         file_number_patient.write("\n")
     file_number_patient.close()
 
     # Numero di pazienti per ogni mdc
-    file_number_mdc = open("../statistiche/number_patient_mdc.txt", "w")
+    file_number_mdc = open(directory + "number_patient_mdc.txt", "w")
     monitor_mdc.print_histograms(values=True, file=file_number_mdc)
     file_number_mdc.close()
 
     # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
-    file_stats_recovery = open("../statistiche/stats_recovery_mdc.txt", "a")
+    file_stats_recovery = open(directory + "stats_recovery_mdc.txt", "a")
     for mdc in iat_mdc:
         file_stats_recovery.write("STATISTICS MDC " + mdc + "\n")
         monitor_recovery[mdc].print_histograms(values=True, file=file_stats_recovery)
@@ -243,15 +248,15 @@ def calculate_statistics(iat_mdc: dict):
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
-    file_stats_beds = open("../statistiche/stats_beds.txt", "a")
+    file_stats_beds = open(directory + "stats_beds.txt", "a")
     for key, value in structures.items():
-        file_stats_beds.write("STATISTICS STRUCTURE " + key)
-        value.beds.print_statistics(file=file_stats_beds)
+        file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
+        value.beds.print_histograms(file=file_stats_beds)
     file_stats_beds.close()
 
     # Numero di pazienti curati in ogni struttura
-    file_number_patients_treated = open("../statistiche/number_patients_treated.txt", "a")
-    file_stats_beds_mean = open("../statistiche/stats_beds_mean.txt", "a")
+    file_number_patients_treated = open(directory + "number_patients_treated.txt", "a")
+    file_stats_beds_mean = open(directory + "stats_beds_mean.txt", "a")
     beds_tot = 0
 
     length_requesters = 0
@@ -269,14 +274,14 @@ def calculate_statistics(iat_mdc: dict):
         claimed_quantity += value.beds.claimed_quantity.mean()
         occupancy += value.beds.occupancy.mean()
     file_number_patients_treated.close()
-    file_stats_beds_mean.write("Length of requesters of beds (mean): " + str(length_requesters / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of requesters of beds (sum of mean): " + str(length_requesters) + "\n")
     # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of claimers of beds (mean): " + str(length_claimers / beds_tot) + "\n")
+    file_stats_beds_mean.write("Length of claimers of beds (sum of mean): " + str(length_claimers) + "\n")
     # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
     file_stats_beds_mean.write(
-        "Length of available quantity of beds (mean): " + str(available_quantity / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of claimed quantity of beds (mean): " + str(claimed_quantity / beds_tot) + "\n")
-    file_stats_beds_mean.write("Length of occupancy of beds (mean): " + str(occupancy / beds_tot) + "\n")
+        "Length of available quantity of beds (sum of mean): " + str(available_quantity) + "\n")
+    file_stats_beds_mean.write("Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity) + "\n")
+    file_stats_beds_mean.write("Length of occupancy of beds (sum of mean): " + str(occupancy) + "\n")
 
     file_stats_beds_mean.close()
 
@@ -286,14 +291,19 @@ def main():
     logfile = False  # open("sim_trace.log", "w")
     sim_time_days = 365
     animate = False
-    speed = 10
+    speed = 15
     mutations = [  # mutazioni di esempio, l'ordine delle mutazioni conta
-        Mutation(type="structure", id="030003-00", ops={"delete": True}),  # elimina la struttura
-        Mutation(type="structure", id="030017-00", ops={"beds": 10}),  # imposta i letti della struttura a 10
-        Mutation(type="structure", id="030038-00", ops={"beds": 0.50}),  # riduce i letti della struttura del 50%
-        Mutation(type="structure", id="*", ops={"beds": 0.90}),  # riduce i letti di tutte le strutture del 10%
+        Mutation(type="structure", id="030901-01", ops={"delete": True}),  # elimina la struttura
+        Mutation(type="structure", id="030905-00", ops={"delete": True}),
+        Mutation(type="structure", id="030906-00", ops={"delete": True}),
+        Mutation(type="structure", id="030913-00", ops={"delete": True}),
+        Mutation(type="structure", id="030924-00", ops={"delete": True})
+    #    Mutation(type="structure", id="030070-00", ops={"delete": True}),  # elimina la struttura
+       # Mutation(type="structure", id="030017-00", ops={"beds": 10}),  # imposta i letti della struttura a 10
+        #Mutation(type="structure", id="030038-00", ops={"beds": 0.50}),  # riduce i letti della struttura del 50%
+        #Mutation(type="structure", id="*", ops={"beds": 1.10}),  # riduce i letti di tutte le strutture del 10%
     ]
-    mutations.clear()  # commentare per attivare le mutazioni
+    #mutations.clear()  # commentare per attivare le mutazioni
     simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed, mutations=mutations)
     stop = timeit.default_timer()
     print("Tempo di esecuzione: ", timedelta(seconds=stop - start))
