@@ -167,9 +167,12 @@ def apply_structure_mutation(key: str, ops: dict):
                     del info_structures[key]
                     del info_beds[key]
                     for _, pdf in Structures_distributions.items():
-                        index = pdf._x.index(key)
-                        pdf._x.pop(index)
-                        pdf._cum.pop(index)
+                        try:
+                            index = pdf._x.index(key)
+                            pdf._x.pop(index)
+                            pdf._cum.pop(index)
+                        except ValueError:
+                            pass
                 else:
                     raise ValueError(key + " not found")
             elif op == "beds":  # modifico il numero di letti
