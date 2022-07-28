@@ -1,7 +1,5 @@
 import os
-import timeit
 from dataclasses import dataclass
-from datetime import timedelta
 from typing import Union, TextIO, Any
 
 import salabim as sim
@@ -12,7 +10,7 @@ from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distr
     get_iat_distribution, get_mdc_data, get_beds_info
 
 Structures_distributions: dict[str, sim.Pdf]
-TypeAccess_distributionsU: dict[str, sim.Pdf]
+TypeAccess_distributions: dict[str, sim.Pdf]
 DayHospitalizationDO_distributions: dict[str, sim.Pdf]
 AccessiPerRicoveroDH_distribution: dict[str, float]
 AccessiPerRicoveroDS_distribution: dict[str, float]
@@ -87,11 +85,7 @@ class Patient(sim.Component):
         self.do = 0
         self.ds = 0
         self.days_do = 0
-        while True:
-            temp = Structures_distributions[mdc].sample()
-            if temp in info_structures:
-                self.structure = structures[temp]
-                break
+        self.structure = structures[Structures_distributions[mdc].sample()]
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.structure.hospitalization_waiting.append(self)
         self.structure.activate()
@@ -163,6 +157,7 @@ def apply_mutations(mutations: list[Mutation]):
             raise ValueError("Unknown mutation type: " + mutation.type)
 
 
+# noinspection PyProtectedMember
 def apply_structure_mutation(key: str, ops: dict):
     keys = info_structures.keys() if key == "*" else [key]  # se key è "*" considero tutte le strutture
     for key in keys:
@@ -171,6 +166,10 @@ def apply_structure_mutation(key: str, ops: dict):
                 if key in info_structures:
                     del info_structures[key]
                     del info_beds[key]
+                    for _, pdf in Structures_distributions.items():
+                        index = pdf._x.index(key)
+                        pdf._x.pop(index)
+                        pdf._cum.pop(index)
                 else:
                     raise ValueError(key + " not found")
             elif op == "beds":  # modifico il numero di letti
@@ -187,7 +186,14 @@ def apply_structure_mutation(key: str, ops: dict):
                 raise ValueError("Invalid mutation operation")
 
 
-def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, speed: float, mutations: list[Mutation]):
+def simulation(
+        trace: Union[bool, TextIO],
+        sim_time_days: int,
+        animate: bool,
+        speed: float,
+        mutations: list[Mutation],
+        statistics_dir: str
+):
     global monitor_mdc
     setup()
     apply_mutations(mutations)
@@ -214,11 +220,10 @@ def simulation(trace: Union[bool, TextIO], sim_time_days: int, animate: bool, sp
                                mdc=mdc, mdc_desc=info_mdc[mdc])
 
     env.run(till=sim_time_days)
-    calculate_statistics(iat_mdc=iat_mdc)
+    calculate_statistics(statistics_dir)
 
 
-def calculate_statistics(iat_mdc: dict):
-    directory = "../statistiche_delete_5_structure/"
+def calculate_statistics(directory: str):
     os.makedirs(directory, exist_ok=True)
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
@@ -284,30 +289,3 @@ def calculate_statistics(iat_mdc: dict):
     file_stats_beds_mean.write("Length of occupancy of beds (sum of mean): " + str(occupancy) + "\n")
 
     file_stats_beds_mean.close()
-
-
-def main():
-    start = timeit.default_timer()
-    logfile = False  # open("sim_trace.log", "w")
-    sim_time_days = 365
-    animate = False
-    speed = 15
-    mutations = [  # mutazioni di esempio, l'ordine delle mutazioni conta
-        Mutation(type="structure", id="030901-01", ops={"delete": True}),  # elimina la struttura
-        Mutation(type="structure", id="030905-00", ops={"delete": True}),
-        Mutation(type="structure", id="030906-00", ops={"delete": True}),
-        Mutation(type="structure", id="030913-00", ops={"delete": True}),
-        Mutation(type="structure", id="030924-00", ops={"delete": True})
-    #    Mutation(type="structure", id="030070-00", ops={"delete": True}),  # elimina la struttura
-       # Mutation(type="structure", id="030017-00", ops={"beds": 10}),  # imposta i letti della struttura a 10
-        #Mutation(type="structure", id="030038-00", ops={"beds": 0.50}),  # riduce i letti della struttura del 50%
-        #Mutation(type="structure", id="*", ops={"beds": 1.10}),  # riduce i letti di tutte le strutture del 10%
-    ]
-    #mutations.clear()  # commentare per attivare le mutazioni
-    simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed, mutations=mutations)
-    stop = timeit.default_timer()
-    print("Tempo di esecuzione: ", timedelta(seconds=stop - start))
-
-
-if __name__ == "__main__":
-    main()
