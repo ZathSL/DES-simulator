@@ -153,7 +153,6 @@ if __name__ == "__main__":
         # test_increase_all_beds_5()
         # test_change_convalescence_avg_time()
         test_mdc_distributions()
-
         # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
         # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
         # p1.start()

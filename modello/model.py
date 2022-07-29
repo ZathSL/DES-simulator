@@ -1,3 +1,4 @@
+import csv
 import os
 from dataclasses import dataclass
 from typing import Union, TextIO, Any
@@ -39,13 +40,17 @@ class Structure(sim.Component):
     hospitalization_waiting: sim.Queue
     beds: sim.Resource
     n_beds: int
-    patients_treated: int
+    patients_treated_dh: int
+    patients_treated_ds: int
+    patients_treated_do: int
 
     # noinspection PyMethodOverriding
     def setup(self, code: str, name_s: str, n_beds: int):
         self.hospitalization_waiting = sim.Queue("recovery")
         self.beds = sim.Resource('beds', capacity=n_beds)
-        self.patients_treated = 0
+        self.patients_treated_dh = 0
+        self.patients_treated_ds = 0
+        self.patients_treated_do = 0
         self.n_beds = n_beds
 
     def process(self):
@@ -59,10 +64,13 @@ class Structure(sim.Component):
                     type_recovery = TypeAccess_distributions[patient.mdc].sample()
                     monitor_recovery[patient.mdc].tally(type_recovery)
                     if type_recovery == "DS":
+                        patient.type_recovery = "DS"
                         patient.ds += AccessiPerRicoveroDS_distribution[patient.mdc]
                     if type_recovery == "DH":
+                        patient.type_recovery = "DH"
                         patient.dh += AccessiPerRicoveroDH_distribution[patient.mdc]
                     if type_recovery == "DO":
+                        patient.type_recovery = "DO"
                         patient.do = 1
                     patient.visited_already = True
                 patient.activate(process="hospitalization")
@@ -78,6 +86,7 @@ class Patient(sim.Component):
     do: int
     days_do: int
     structure: Structure
+    type_recovery: str
 
     # noinspection PyMethodOverriding
     def setup(self, mdc: str, mdc_desc: str):
@@ -87,6 +96,7 @@ class Patient(sim.Component):
         self.do = 0
         self.ds = 0
         self.days_do = 0
+        self.type_recovery = ""
         self.structure = structures[Structures_distributions[mdc].sample()]
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
@@ -119,7 +129,12 @@ class Patient(sim.Component):
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
         if self.ds <= 0 and self.dh <= 0 and self.do <= 0:
-            self.structure.patients_treated += 1
+            if self.type_recovery == "DS":
+                self.structure.patients_treated_ds += 1
+            elif self.type_recovery == "DH":
+                self.structure.patients_treated_dh += 1
+            elif self.type_recovery == "DO":
+                self.structure.patients_treated_do += 1
             self.release()
         else:
             self.release(self.structure.beds)
@@ -281,6 +296,7 @@ def calculate_statistics(directory: str):
             file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
             value.beds.print_histograms(file=file_stats_beds)
 
+
     # Numero di pazienti curati in ogni struttura
     beds_tot = 0
     patient_treated_mean = 0
@@ -292,15 +308,19 @@ def calculate_statistics(directory: str):
     with open(directory + "number_patients_treated.txt", "a") as file_number_patients_treated:
         for key, value in structures.items():
             beds_tot += value.n_beds
-            patient_treated_mean += value.patients_treated * value.n_beds
-            file_number_patients_treated.write(
-                'Numero di pazienti guariti nella struttura ' + key + ': ' + str(value.patients_treated) + "\n")
+            patient_treated_mean += (value.patients_treated_ds + value.patients_treated_dh + value.patients_treated_do) * value.n_beds
             length_requesters += value.beds.requesters().length.mean()
             length_claimers += value.beds.claimers().length.mean()
             available_quantity += value.beds.available_quantity.mean()
             claimed_quantity += value.beds.claimed_quantity.mean()
             occupancy += value.beds.occupancy.mean()
         file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
+
+    with open(directory + "type_patients_treated.csv", 'w') as type_patients_treated:
+        writer = csv.writer(type_patients_treated)
+        writer.writerow(["STRUTTURA", "RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
+        for key, value in structures.items():
+            writer.writerow([key, value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do])
 
     with open(directory + "stats_beds_mean.txt", "a") as file_stats_beds_mean:
         file_stats_beds_mean.write(
