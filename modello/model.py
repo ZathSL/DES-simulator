@@ -263,7 +263,7 @@ def calculate_statistics(directory: str):
     os.makedirs(directory, exist_ok=True)
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
-    with open(directory + "number_patients.txt", "a") as file_number_patient:
+    with open(directory + "number_patients.txt", "w") as file_number_patient:
         for key, value in structures.items():
             file_number_patient.write("Structure " + key + "\n")
             value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
@@ -281,7 +281,7 @@ def calculate_statistics(directory: str):
         values.to_csv(file_number_mdc_csv)
 
     # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
-    with open(directory + "stats_hospitalization_mdc.txt", "a") as file_stats_hospitalization:
+    with open(directory + "stats_hospitalization_mdc.txt", "w") as file_stats_hospitalization:
         for mdc in iat_mdc:
             file_stats_hospitalization.write("STATISTICS MDC " + mdc + "\n")
             monitor_hospitalization[mdc].print_histograms(values=True, file=file_stats_hospitalization)
@@ -293,7 +293,7 @@ def calculate_statistics(directory: str):
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
-    with open(directory + "stats_beds.txt", "a") as file_stats_beds:
+    with open(directory + "stats_beds.txt", "w") as file_stats_beds:
         for key, value in structures.items():
             file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
             value.beds.print_histograms(file=file_stats_beds)
@@ -306,7 +306,7 @@ def calculate_statistics(directory: str):
     available_quantity = 0
     claimed_quantity = 0
     occupancy = 0
-    with open(directory + "number_patients_treated.txt", "a") as file_number_patients_treated:
+    with open(directory + "number_patients_treated.txt", "w") as file_number_patients_treated:
         for key, value in structures.items():
             beds_tot += value.n_beds
             patient_treated_mean += (value.patients_treated_ds + value.patients_treated_dh +
@@ -324,7 +324,7 @@ def calculate_statistics(directory: str):
         for key, value in structures.items():
             writer.writerow([key, value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do])
 
-    with open(directory + "stats_beds_mean.txt", "a") as file_stats_beds_mean:
+    with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
         file_stats_beds_mean.write(
             "Length of requesters of beds (sum of mean): " + str((length_requesters / len(structures))) + "\n")
         # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
