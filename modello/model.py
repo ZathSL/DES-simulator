@@ -6,6 +6,7 @@ from typing import Union, TextIO, Any
 import pandas as pd
 import salabim as sim
 from scipy.stats import bernoulli
+from numpy import var, mean
 
 from util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
     get_structures_distributions, get_repeated_hospitalizations_do_distribution, \
@@ -323,6 +324,54 @@ def calculate_statistics(directory: str):
         writer.writerow(["STRUTTURA", "RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
         for key, value in structures.items():
             writer.writerow([key, value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do])
+
+    with open(directory + "stats_beds.csv", "w") as file_stats_beds_iid:
+        writer = csv.writer(file_stats_beds_iid)
+        length_requesters_list = ["REQUESTERS"]
+        length_claimers_list = ["CLAIMERS"]
+        length_stay_requesters_list = ["STAY_REQUESTERS"]
+        length_stay_claimers_list = ["STAY_CLAIMERS"]
+        header = ["VARIABILE CALCOLATA"]
+        for i in range(11):
+            header.append("Mese " + str(i+2))
+        header.extend(["MEDIA", "VARIANZA"])
+        writer.writerow(header)
+        day_start = 30
+        while day_start < 365:
+            sum_requesters = 0
+            sum_claimers = 0
+            sum_stay_requesters = 0
+            sum_stay_claimers = 0
+            for key, value in structures.items():
+                sum_requesters += value.beds.requesters().length[day_start:day_start+30].mean()
+                sum_claimers += value.beds.claimers().length[day_start:day_start+30].mean()
+                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start+30].mean()
+                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start+30].mean()
+            length_requesters_list.append(str(sum_requesters / len(structures)))
+            length_claimers_list.append(str(sum_claimers / len(structures)))
+            length_stay_requesters_list.append(str(sum_stay_requesters / len(structures)))
+            length_stay_claimers_list.append(str(sum_stay_claimers / len(structures)))
+            day_start += 30
+
+        temp = list(filter('nan'.__ne__, length_requesters_list[1:]))
+        if len(temp) > 0:
+            length_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
+        writer.writerow(length_requesters_list)
+
+        temp = list(filter('nan'.__ne__, length_claimers_list[1:]))
+        if len(temp) > 0:
+            length_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
+        writer.writerow(length_claimers_list)
+
+        temp = list(filter('nan'.__ne__, length_stay_requesters_list[1:]))
+        if len(temp) > 0:
+            length_stay_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
+        writer.writerow(length_stay_requesters_list)
+
+        temp = list(filter('nan'.__ne__, length_stay_claimers_list[1:]))
+        if len(temp) > 0:
+            length_stay_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
+        writer.writerow(length_stay_claimers_list)
 
     with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
         file_stats_beds_mean.write(
