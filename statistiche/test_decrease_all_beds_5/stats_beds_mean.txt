@@ -1,0 +1,5 @@
+Length of requesters of beds (sum of mean): 2226.1167247495846
+Length of claimers of beds (sum of mean): 130.05795776696556
+Length of available quantity of beds (sum of mean): 24.53938736577784
+Length of claimed quantity of beds (sum of mean): 130.05795776696556
+Length of occupancy of beds (sum of mean): 0.7430710811554679
