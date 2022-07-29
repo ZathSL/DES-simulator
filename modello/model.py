@@ -7,20 +7,21 @@ import pandas as pd
 import salabim as sim
 from scipy.stats import bernoulli
 
-from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distributions, \
-    get_Strutture_distributions, get_RicoveriRipetuti_distributions, get_AccessiPerRicovero_distributions, \
+from util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
+    get_structures_distributions, get_repeated_hospitalizations_do_distribution, \
+    get_accesses_per_hospitalization_distributions, \
     get_iat_distribution, get_mdc_data, get_beds_info
 
 convalescence_avg_time = 7  # giorni
 
 structures: dict[str, "Structure"] = {}
 
-Structures_distributions: dict[str, sim.Pdf]
-TypeAccess_distributions: dict[str, sim.Pdf]
-DayHospitalizationDO_distributions: dict[str, sim.Pdf]
-AccessiPerRicoveroDH_distribution: dict[str, float]
-AccessiPerRicoveroDS_distribution: dict[str, float]
-RepeatHospitalization_distributions: dict[str, float]
+structures_distributions: dict[str, sim.Pdf]
+hospitalization_type_distributions: dict[str, sim.Pdf]
+hospitalization_days_DO_distributions: dict[str, sim.Pdf]
+repeated_hospitalizations_DO_distribution: dict[str, float]
+accesses_per_hospitalization_DH_distribution: dict[str, float]
+accesses_per_hospitalization_DS_distribution: dict[str, float]
 
 iat_mdc: dict[str, float]
 info_structures: dict[str, str]
@@ -28,7 +29,7 @@ info_mdc: dict[str, str]
 info_beds: dict[str, int]
 
 monitor_mdc: sim.Monitor
-monitor_recovery: dict[str, sim.Monitor] = {}
+monitor_hospitalization: dict[str, sim.Monitor] = {}
 monitor_days_do: dict[str, sim.Monitor] = {}
 monitor_repeat_do: dict[str, sim.Monitor] = {}
 monitor_beds: dict[str, sim.Monitor] = {}
@@ -46,8 +47,8 @@ class Structure(sim.Component):
 
     # noinspection PyMethodOverriding
     def setup(self, code: str, name_s: str, n_beds: int):
-        self.hospitalization_waiting = sim.Queue("recovery")
-        self.beds = sim.Resource('beds', capacity=n_beds)
+        self.hospitalization_waiting = sim.Queue("hospitalization")
+        self.beds = sim.Resource("beds", capacity=n_beds)
         self.patients_treated_dh = 0
         self.patients_treated_ds = 0
         self.patients_treated_do = 0
@@ -61,16 +62,16 @@ class Structure(sim.Component):
                 # patient visit
                 patient: Patient = self.hospitalization_waiting.pop()
                 if not patient.visited_already:
-                    type_recovery = TypeAccess_distributions[patient.mdc].sample()
-                    monitor_recovery[patient.mdc].tally(type_recovery)
-                    if type_recovery == "DS":
-                        patient.type_recovery = "DS"
-                        patient.ds += AccessiPerRicoveroDS_distribution[patient.mdc]
-                    if type_recovery == "DH":
-                        patient.type_recovery = "DH"
-                        patient.dh += AccessiPerRicoveroDH_distribution[patient.mdc]
-                    if type_recovery == "DO":
-                        patient.type_recovery = "DO"
+                    hospitalization_type = hospitalization_type_distributions[patient.mdc].sample()
+                    monitor_hospitalization[patient.mdc].tally(hospitalization_type)
+                    if hospitalization_type == "DS":
+                        patient.hospitalization_type = "DS"
+                        patient.ds += accesses_per_hospitalization_DS_distribution[patient.mdc]
+                    if hospitalization_type == "DH":
+                        patient.hospitalization_type = "DH"
+                        patient.dh += accesses_per_hospitalization_DH_distribution[patient.mdc]
+                    if hospitalization_type == "DO":
+                        patient.hospitalization_type = "DO"
                         patient.do = 1
                     patient.visited_already = True
                 patient.activate(process="hospitalization")
@@ -86,7 +87,7 @@ class Patient(sim.Component):
     do: int
     days_do: int
     structure: Structure
-    type_recovery: str
+    hospitalization_type: str
 
     # noinspection PyMethodOverriding
     def setup(self, mdc: str, mdc_desc: str):
@@ -96,8 +97,8 @@ class Patient(sim.Component):
         self.do = 0
         self.ds = 0
         self.days_do = 0
-        self.type_recovery = ""
-        self.structure = structures[Structures_distributions[mdc].sample()]
+        self.hospitalization_type = ""
+        self.structure = structures[structures_distributions[mdc].sample()]
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
         self.structure.activate()
@@ -113,14 +114,14 @@ class Patient(sim.Component):
         elif self.do > 0:
             # se non ho già generato i giorni di degenza DO, genero il numero di giorni
             if self.days_do == 0:
-                self.days_do = DayHospitalizationDO_distributions[self.mdc].sample()
+                self.days_do = hospitalization_days_DO_distributions[self.mdc].sample()
                 monitor_days_do[self.mdc].tally(self.days_do)
             # finché non ho terminato di scontare tutti i giorni di degenza DO
             while self.days_do > 0:
                 self.hold(1)
                 self.days_do -= 1
                 # se ho ancora giorni di degenza DO da scontare, controllo se devo eseguire dei ricoveri ripetuti
-                repeat_result = bernoulli.rvs(size=1, p=RepeatHospitalization_distributions[self.mdc])
+                repeat_result = bernoulli.rvs(size=1, p=repeated_hospitalizations_DO_distribution[self.mdc])
                 monitor_repeat_do[self.mdc].tally(repeat_result)
                 if self.days_do > 0 and repeat_result == 1:
                     break
@@ -129,11 +130,11 @@ class Patient(sim.Component):
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
         if self.ds <= 0 and self.dh <= 0 and self.do <= 0:
-            if self.type_recovery == "DS":
+            if self.hospitalization_type == "DS":
                 self.structure.patients_treated_ds += 1
-            elif self.type_recovery == "DH":
+            elif self.hospitalization_type == "DH":
                 self.structure.patients_treated_dh += 1
-            elif self.type_recovery == "DO":
+            elif self.hospitalization_type == "DO":
                 self.structure.patients_treated_do += 1
             self.release()
         else:
@@ -146,17 +147,18 @@ class Patient(sim.Component):
 
 
 def setup():
-    global Structures_distributions, TypeAccess_distributions, DayHospitalizationDO_distributions, \
-        RepeatHospitalization_distributions, AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution, \
-        iat_mdc, info_structures, info_mdc, info_beds
-    codici_mdc, info_mdc = get_mdc_data()
+    global structures_distributions, hospitalization_type_distributions, hospitalization_days_DO_distributions, \
+        repeated_hospitalizations_DO_distribution, accesses_per_hospitalization_DH_distribution, \
+        accesses_per_hospitalization_DS_distribution, iat_mdc, info_structures, info_mdc, info_beds
+    mdc_codes, info_mdc = get_mdc_data()
     info_beds = get_beds_info()
     iat_mdc = get_iat_distribution()
-    Structures_distributions, info_structures = get_Strutture_distributions(codici_mdc)
-    TypeAccess_distributions = get_TipologieAccessi_distributions()
-    DayHospitalizationDO_distributions = get_GiornateDegenzaDO_distributions(codici_mdc)
-    AccessiPerRicoveroDH_distribution, AccessiPerRicoveroDS_distribution = get_AccessiPerRicovero_distributions()
-    RepeatHospitalization_distributions = get_RicoveriRipetuti_distributions()
+    structures_distributions, info_structures = get_structures_distributions(mdc_codes)
+    hospitalization_type_distributions = get_hospitalization_type_distributions()
+    hospitalization_days_DO_distributions = get_hospitalization_days_do_distributions(mdc_codes)
+    accesses_per_hospitalization_DH_distribution, accesses_per_hospitalization_DS_distribution = \
+        get_accesses_per_hospitalization_distributions()
+    repeated_hospitalizations_DO_distribution = get_repeated_hospitalizations_do_distribution()
 
 
 @dataclass
@@ -196,7 +198,7 @@ def apply_structure_mutation(key: str, ops: dict):
                 if key in info_structures:
                     del info_structures[key]
                     del info_beds[key]
-                    for _, pdf in Structures_distributions.items():
+                    for _, pdf in structures_distributions.items():
                         try:
                             index = pdf._x.index(key)
                             pdf._x.pop(index)
@@ -239,7 +241,7 @@ def simulation(
 
     monitor_mdc = sim.Monitor(name='mdc')
     for mdc, _ in iat_mdc.items():
-        monitor_recovery[mdc] = sim.Monitor(name='recovery ' + mdc)
+        monitor_hospitalization[mdc] = sim.Monitor(name='hospitalization ' + mdc)
         monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
         monitor_repeat_do[mdc] = sim.Monitor(name='repeat do ' + mdc)
 
@@ -279,15 +281,15 @@ def calculate_statistics(directory: str):
         values.to_csv(file_number_mdc_csv)
 
     # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
-    with open(directory + "stats_recovery_mdc.txt", "a") as file_stats_recovery:
+    with open(directory + "stats_hospitalization_mdc.txt", "a") as file_stats_hospitalization:
         for mdc in iat_mdc:
-            file_stats_recovery.write("STATISTICS MDC " + mdc + "\n")
-            monitor_recovery[mdc].print_histograms(values=True, file=file_stats_recovery)
-            file_stats_recovery.write("\n")
-            monitor_days_do[mdc].print_histograms(values=True, file=file_stats_recovery)
-            file_stats_recovery.write("\n")
-            monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_recovery)
-            file_stats_recovery.write("\n")
+            file_stats_hospitalization.write("STATISTICS MDC " + mdc + "\n")
+            monitor_hospitalization[mdc].print_histograms(values=True, file=file_stats_hospitalization)
+            file_stats_hospitalization.write("\n")
+            monitor_days_do[mdc].print_histograms(values=True, file=file_stats_hospitalization)
+            file_stats_hospitalization.write("\n")
+            monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_hospitalization)
+            file_stats_hospitalization.write("\n")
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
@@ -295,7 +297,6 @@ def calculate_statistics(directory: str):
         for key, value in structures.items():
             file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
             value.beds.print_histograms(file=file_stats_beds)
-
 
     # Numero di pazienti curati in ogni struttura
     beds_tot = 0
@@ -308,7 +309,8 @@ def calculate_statistics(directory: str):
     with open(directory + "number_patients_treated.txt", "a") as file_number_patients_treated:
         for key, value in structures.items():
             beds_tot += value.n_beds
-            patient_treated_mean += (value.patients_treated_ds + value.patients_treated_dh + value.patients_treated_do) * value.n_beds
+            patient_treated_mean += (value.patients_treated_ds + value.patients_treated_dh +
+                                     value.patients_treated_do) * value.n_beds
             length_requesters += value.beds.requesters().length.mean()
             length_claimers += value.beds.claimers().length.mean()
             available_quantity += value.beds.available_quantity.mean()
@@ -316,7 +318,7 @@ def calculate_statistics(directory: str):
             occupancy += value.beds.occupancy.mean()
         file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
 
-    with open(directory + "type_patients_treated.csv", 'w') as type_patients_treated:
+    with open(directory + "type_patients_treated.csv", "w") as type_patients_treated:
         writer = csv.writer(type_patients_treated)
         writer.writerow(["STRUTTURA", "RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
         for key, value in structures.items():

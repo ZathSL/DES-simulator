@@ -27,7 +27,7 @@ def get_iat_distribution() -> dict[str, float]:
     return csv["INTERARRIVO IN GIORNI"].astype(float).to_dict()
 
 
-def get_TipologieAccessi_distributions() -> dict[str, Pdf]:
+def get_hospitalization_type_distributions() -> dict[str, Pdf]:
     csv_type = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
                            keep_default_na=False)
     return {
@@ -36,14 +36,14 @@ def get_TipologieAccessi_distributions() -> dict[str, Pdf]:
     }
 
 
-def get_RicoveriRipetuti_distributions() -> dict[str, float]:
+def get_repeated_hospitalizations_do_distribution() -> dict[str, float]:
     csv = pd.read_csv("../distribuzioni/empiriche/RicoveriRipetuti/RicoveriRipetutiDistribution.csv",
                       keep_default_na=False)
     csv.set_index("CODICE MDC", inplace=True)
     return csv["PROBABILITA RICOVERI RIPETUTI"].to_dict()
 
 
-def get_AccessiPerRicovero_distributions() -> tuple[dict[str, float], dict[str, float]]:
+def get_accesses_per_hospitalization_distributions() -> tuple[dict[str, float], dict[str, float]]:
     csv = pd.read_csv("../distribuzioni/empiriche/AccessiPerRicovero/AccessiPerRicoveroDistribution.csv",
                       keep_default_na=False)
     csv.set_index("CODICE MDC", inplace=True)
@@ -52,7 +52,7 @@ def get_AccessiPerRicovero_distributions() -> tuple[dict[str, float], dict[str, 
     return accessi_dh, accessi_ds
 
 
-def get_GiornateDegenzaDO_distributions(codici_mdc) -> dict[str, Pdf]:
+def get_hospitalization_days_do_distributions(codici_mdc) -> dict[str, Pdf]:
     csvs = {
         mdc: pd.read_csv(f"../distribuzioni/empiriche/GiornateDegenzaDO/MDC_{mdc}/GiornateDegenzaDO-{mdc}.csv",
                          keep_default_na=False)
@@ -64,7 +64,7 @@ def get_GiornateDegenzaDO_distributions(codici_mdc) -> dict[str, Pdf]:
     }
 
 
-def get_Strutture_distributions(codici_mdc) -> tuple[dict[str, Pdf], dict[str, str]]:
+def get_structures_distributions(codici_mdc) -> tuple[dict[str, Pdf], dict[str, str]]:
     strutture = {}
     csvs = {
         mdc: pd.read_csv(f"../distribuzioni/empiriche/Strutture/MDC_{mdc}/StruttureDistribution.csv",
