@@ -1,5 +1,5 @@
 import inspect
-
+import multiprocessing
 from modello.model import simulation, Mutation
 from modello.util import CodeTimer
 
@@ -45,7 +45,7 @@ def test_delete_5_biggest_structures():
                statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + "/")
 
 
-def test_delete_5_small_structures():
+def test_delete_5_smallest_structures():
     logfile = False
     sim_time_days = 365
     animate = False
@@ -89,7 +89,10 @@ if __name__ == "__main__":
     with CodeTimer():
         test_main()
         # test_mutations_example()
+        # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
+        # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
+        # p1.start()
+        # p2.start()
         # test_delete_5_biggest_structures()
-        # test_delete_5_small_structures()
         # test_decrease_all_beds_10()
         # test_increase_all_beds_10()
