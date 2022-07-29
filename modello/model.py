@@ -2,6 +2,7 @@ import os
 from dataclasses import dataclass
 from typing import Union, TextIO, Any
 
+import pandas as pd
 import salabim as sim
 from scipy.stats import bernoulli
 
@@ -9,12 +10,16 @@ from util import get_TipologieAccessi_distributions, get_GiornateDegenzaDO_distr
     get_Strutture_distributions, get_RicoveriRipetuti_distributions, get_AccessiPerRicovero_distributions, \
     get_iat_distribution, get_mdc_data, get_beds_info
 
+convalescence_avg_time = 7  # giorni
+
+structures: dict[str, "Structure"] = {}
+
 Structures_distributions: dict[str, sim.Pdf]
 TypeAccess_distributions: dict[str, sim.Pdf]
 DayHospitalizationDO_distributions: dict[str, sim.Pdf]
 AccessiPerRicoveroDH_distribution: dict[str, float]
 AccessiPerRicoveroDS_distribution: dict[str, float]
-RepeatHospitalization_distributions: dict[str, sim.Pdf]
+RepeatHospitalization_distributions: dict[str, float]
 
 iat_mdc: dict[str, float]
 info_structures: dict[str, str]
@@ -34,13 +39,13 @@ class Structure(sim.Component):
     hospitalization_waiting: sim.Queue
     beds: sim.Resource
     n_beds: int
-    patient_treated: list
+    patients_treated: int
 
     # noinspection PyMethodOverriding
     def setup(self, code: str, name_s: str, n_beds: int):
         self.hospitalization_waiting = sim.Queue("recovery")
         self.beds = sim.Resource('beds', capacity=n_beds)
-        self.patient_treated = []
+        self.patients_treated = 0
         self.n_beds = n_beds
 
     def process(self):
@@ -61,9 +66,6 @@ class Structure(sim.Component):
                         patient.do = 1
                     patient.visited_already = True
                 patient.activate(process="hospitalization")
-
-
-structures: dict[str, Structure] = {}
 
 
 # patient component
@@ -87,12 +89,11 @@ class Patient(sim.Component):
         self.days_do = 0
         self.structure = structures[Structures_distributions[mdc].sample()]
         monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
-        self.structure.hospitalization_waiting.append(self)
+        self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
         self.structure.activate()
 
     def hospitalization(self):
         yield self.request(self.structure.beds)
-
         if self.ds > 0:
             yield self.hold(1)
             self.ds -= 1
@@ -113,17 +114,18 @@ class Patient(sim.Component):
                 monitor_repeat_do[self.mdc].tally(repeat_result)
                 if self.days_do > 0 and repeat_result == 1:
                     break
-            # se ho terminato di scontare tutti i giorni, decremento il numero di ricoveri DO
+            # se ho terminato di scontare tutti i giorni in DO, decremento il numero di ricoveri DO
             if self.days_do <= 0:
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
         if self.ds <= 0 and self.dh <= 0 and self.do <= 0:
-            self.structure.patient_treated.append(self)
+            self.structure.patients_treated += 1
+            self.release()
         else:
             self.release(self.structure.beds)
-            # decido se attendere un tot tempo di convalescenza prima di riaccedere alla struttura
-            yield self.hold(sim.Exponential(7))
-            self.structure.hospitalization_waiting.append(self)
+            # attendo un tempo di convalescenza prima di riaccedere alla struttura
+            yield self.hold(sim.Exponential(convalescence_avg_time))
+            self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
             yield self.passivate()
         yield self.structure.activate()
 
@@ -153,8 +155,21 @@ def apply_mutations(mutations: list[Mutation]):
     for mutation in mutations:
         if mutation.type == "structure":
             apply_structure_mutation(mutation.id, mutation.ops)
+        elif mutation.type == "parameter":
+            apply_parameter_mutation(mutation.id, mutation.ops)
         else:
             raise ValueError("Unknown mutation type: " + mutation.type)
+
+
+def apply_parameter_mutation(param: str, ops: dict):
+    global convalescence_avg_time
+    if param == "convalescence_avg_time":
+        if "value" in ops:
+            convalescence_avg_time = ops["value"]
+        else:
+            raise ValueError("Missing value in parameter mutation")
+    else:
+        raise ValueError("Unknown parameter: " + param)
 
 
 # noinspection PyProtectedMember
@@ -195,13 +210,14 @@ def simulation(
         animate: bool,
         speed: float,
         mutations: list[Mutation],
-        statistics_dir: str
+        statistics_dir: str,
+        random_seed: Union[int, float, str] = None,
 ):
     global monitor_mdc
     setup()
     apply_mutations(mutations)
 
-    env = sim.Environment(trace=trace, time_unit="days")
+    env = sim.Environment(trace=trace, time_unit="days", random_seed=random_seed)
     env.animate(animate)
     env.speed(speed)
     env.modelname("Simulatore SSR lombardo")
@@ -230,41 +246,42 @@ def calculate_statistics(directory: str):
     os.makedirs(directory, exist_ok=True)
     # INPUT
     # Numero di pazienti in entrata per ogni struttura
-    file_number_patient = open(directory + "number_patients.txt", "a")
-    for key, value in structures.items():
-        file_number_patient.write("Structure " + key + "\n")
-        value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
-        file_number_patient.write("\n")
-    file_number_patient.close()
+    with open(directory + "number_patients.txt", "a") as file_number_patient:
+        for key, value in structures.items():
+            file_number_patient.write("Structure " + key + "\n")
+            value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
+            file_number_patient.write("\n")
 
     # Numero di pazienti per ogni mdc
-    file_number_mdc = open(directory + "number_patient_mdc.txt", "w")
-    monitor_mdc.print_histograms(values=True, file=file_number_mdc)
-    file_number_mdc.close()
+    with open(directory + "number_patient_mdc.txt", "w") as file_number_mdc:
+        monitor_mdc.print_histograms(values=True, file=file_number_mdc)
+
+    with open(directory + "number_patient_mdc.csv", "wb") as file_number_mdc_csv:
+        values = {mdc: monitor_mdc.value_number_of_entries(mdc) for mdc in monitor_mdc.values()}
+        values = pd.DataFrame.from_dict(values, orient="index", columns=["COUNT"])
+        values.index.name = "MDC"
+        values["FREQUENCY"] = values["COUNT"] / values["COUNT"].sum()
+        values.to_csv(file_number_mdc_csv)
 
     # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
-    file_stats_recovery = open(directory + "stats_recovery_mdc.txt", "a")
-    for mdc in iat_mdc:
-        file_stats_recovery.write("STATISTICS MDC " + mdc + "\n")
-        monitor_recovery[mdc].print_histograms(values=True, file=file_stats_recovery)
-        file_stats_recovery.write("\n")
-        monitor_days_do[mdc].print_histograms(values=True, file=file_stats_recovery)
-        file_stats_recovery.write("\n")
-        monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_recovery)
-        file_stats_recovery.write("\n")
-    file_stats_recovery.close()
+    with open(directory + "stats_recovery_mdc.txt", "a") as file_stats_recovery:
+        for mdc in iat_mdc:
+            file_stats_recovery.write("STATISTICS MDC " + mdc + "\n")
+            monitor_recovery[mdc].print_histograms(values=True, file=file_stats_recovery)
+            file_stats_recovery.write("\n")
+            monitor_days_do[mdc].print_histograms(values=True, file=file_stats_recovery)
+            file_stats_recovery.write("\n")
+            monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_recovery)
+            file_stats_recovery.write("\n")
 
     # OUTPUT
     # Statistiche sui letti in ogni struttura
-    file_stats_beds = open(directory + "stats_beds.txt", "a")
-    for key, value in structures.items():
-        file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
-        value.beds.print_histograms(file=file_stats_beds)
-    file_stats_beds.close()
+    with open(directory + "stats_beds.txt", "a") as file_stats_beds:
+        for key, value in structures.items():
+            file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
+            value.beds.print_histograms(file=file_stats_beds)
 
     # Numero di pazienti curati in ogni struttura
-    file_number_patients_treated = open(directory + "number_patients_treated.txt", "a")
-    file_stats_beds_mean = open(directory + "stats_beds_mean.txt", "a")
     beds_tot = 0
     patient_treated_mean = 0
     length_requesters = 0
@@ -272,28 +289,29 @@ def calculate_statistics(directory: str):
     available_quantity = 0
     claimed_quantity = 0
     occupancy = 0
-    for key, value in structures.items():
-        beds_tot += value.n_beds
-        patient_treated_mean += len(value.patient_treated) * value.n_beds
-        file_number_patients_treated.write(
-            'Numero di pazienti guariti nella struttura ' + key + ': ' + str(len(value.patient_treated)) + "\n")
-        length_requesters += value.beds.requesters().length.mean()
-        length_claimers += value.beds.claimers().length.mean()
-        available_quantity += value.beds.available_quantity.mean()
-        claimed_quantity += value.beds.claimed_quantity.mean()
-        occupancy += value.beds.occupancy.mean()
-    file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
-    file_number_patients_treated.close()
-    file_stats_beds_mean.write(
-        "Length of requesters of beds (sum of mean): " + str((length_requesters / len(structures))) + "\n")
-    # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
-    file_stats_beds_mean.write(
-        "Length of claimers of beds (sum of mean): " + str(length_claimers / len(structures)) + "\n")
-    # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
-    file_stats_beds_mean.write(
-        "Length of available quantity of beds (sum of mean): " + str(available_quantity / len(structures)) + "\n")
-    file_stats_beds_mean.write(
-        "Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity / len(structures)) + "\n")
-    file_stats_beds_mean.write("Length of occupancy of beds (sum of mean): " + str(occupancy / len(structures)) + "\n")
+    with open(directory + "number_patients_treated.txt", "a") as file_number_patients_treated:
+        for key, value in structures.items():
+            beds_tot += value.n_beds
+            patient_treated_mean += value.patients_treated * value.n_beds
+            file_number_patients_treated.write(
+                'Numero di pazienti guariti nella struttura ' + key + ': ' + str(value.patients_treated) + "\n")
+            length_requesters += value.beds.requesters().length.mean()
+            length_claimers += value.beds.claimers().length.mean()
+            available_quantity += value.beds.available_quantity.mean()
+            claimed_quantity += value.beds.claimed_quantity.mean()
+            occupancy += value.beds.occupancy.mean()
+        file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
 
-    file_stats_beds_mean.close()
+    with open(directory + "stats_beds_mean.txt", "a") as file_stats_beds_mean:
+        file_stats_beds_mean.write(
+            "Length of requesters of beds (sum of mean): " + str((length_requesters / len(structures))) + "\n")
+        # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
+        file_stats_beds_mean.write(
+            "Length of claimers of beds (sum of mean): " + str(length_claimers / len(structures)) + "\n")
+        # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
+        file_stats_beds_mean.write(
+            "Length of available quantity of beds (sum of mean): " + str(available_quantity / len(structures)) + "\n")
+        file_stats_beds_mean.write(
+            "Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity / len(structures)) + "\n")
+        file_stats_beds_mean.write(
+            "Length of occupancy of beds (sum of mean): " + str(occupancy / len(structures)) + "\n")

@@ -1,4 +1,8 @@
 import inspect
+import os
+import shutil
+
+import pandas as pd
 
 from model import simulation, Mutation
 from util import CodeTimer
@@ -109,6 +113,34 @@ def test_increase_all_beds_5():
                statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + "/")
 
 
+def test_change_convalescence_avg_time():
+    logfile = False
+    sim_time_days = 1
+    animate = False
+    speed = 15
+    mutations = [
+        Mutation(type="parameter", id="convalescence_avg_time", ops={"value": 15}),
+    ]
+    simulation(trace=logfile, sim_time_days=sim_time_days, animate=animate, speed=speed, mutations=mutations,
+               statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + "/")
+
+
+def test_mdc_distributions():
+    sim_time_days = 1  # FIXME: incrementare
+    mdc_stats = []
+    for i in range(3):  # FIXME: incrementare
+        simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
+                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + "/", random_seed="*")
+        csv = pd.read_csv(
+            "../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc.csv")
+        mdc_stats.append(csv)
+        shutil.rmtree("../statistiche/" + inspect.currentframe().f_code.co_name)
+    frame = pd.DataFrame(list(map(lambda x: x["FREQUENCY"].to_numpy(), mdc_stats)))
+    mean = frame.mean()  # FIXME: da migliorare
+    os.makedirs("../statistiche/" + inspect.currentframe().f_code.co_name)
+    mean.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc_mean.csv")
+
+
 if __name__ == "__main__":
     with CodeTimer():
         # test_main()
@@ -117,8 +149,10 @@ if __name__ == "__main__":
         # test_delete_5_smallest_structures()
         # test_decrease_all_beds_10()
         # test_increase_all_beds_10()
-        test_decrease_all_beds_5()
+        # test_decrease_all_beds_5()
         # test_increase_all_beds_5()
+        # test_change_convalescence_avg_time()
+        test_mdc_distributions()
 
         # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
         # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
