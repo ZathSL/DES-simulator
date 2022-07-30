@@ -45,6 +45,8 @@ def calc_hospitalization_type_stats(name: str, runs: int):
     concat.sort_index(inplace=True)
     concat.to_csv(f"../statistiche/{name}/hospitalization_type_patients_treated_mean.csv", float_format="%.15f",
                   encoding="utf-8")
+    concat.mean().to_csv(f"../statistiche/{name}/hospitalization_type_patients_treated_mean_mean.csv", header=False,
+                         float_format="%.15f", encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/Strutture/StruttureDistribution.csv", keep_default_na=False,
                            dtype={"CODICE STRUTTURA DI RICOVERO": str}, index_col="CODICE STRUTTURA DI RICOVERO")
     with open(f"../statistiche/{name}/hospitalization_type_patients_treated_correlation.txt", "w") as f:
