@@ -255,13 +255,6 @@ def simulation(
 def calculate_statistics(directory: str):
     os.makedirs(directory, exist_ok=True)
     # INPUT
-    # Numero di pazienti in entrata per ogni struttura
-    with open(directory + "number_patients.txt", "w") as file_number_patient:
-        for key, value in structures.items():
-            file_number_patient.write("Structure " + key + "\n")
-            value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
-            file_number_patient.write("\n")
-
     with open(directory + "number_patient_mdc.csv", "wb") as file_number_mdc_csv:
         values = {mdc: monitor_mdc.value_number_of_entries(mdc) for mdc in monitor_mdc.values()}
         values = pd.DataFrame.from_dict(values, orient="index", columns=["COUNT"])
@@ -269,20 +262,7 @@ def calculate_statistics(directory: str):
         values["FREQUENCY"] = values["COUNT"] / values["COUNT"].sum()
         values.to_csv(file_number_mdc_csv, float_format="%.15f", encoding="utf-8")
 
-    # Numero di ricoveri ripetuti per ogni mdc
-    with open(directory + "stats_hospitalization_mdc.txt", "w") as file_stats_hospitalization:
-        for mdc in iat_mdc:
-            file_stats_hospitalization.write("STATISTICS MDC " + mdc + "\n")
-            monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_hospitalization)
-            file_stats_hospitalization.write("\n")
-
     # OUTPUT
-    # Statistiche sui letti in ogni struttura
-    with open(directory + "stats_beds.txt", "w") as file_stats_beds:
-        for key, value in structures.items():
-            file_stats_beds.write("STATISTICS STRUCTURE " + key + "\n")
-            value.beds.print_histograms(file=file_stats_beds)
-
     # Numero di pazienti curati in ogni struttura
     beds_tot = 0
     patient_treated_mean = 0
@@ -342,14 +322,12 @@ def calculate_statistics(directory: str):
 
     with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
         file_stats_beds_mean.write(
-            "Length of requesters of beds (sum of mean): " + str((length_requesters / len(structures))) + "\n")
-        # file_stats_beds_mean.write("Length of stay in requesters of beds (mean): " + str(length_stay_requesters / beds_tot) + "\n")
+            f"Length of requesters of beds (sum of mean): {length_requesters / len(structures)}\n")
         file_stats_beds_mean.write(
-            "Length of claimers of beds (sum of mean): " + str(length_claimers / len(structures)) + "\n")
-        # file_stats_beds_mean.write("Length of stay in claimers of beds (mean): " + str(length_stay_claimers / beds_tot) + "\n")
+            f"Length of claimers of beds (sum of mean): {length_claimers / len(structures)}\n")
         file_stats_beds_mean.write(
-            "Length of available quantity of beds (sum of mean): " + str(available_quantity / len(structures)) + "\n")
+            f"Length of available quantity of beds (sum of mean): {available_quantity / len(structures)}\n")
         file_stats_beds_mean.write(
-            "Length of claimed quantity of beds (sum of mean): " + str(claimed_quantity / len(structures)) + "\n")
+            f"Length of claimed quantity of beds (sum of mean): {claimed_quantity / len(structures)}\n")
         file_stats_beds_mean.write(
-            "Length of occupancy of beds (sum of mean): " + str(occupancy / len(structures)) + "\n")
+            f"Length of occupancy of beds (sum of mean): {occupancy / len(structures)}\n")
