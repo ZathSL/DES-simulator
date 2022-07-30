@@ -1,13 +1,11 @@
-import csv
-import gc
 import os
 from dataclasses import dataclass
 from typing import Union, TextIO, Any
 
 import pandas as pd
 import salabim as sim
-from scipy.stats import bernoulli
 from numpy import var, mean
+from scipy.stats import bernoulli
 
 from util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
     get_structures_distributions, get_repeated_hospitalizations_do_distribution, \
@@ -266,16 +264,12 @@ def calculate_statistics(directory: str):
             value.hospitalization_waiting.print_histograms(file=file_number_patient)  # statistiche delle entrate
             file_number_patient.write("\n")
 
-    # Numero di pazienti per ogni mdc
-    with open(directory + "number_patient_mdc.txt", "w") as file_number_mdc:
-        monitor_mdc.print_histograms(values=True, file=file_number_mdc)
-
     with open(directory + "number_patient_mdc.csv", "wb") as file_number_mdc_csv:
         values = {mdc: monitor_mdc.value_number_of_entries(mdc) for mdc in monitor_mdc.values()}
         values = pd.DataFrame.from_dict(values, orient="index", columns=["COUNT"])
         values.index.name = "MDC"
         values["FREQUENCY"] = values["COUNT"] / values["COUNT"].sum()
-        values.to_csv(file_number_mdc_csv)
+        values.to_csv(file_number_mdc_csv, float_format="%.15f", encoding="utf-8")
 
     # Numero di ricoveri ripetuti per ogni mdc
     with open(directory + "stats_hospitalization_mdc.txt", "w") as file_stats_hospitalization:
@@ -311,34 +305,29 @@ def calculate_statistics(directory: str):
             occupancy += value.beds.occupancy.mean()
         file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
 
-    with open(directory + "type_patients_treated.csv", "w") as type_patients_treated:
-        writer = csv.writer(type_patients_treated)
-        writer.writerow(["STRUTTURA", "RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
-        for key, value in structures.items():
-            writer.writerow([key, value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do])
+    with open(directory + "type_patients_treated.csv", "wb") as type_patients_treated:
+        data = {key: [value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do]
+                for key, value in structures.items()}
+        df = pd.DataFrame.from_dict(data, orient="index", columns=["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
+        df.index.name = "STRUTTURA"
+        df.to_csv(type_patients_treated, float_format="%.15f", encoding="utf-8")
 
-    with open(directory + "stats_beds.csv", "w") as file_stats_beds_iid:
-        writer = csv.writer(file_stats_beds_iid)
+    with open(directory + "stats_beds.csv", "wb") as file_stats_beds_iid:
         length_requesters_list = ["REQUESTERS"]
         length_claimers_list = ["CLAIMERS"]
         length_stay_requesters_list = ["STAY_REQUESTERS"]
         length_stay_claimers_list = ["STAY_CLAIMERS"]
-        header = ["VARIABILE CALCOLATA"]
-        for i in range(10):
-            header.append("Mese " + str(i+2))
-        header.extend(["MEDIA", "VARIANZA"])
-        writer.writerow(header)
         day_start = 30
-        for _ in range(10):
+        for _ in range(11):
             sum_requesters = 0
             sum_claimers = 0
             sum_stay_requesters = 0
             sum_stay_claimers = 0
             for key, value in structures.items():
-                sum_requesters += value.beds.requesters().length[day_start:day_start+30].mean()
-                sum_claimers += value.beds.claimers().length[day_start:day_start+30].mean()
-                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start+30].mean().real
-                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start+30].mean().real
+                sum_requesters += value.beds.requesters().length[day_start:day_start + 30].mean()
+                sum_claimers += value.beds.claimers().length[day_start:day_start + 30].mean()
+                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start + 30].mean().real
+                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start + 30].mean().real
             length_requesters_list.append(str(sum_requesters / len(structures)))
             length_claimers_list.append(str(sum_claimers / len(structures)))
             length_stay_requesters_list.append(str(sum_stay_requesters / len(structures)))
@@ -348,22 +337,26 @@ def calculate_statistics(directory: str):
         temp = list(filter('nan'.__ne__, length_requesters_list[1:]))
         if len(temp) > 0:
             length_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-        writer.writerow(length_requesters_list)
 
         temp = list(filter('nan'.__ne__, length_claimers_list[1:]))
         if len(temp) > 0:
             length_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-        writer.writerow(length_claimers_list)
 
         temp = list(filter('nan'.__ne__, length_stay_requesters_list[1:]))
         if len(temp) > 0:
             length_stay_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-        writer.writerow(length_stay_requesters_list)
 
         temp = list(filter('nan'.__ne__, length_stay_claimers_list[1:]))
         if len(temp) > 0:
             length_stay_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-        writer.writerow(length_stay_claimers_list)
+
+        columns = ["VARIABILE CALCOLATA"]
+        columns.extend(f"MESE {i}" for i in range(2, 13))
+        columns.extend(["MEDIA", "VARIANZA"])
+        df = pd.DataFrame([length_requesters_list, length_claimers_list, length_stay_requesters_list,
+                           length_stay_claimers_list], columns=columns)
+        df.set_index("VARIABILE CALCOLATA", inplace=True)
+        df.to_csv(file_stats_beds_iid, float_format="%.15f", encoding="utf-8")
 
     with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
         file_stats_beds_mean.write(

@@ -29,7 +29,6 @@ def plot_data(data: pd.DataFrame):
     data["RICOVERI DO"] /= data["TOTALE RICOVERI"]
     data["RICOVERI DH"] /= data["TOTALE RICOVERI"]
     data["RICOVERI DS"] /= data["TOTALE RICOVERI"]
-    data.drop("TOTALE RICOVERI", axis=1, inplace=True)
 
     # Export CSV
     data.to_csv("TipologieAccessiDistribution.csv", float_format="%.15f", encoding="utf-8")

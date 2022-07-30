@@ -140,7 +140,8 @@ def test_mdc_distributions():
     mean /= mean.sum()
     mean.rename("FREQUENCY", inplace=True)
     os.makedirs("../statistiche/" + inspect.currentframe().f_code.co_name)
-    mean.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc_mean.csv")
+    mean.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc_mean.csv",
+                float_format="%.15f", encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False,
                            dtype={"CODICE MDC": str}, index_col="CODICE MDC")
     original = original["FREQUENZA"]
@@ -169,9 +170,13 @@ def test_hospitalization_type_distributions():
     mean_dh = frame_dh.transpose().mean().rename("RICOVERI DH")
     mean_do = frame_do.transpose().mean().rename("RICOVERI DO")
     concat = pd.concat([mean_ds, mean_dh, mean_do], axis=1)
-    concat.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/type_patients_treated_mean.csv")
+    concat.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/type_patients_treated_mean.csv",
+                  float_format="%.15f", encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
                            keep_default_na=False, dtype={"CODICE MDC": str}, index_col="CODICE MDC")
+    original["RICOVERI DS"] *= original["TOTALE RICOVERI"]
+    original["RICOVERI DH"] *= original["TOTALE RICOVERI"]
+    original["RICOVERI DO"] *= original["TOTALE RICOVERI"]
     with open("../statistiche/" + inspect.currentframe().f_code.co_name + "/correlation.txt", "w") as f:
         for df, col in zip([mean_ds, mean_dh, mean_do], ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"]):
             f.write(col + ":\n")
@@ -193,8 +198,9 @@ if __name__ == "__main__":
         # test_increase_all_beds_5()
         # test_change_convalescence_avg_time()
         # test_mdc_distributions()
-        test_hospitalization_type_distributions()
+        # test_hospitalization_type_distributions()
         # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
         # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
         # p1.start()
         # p2.start()
+        pass
