@@ -332,12 +332,12 @@ def calculate_statistics(directory: str):
         length_stay_requesters_list = ["STAY_REQUESTERS"]
         length_stay_claimers_list = ["STAY_CLAIMERS"]
         header = ["VARIABILE CALCOLATA"]
-        for i in range(11):
+        for i in range(10):
             header.append("Mese " + str(i+2))
         header.extend(["MEDIA", "VARIANZA"])
         writer.writerow(header)
         day_start = 30
-        while day_start < 365:
+        for _ in range(10):
             sum_requesters = 0
             sum_claimers = 0
             sum_stay_requesters = 0
@@ -345,8 +345,8 @@ def calculate_statistics(directory: str):
             for key, value in structures.items():
                 sum_requesters += value.beds.requesters().length[day_start:day_start+30].mean()
                 sum_claimers += value.beds.claimers().length[day_start:day_start+30].mean()
-                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start+30].mean()
-                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start+30].mean()
+                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start+30].mean().real
+                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start+30].mean().real
             length_requesters_list.append(str(sum_requesters / len(structures)))
             length_claimers_list.append(str(sum_claimers / len(structures)))
             length_stay_requesters_list.append(str(sum_stay_requesters / len(structures)))

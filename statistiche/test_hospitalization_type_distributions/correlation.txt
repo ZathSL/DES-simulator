@@ -1,0 +1,15 @@
+RICOVERI DS:
+	Pearson: nan
+	Spearman: nan
+	Kendall: nan
+
+RICOVERI DH:
+	Pearson: nan
+	Spearman: nan
+	Kendall: nan
+
+RICOVERI DO:
+	Pearson: nan
+	Spearman: nan
+	Kendall: nan
+
