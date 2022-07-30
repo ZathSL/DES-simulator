@@ -223,7 +223,7 @@ def simulation(
         speed: float,
         mutations: list[Mutation],
         statistics_dir: str,
-        random_seed: Union[int, float, str] = None,
+        random_seed: Union[int, float, str],
 ):
     global monitor_mdc
     setup()
