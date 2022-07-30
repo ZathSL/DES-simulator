@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def calc_mdc_distributions(name: str, runs: int):
+def calc_mdc_distribution_stats(name: str, runs: int):
     stats = []
     for i in range(runs):
         csv = pd.read_csv(f"../statistiche/{name}/runs/{i}/number_patient_mdc.csv", keep_default_na=False,
@@ -12,20 +12,20 @@ def calc_mdc_distributions(name: str, runs: int):
     mean = frame.transpose().mean()
     mean /= mean.sum()
     mean.rename("FREQUENCY", inplace=True)
-    mean.to_csv(f"../statistiche/{name}/number_patient_mdc_mean.csv", float_format="%.15f", encoding="utf-8")
+    mean.to_csv(f"../statistiche/{name}/mdc_distribution_mean.csv", float_format="%.15f", encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False,
                            dtype={"CODICE MDC": str}, index_col="CODICE MDC")
     original = original["FREQUENZA"]
     pearson = mean.corr(original, method="pearson")
     spearman = mean.corr(original, method="spearman")
     kendall = mean.corr(original, method="kendall")
-    with open(f"../statistiche/{name}/correlation.txt", "w") as f:
+    with open(f"../statistiche/{name}/mdc_distribution_correlation.txt", "w") as f:
         f.write("Pearson: " + str(pearson) + "\n")
         f.write("Spearman: " + str(spearman) + "\n")
         f.write("Kendall: " + str(kendall) + "\n")
 
 
-def calc_hospitalization_type_distributions(name: str, runs: int):
+def calc_hospitalization_type_stats(name: str, runs: int):
     stats = []
     for i in range(runs):
         csv = pd.read_csv(f"../statistiche/{name}/runs/{i}/type_patients_treated.csv", keep_default_na=False,
@@ -43,10 +43,11 @@ def calc_hospitalization_type_distributions(name: str, runs: int):
         dfs.append(df)
     concat = pd.concat(dfs, axis=1)
     concat.sort_index(inplace=True)
-    concat.to_csv(f"../statistiche/{name}/type_patients_treated_mean.csv", float_format="%.15f", encoding="utf-8")
+    concat.to_csv(f"../statistiche/{name}/hospitalization_type_patients_treated_mean.csv", float_format="%.15f",
+                  encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/Strutture/StruttureDistribution.csv", keep_default_na=False,
                            dtype={"CODICE STRUTTURA DI RICOVERO": str}, index_col="CODICE STRUTTURA DI RICOVERO")
-    with open(f"../statistiche/{name}/correlation.txt", "w") as f:
+    with open(f"../statistiche/{name}/hospitalization_type_patients_treated_correlation.txt", "w") as f:
         for col in ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"]:
             pearson = concat[col + "_MEDIA"].corr(original[col], method="pearson")
             spearman = concat[col + "_MEDIA"].corr(original[col], method="spearman")
