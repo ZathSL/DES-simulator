@@ -132,14 +132,13 @@ class Patient(sim.Component):
                 self.structure.patients_treated_do += 1
             self.release()
             yield self.cancel()
-            yield self.structure.activate()
         else:
             self.release(self.structure.beds)
             # attendo un tempo di convalescenza prima di riaccedere alla struttura
             yield self.hold(sim.Exponential(convalescence_avg_time))
             self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
             yield self.passivate()
-            yield self.structure.activate()
+        yield self.structure.activate()
 
 
 def setup():

@@ -155,7 +155,7 @@ def test_mdc_distributions():
 
 def test_hospitalization_type_distributions():
     runs = 2
-    sim_time_days = 1
+    sim_time_days = 5
     stats = []
     for i in range(runs):
         simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
