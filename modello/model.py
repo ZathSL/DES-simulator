@@ -1,4 +1,5 @@
 import csv
+import gc
 import os
 from dataclasses import dataclass
 from typing import Union, TextIO, Any
@@ -133,13 +134,15 @@ class Patient(sim.Component):
             elif self.hospitalization_type == "DO":
                 self.structure.patients_treated_do += 1
             self.release()
+            yield self.cancel()
+            yield self.structure.activate()
         else:
             self.release(self.structure.beds)
             # attendo un tempo di convalescenza prima di riaccedere alla struttura
             yield self.hold(sim.Exponential(convalescence_avg_time))
             self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
             yield self.passivate()
-        yield self.structure.activate()
+            yield self.structure.activate()
 
 
 def setup():
