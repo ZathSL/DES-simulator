@@ -9,7 +9,7 @@ RICOVERI DH:
 	Kendall: nan
 
 RICOVERI DO:
-	Pearson: nan
-	Spearman: nan
-	Kendall: nan
+	Pearson: 0.9815399151161139
+	Spearman: 0.9691388017611289
+	Kendall: 0.8619029526093397
 

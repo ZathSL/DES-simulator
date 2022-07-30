@@ -1,5 +1,6 @@
 import inspect
 
+import numpy as np
 import pandas as pd
 
 from model import simulation, Mutation
@@ -153,43 +154,50 @@ def test_mdc_distributions():
 
 
 def test_hospitalization_type_distributions():
-    sim_time_days = 30
-    mdc_stats = []
-    for i in range(10):
+    runs = 2
+    sim_time_days = 1
+    stats = []
+    for i in range(runs):
         simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
                    statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/",
                    random_seed=i)
         csv = pd.read_csv(
             "../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/type_patients_treated.csv",
             keep_default_na=False, index_col="STRUTTURA")
-        mdc_stats.append(csv)
-    frame_ds = pd.concat((df["RICOVERI DS"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
-    frame_dh = pd.concat((df["RICOVERI DH"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
-    frame_do = pd.concat((df["RICOVERI DO"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
-    mean_ds = frame_ds.transpose().mean().rename("RICOVERI DS")
-    mean_dh = frame_dh.transpose().mean().rename("RICOVERI DH")
-    mean_do = frame_do.transpose().mean().rename("RICOVERI DO")
-    concat = pd.concat([mean_ds, mean_dh, mean_do], axis=1)
+        stats.append(csv)
+    dfs = []
+    for key in stats[0].columns:
+        df = pd.concat((df[key].rename(str(i)) for i, df in enumerate(stats)), axis=1)
+        df = df.transpose()
+        df_mean = df.mean().rename(key + "_MEDIA")
+        df_var = df.var().rename(key + "_VARIANZA")
+        df_lower_conf = (df_mean - (0.8159 * (np.sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA INFERIORE")
+        df_upper_conf = (df_mean + (0.8159 * (np.sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA SUPERIORE")
+        df = pd.concat([df_mean, df_var, df_lower_conf, df_upper_conf], axis=1)
+        dfs.append(df)
+    concat = pd.concat(dfs, axis=1)
+    concat.sort_index(inplace=True)
     concat.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/type_patients_treated_mean.csv",
                   float_format="%.15f", encoding="utf-8")
-    original = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
-                           keep_default_na=False, dtype={"CODICE MDC": str}, index_col="CODICE MDC")
-    original["RICOVERI DS"] *= original["TOTALE RICOVERI"]
-    original["RICOVERI DH"] *= original["TOTALE RICOVERI"]
-    original["RICOVERI DO"] *= original["TOTALE RICOVERI"]
+    original = pd.read_csv("../distribuzioni/empiriche/Strutture/StruttureDistribution.csv", keep_default_na=False,
+                           dtype={"CODICE STRUTTURA DI RICOVERO": str}, index_col="CODICE STRUTTURA DI RICOVERO")
     with open("../statistiche/" + inspect.currentframe().f_code.co_name + "/correlation.txt", "w") as f:
-        for df, col in zip([mean_ds, mean_dh, mean_do], ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"]):
-            f.write(col + ":\n")
-            f.write("\tPearson: " + str(df.corr(original[col], method="pearson")) + "\n")
-            f.write("\tSpearman: " + str(df.corr(original[col], method="spearman")) + "\n")
-            f.write("\tKendall: " + str(df.corr(original[col], method="kendall")) + "\n")
+        for col in ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"]:
+            pearson = concat[col + "_MEDIA"].corr(original[col], method="pearson")
+            spearman = concat[col + "_MEDIA"].corr(original[col], method="spearman")
+            kendall = concat[col + "_MEDIA"].corr(original[col], method="kendall")
+            f.write(f"{col}:\n")
+            f.write(f"\tPearson: {pearson}\n")
+            f.write(f"\tSpearman: {spearman}\n")
+            f.write(f"\tKendall: {kendall}\n")
             f.write("\n")
 
 
 def test_beds_stats():
-    sim_time_days = 1  # FIXME
+    runs = 2  # FIXME
+    sim_time_days = 30  # FIXME
     beds_stats = []
-    for i in range(2):  # FIXME
+    for i in range(runs):
         simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
                    statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/",
                    random_seed=i)
@@ -203,8 +211,8 @@ def test_beds_stats():
         dfs.append(df)
     frame = pd.concat(dfs, axis=1).transpose()
     frame.index.name = "VARIABILE CALCOLATA"
-    frame["AVG"] = frame.loc[:, frame.columns.str.startswith("MESE")].mean(axis=1)
-    frame["VAR"] = frame.loc[:, frame.columns.str.startswith("MESE")].var(axis=1)
+    frame["INTERVALLO CONFIDENZA INFERIORE"] = frame["MEDIA"] - (0.8159 * (np.sqrt(frame["VARIANZA"] / runs)))
+    frame["INTERVALLO CONFIDENZA SUPERIORE"] = frame["MEDIA"] + (0.8159 * (np.sqrt(frame["VARIANZA"] / runs)))
     frame.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/stats_beds_mean.csv",
                  float_format="%.15f", encoding="utf-8")
 
@@ -221,8 +229,8 @@ if __name__ == "__main__":
         # test_increase_all_beds_5()
         # test_change_convalescence_avg_time()
         # test_mdc_distributions()
-        # test_hospitalization_type_distributions()
-        test_beds_stats()
+        test_hospitalization_type_distributions()
+        # test_beds_stats()
         # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
         # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
         # p1.start()

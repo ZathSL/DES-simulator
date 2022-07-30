@@ -11,7 +11,12 @@ cwd = path.dirname(path.abspath(__file__))
 
 
 def get_dataset(*columns: str):
-    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype=str)
+    df = pd.read_csv("../../../dataset/Dataset_SDO_Regione_Lombardia.csv", dtype={
+        "CODICE MDC": str,
+        "DESCRIZIONE MDC": str,
+        "CODICE STRUTTURA DI RICOVERO": str,
+        "DESCRIZIONE STRUTTURA DI RICOVERO": str,
+    })
     df = df[["CODICE MDC", "DESCRIZIONE MDC", *columns]]
     missing = df["CODICE MDC"].isna()
     df.loc[missing, "CODICE MDC"] = df.loc[missing, "DESCRIZIONE MDC"].map({
@@ -24,28 +29,30 @@ def get_dataset(*columns: str):
 
 
 def aggr_data(data: pd.DataFrame):
-    data = data.value_counts(sort=False).to_frame("CONTEGGIO")
-    data = data.reset_index()
     data = data.groupby(["CODICE STRUTTURA DI RICOVERO"], as_index=False).agg({
         "CODICE STRUTTURA DI RICOVERO": "last",
         "DESCRIZIONE STRUTTURA DI RICOVERO": "last",
-        "CONTEGGIO": "sum",
+        "TOTALE RICOVERI": "sum",
+        "RICOVERI DO": "sum",
+        "RICOVERI DH": "sum",
+        "RICOVERI DS": "sum",
     })
     data = data.set_index("CODICE STRUTTURA DI RICOVERO").sort_index()
-    data["FREQUENZA"] = data["CONTEGGIO"] / data["CONTEGGIO"].sum()
+    data["FREQUENZA"] = data["TOTALE RICOVERI"] / data["TOTALE RICOVERI"].sum()
     data.to_csv(path.join(cwd, "StruttureDistribution.csv"), float_format="%.15f", encoding="utf-8")
 
 
 def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
-    data = data.value_counts(sort=False).to_frame("CONTEGGIO")
-    data = data.reset_index()
     data = data.groupby(["CODICE STRUTTURA DI RICOVERO"], as_index=False).agg({
         "CODICE STRUTTURA DI RICOVERO": "last",
         "DESCRIZIONE STRUTTURA DI RICOVERO": "last",
-        "CONTEGGIO": "sum",
+        "TOTALE RICOVERI": "sum",
+        "RICOVERI DO": "sum",
+        "RICOVERI DH": "sum",
+        "RICOVERI DS": "sum",
     })
     data = data.set_index("CODICE STRUTTURA DI RICOVERO").sort_index()
-    freq = data["FREQUENZA"] = data["CONTEGGIO"] / data["CONTEGGIO"].sum()
+    freq = data["FREQUENZA"] = data["TOTALE RICOVERI"] / data["TOTALE RICOVERI"].sum()
 
     os.makedirs(f"MDC_{mdc}", exist_ok=True)
     # Display
@@ -70,7 +77,9 @@ def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
 
 
 def main():
-    df, mdcs = get_dataset("CODICE STRUTTURA DI RICOVERO", "DESCRIZIONE STRUTTURA DI RICOVERO")
+    df, mdcs = get_dataset("CODICE STRUTTURA DI RICOVERO", "DESCRIZIONE STRUTTURA DI RICOVERO", "RICOVERI DO",
+                           "RICOVERI DH", "RICOVERI DS")
+    df["TOTALE RICOVERI"] = df["RICOVERI DO"] + df["RICOVERI DH"] + df["RICOVERI DS"]
     aggr_data(df.drop(["CODICE MDC", "DESCRIZIONE MDC"], axis=1))
     for i, mdc in mdcs.iterrows():
         codice, descrizione = mdc["CODICE MDC"], mdc["DESCRIZIONE MDC"]
