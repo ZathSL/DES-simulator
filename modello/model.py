@@ -30,10 +30,7 @@ info_mdc: dict[str, str]
 info_beds: dict[str, int]
 
 monitor_mdc: sim.Monitor
-monitor_hospitalization: dict[str, sim.Monitor] = {}
-monitor_days_do: dict[str, sim.Monitor] = {}
 monitor_repeat_do: dict[str, sim.Monitor] = {}
-monitor_beds: dict[str, sim.Monitor] = {}
 
 
 class Structure(sim.Component):
@@ -64,7 +61,6 @@ class Structure(sim.Component):
                 patient: Patient = self.hospitalization_waiting.pop()
                 if not patient.visited_already:
                     hospitalization_type = hospitalization_type_distributions[patient.mdc].sample()
-                    monitor_hospitalization[patient.mdc].tally(hospitalization_type)
                     if hospitalization_type == "DS":
                         patient.hospitalization_type = "DS"
                         patient.ds += accesses_per_hospitalization_DS_distribution[patient.mdc]
@@ -116,7 +112,6 @@ class Patient(sim.Component):
             # se non ho già generato i giorni di degenza DO, genero il numero di giorni
             if self.days_do == 0:
                 self.days_do = hospitalization_days_DO_distributions[self.mdc].sample()
-                monitor_days_do[self.mdc].tally(self.days_do)
             # finché non ho terminato di scontare tutti i giorni di degenza DO
             while self.days_do > 0:
                 self.hold(1)
@@ -242,8 +237,6 @@ def simulation(
 
     monitor_mdc = sim.Monitor(name='mdc')
     for mdc, _ in iat_mdc.items():
-        monitor_hospitalization[mdc] = sim.Monitor(name='hospitalization ' + mdc)
-        monitor_days_do[mdc] = sim.Monitor(name='days do ' + mdc)
         monitor_repeat_do[mdc] = sim.Monitor(name='repeat do ' + mdc)
 
     for code, name in info_structures.items():  # creo le strutture
@@ -281,14 +274,10 @@ def calculate_statistics(directory: str):
         values["FREQUENCY"] = values["COUNT"] / values["COUNT"].sum()
         values.to_csv(file_number_mdc_csv)
 
-    # Numero di ricoveri DS/DH/DO, numero di giorni ricovero DO, numero di ricoveri ripetuti per ogni mdc
+    # Numero di ricoveri ripetuti per ogni mdc
     with open(directory + "stats_hospitalization_mdc.txt", "w") as file_stats_hospitalization:
         for mdc in iat_mdc:
             file_stats_hospitalization.write("STATISTICS MDC " + mdc + "\n")
-            monitor_hospitalization[mdc].print_histograms(values=True, file=file_stats_hospitalization)
-            file_stats_hospitalization.write("\n")
-            monitor_days_do[mdc].print_histograms(values=True, file=file_stats_hospitalization)
-            file_stats_hospitalization.write("\n")
             monitor_repeat_do[mdc].print_histograms(values=True, file=file_stats_hospitalization)
             file_stats_hospitalization.write("\n")
 
