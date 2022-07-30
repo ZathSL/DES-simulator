@@ -1,0 +1,231 @@
+STATISTICS MDC 01
+Histogram of repeat do 01
+entries           2697    
+
+value               entries     %
+[0]                    2671  99.0 *******************************************************************************
+[1]                      26   1.0 
+
+
+STATISTICS MDC 02
+Histogram of repeat do 02
+entries            159    
+
+value               entries     %
+[0]                     159 100   ********************************************************************************
+
+
+STATISTICS MDC 03
+Histogram of repeat do 03
+entries            531    
+
+value               entries     %
+[0]                     531 100   ********************************************************************************
+
+
+STATISTICS MDC 04
+Histogram of repeat do 04
+entries           2850    
+
+value               entries     %
+[0]                    2789  97.9 ******************************************************************************
+[1]                      61   2.1 *
+
+
+STATISTICS MDC 05
+Histogram of repeat do 05
+entries           3941    
+
+value               entries     %
+[0]                    3792  96.2 ****************************************************************************
+[1]                     149   3.8 ***
+
+
+STATISTICS MDC 06
+Histogram of repeat do 06
+entries           2544    
+
+value               entries     %
+[0]                    2490  97.9 ******************************************************************************
+[1]                      54   2.1 *
+
+
+STATISTICS MDC 07
+Histogram of repeat do 07
+entries           1341    
+
+value               entries     %
+[0]                    1297  96.7 *****************************************************************************
+[1]                      44   3.3 **
+
+
+STATISTICS MDC 08
+Histogram of repeat do 08
+entries           4300    
+
+value               entries     %
+[0]                    4262  99.1 *******************************************************************************
+[1]                      38   0.9 
+
+
+STATISTICS MDC 09
+Histogram of repeat do 09
+entries            484    
+
+value               entries     %
+[0]                     483  99.8 *******************************************************************************
+[1]                       1   0.2 
+
+
+STATISTICS MDC 10
+Histogram of repeat do 10
+entries            409    
+
+value               entries     %
+[0]                     409 100   ********************************************************************************
+
+
+STATISTICS MDC 11
+Histogram of repeat do 11
+entries           1123    
+
+value               entries     %
+[0]                    1068  95.1 ****************************************************************************
+[1]                      55   4.9 ***
+
+
+STATISTICS MDC 12
+Histogram of repeat do 12
+entries            162    
+
+value               entries     %
+[0]                     162 100   ********************************************************************************
+
+
+STATISTICS MDC 13
+Histogram of repeat do 13
+entries            352    
+
+value               entries     %
+[0]                     352 100   ********************************************************************************
+
+
+STATISTICS MDC 14
+Histogram of repeat do 14
+entries           1266    
+
+value               entries     %
+[0]                    1266 100   ********************************************************************************
+
+
+STATISTICS MDC 15
+Histogram of repeat do 15
+entries            649    
+
+value               entries     %
+[0]                     649 100   ********************************************************************************
+
+
+STATISTICS MDC 16
+Histogram of repeat do 16
+entries            170    
+
+value               entries     %
+[0]                     167  98.2 ******************************************************************************
+[1]                       3   1.8 *
+
+
+STATISTICS MDC 17
+Histogram of repeat do 17
+entries            702    
+
+value               entries     %
+[0]                     671  95.6 ****************************************************************************
+[1]                      31   4.4 ***
+
+
+STATISTICS MDC 18
+Histogram of repeat do 18
+entries            763    
+
+value               entries     %
+[0]                     756  99.1 *******************************************************************************
+[1]                       7   0.9 
+
+
+STATISTICS MDC 19
+Histogram of repeat do 19
+entries            703    
+
+value               entries     %
+[0]                     701  99.7 *******************************************************************************
+[1]                       2   0.3 
+
+
+STATISTICS MDC 20
+Histogram of repeat do 20
+entries             30    
+
+value               entries     %
+[0]                      30 100   ********************************************************************************
+
+
+STATISTICS MDC 21
+Histogram of repeat do 21
+entries            141    
+
+value               entries     %
+[0]                     141 100   ********************************************************************************
+
+
+STATISTICS MDC 22
+Histogram of repeat do 22
+entries             85    
+
+value               entries     %
+[0]                      85 100   ********************************************************************************
+
+
+STATISTICS MDC 23
+Histogram of repeat do 23
+entries            269    
+
+value               entries     %
+[0]                     267  99.3 *******************************************************************************
+[1]                       2   0.7 
+
+
+STATISTICS MDC 24
+Histogram of repeat do 24
+entries             80    
+
+value               entries     %
+[0]                      80 100   ********************************************************************************
+
+
+STATISTICS MDC 25
+Histogram of repeat do 25
+entries             33    
+
+value               entries     %
+[0]                      33 100   ********************************************************************************
+
+
+STATISTICS MDC NA
+Histogram of repeat do NA
+entries             65    
+
+value               entries     %
+[0]                      63  96.9 *****************************************************************************
+[1]                       2   3.1 **
+
+
+STATISTICS MDC PR
+Histogram of repeat do PR
+entries            725    
+
+value               entries     %
+[0]                     724  99.9 *******************************************************************************
+[1]                       1   0.1 
+
+

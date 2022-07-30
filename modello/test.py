@@ -1,6 +1,4 @@
 import inspect
-import os
-import shutil
 
 import pandas as pd
 
@@ -130,16 +128,16 @@ def test_mdc_distributions():
     mdc_stats = []
     for i in range(10):
         simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
-                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + "/", random_seed=i)
-        csv = pd.read_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc.csv",
-                          keep_default_na=False, dtype={"MDC": str}, index_col="MDC")
+                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/",
+                   random_seed=i)
+        csv = pd.read_csv(
+            "../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/number_patient_mdc.csv",
+            keep_default_na=False, dtype={"MDC": str}, index_col="MDC")
         mdc_stats.append(csv)
-        shutil.rmtree("../statistiche/" + inspect.currentframe().f_code.co_name)
     frame = pd.concat((df["FREQUENCY"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
     mean = frame.transpose().mean()
     mean /= mean.sum()
     mean.rename("FREQUENCY", inplace=True)
-    os.makedirs("../statistiche/" + inspect.currentframe().f_code.co_name)
     mean.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/number_patient_mdc_mean.csv",
                 float_format="%.15f", encoding="utf-8")
     original = pd.read_csv("../distribuzioni/empiriche/MDC/MDCDistribution.csv", keep_default_na=False,
@@ -159,9 +157,11 @@ def test_hospitalization_type_distributions():
     mdc_stats = []
     for i in range(10):
         simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
-                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/{i}/", random_seed=i)
-        csv = pd.read_csv("../statistiche/" + inspect.currentframe().f_code.co_name + f"/{i}/type_patients_treated.csv",
-                          keep_default_na=False, index_col="STRUTTURA")
+                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/",
+                   random_seed=i)
+        csv = pd.read_csv(
+            "../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/type_patients_treated.csv",
+            keep_default_na=False, index_col="STRUTTURA")
         mdc_stats.append(csv)
     frame_ds = pd.concat((df["RICOVERI DS"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
     frame_dh = pd.concat((df["RICOVERI DH"].rename(str(i)) for i, df in enumerate(mdc_stats)), axis=1)
@@ -186,6 +186,29 @@ def test_hospitalization_type_distributions():
             f.write("\n")
 
 
+def test_beds_stats():
+    sim_time_days = 1  # FIXME
+    beds_stats = []
+    for i in range(2):  # FIXME
+        simulation(trace=False, sim_time_days=sim_time_days, animate=False, speed=10, mutations=[],
+                   statistics_dir="../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/",
+                   random_seed=i)
+        csv = pd.read_csv("../statistiche/" + inspect.currentframe().f_code.co_name + f"/runs/{i}/stats_beds.csv",
+                          keep_default_na=False, index_col="VARIABILE CALCOLATA").transpose()
+        beds_stats.append(csv)
+    dfs = []
+    for key in beds_stats[0].columns:
+        df = pd.concat((df[key].rename(str(i)).astype(float) for i, df in enumerate(beds_stats)), axis=1)
+        df = df.transpose().mean().rename(key)
+        dfs.append(df)
+    frame = pd.concat(dfs, axis=1).transpose()
+    frame.index.name = "VARIABILE CALCOLATA"
+    frame["AVG"] = frame.loc[:, frame.columns.str.startswith("MESE")].mean(axis=1)
+    frame["VAR"] = frame.loc[:, frame.columns.str.startswith("MESE")].var(axis=1)
+    frame.to_csv("../statistiche/" + inspect.currentframe().f_code.co_name + "/stats_beds_mean.csv",
+                 float_format="%.15f", encoding="utf-8")
+
+
 if __name__ == "__main__":
     with CodeTimer():
         # test_main()
@@ -199,6 +222,7 @@ if __name__ == "__main__":
         # test_change_convalescence_avg_time()
         # test_mdc_distributions()
         # test_hospitalization_type_distributions()
+        test_beds_stats()
         # p1 = multiprocessing.Process(name='delete_5_biggest', target=test_delete_5_smallest_structures())
         # p2 = multiprocessing.Process(name='delete_5_smallest', target=test_delete_5_smallest_structures())
         # p1.start()

@@ -4,7 +4,6 @@ from typing import Union, TextIO, Any
 
 import pandas as pd
 import salabim as sim
-from numpy import var, mean
 from scipy.stats import bernoulli
 
 from util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
@@ -328,34 +327,18 @@ def calculate_statistics(directory: str):
                 sum_claimers += value.beds.claimers().length[day_start:day_start + 30].mean()
                 sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start + 30].mean().real
                 sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start + 30].mean().real
-            length_requesters_list.append(str(sum_requesters / len(structures)))
-            length_claimers_list.append(str(sum_claimers / len(structures)))
-            length_stay_requesters_list.append(str(sum_stay_requesters / len(structures)))
-            length_stay_claimers_list.append(str(sum_stay_claimers / len(structures)))
+            length_requesters_list.append(sum_requesters / len(structures))
+            length_claimers_list.append(sum_claimers / len(structures))
+            length_stay_requesters_list.append(sum_stay_requesters / len(structures))
+            length_stay_claimers_list.append(sum_stay_claimers / len(structures))
             day_start += 30
-
-        temp = list(filter('nan'.__ne__, length_requesters_list[1:]))
-        if len(temp) > 0:
-            length_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-
-        temp = list(filter('nan'.__ne__, length_claimers_list[1:]))
-        if len(temp) > 0:
-            length_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-
-        temp = list(filter('nan'.__ne__, length_stay_requesters_list[1:]))
-        if len(temp) > 0:
-            length_stay_requesters_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-
-        temp = list(filter('nan'.__ne__, length_stay_claimers_list[1:]))
-        if len(temp) > 0:
-            length_stay_claimers_list.extend([mean([float(x) for x in temp]), var([float(x) for x in temp])])
-
         columns = ["VARIABILE CALCOLATA"]
         columns.extend(f"MESE {i}" for i in range(2, 13))
-        columns.extend(["MEDIA", "VARIANZA"])
         df = pd.DataFrame([length_requesters_list, length_claimers_list, length_stay_requesters_list,
                            length_stay_claimers_list], columns=columns)
         df.set_index("VARIABILE CALCOLATA", inplace=True)
+        df.fillna(0, inplace=True)
+        df["MEDIA"], df["VARIANZA"] = df.mean(axis=1), df.var(axis=1)
         df.to_csv(file_stats_beds_iid, float_format="%.15f", encoding="utf-8")
 
     with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
