@@ -1,7 +1,7 @@
 import shutil
 
 from model import simulation
-from modello.stats import calc_mdc_distribution_stats, calc_hospitalization_type_stats, calc_beds_stats
+from stats import calc_mdc_distribution_stats, calc_hospitalization_type_stats, calc_beds_stats
 from util import CodeTimer
 
 
@@ -20,7 +20,6 @@ def test(runs: int, duration: int, name: str, mutations=None):
 if __name__ == "__main__":
     with CodeTimer():
         test(runs=2, duration=1, name="base")
-        # base_test(runs=2, duration=1, mutations=mutations_example(), name="mutations_example")
         # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(5), name="increase_all_beds_5_percent")
         # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(10), name="increase_all_beds_10_percent")
         # base_test(runs=2, duration=1, mutations=decrease_all_beds_percent(5), name="decrease_all_beds_5_percent")

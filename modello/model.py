@@ -264,30 +264,12 @@ def calculate_statistics(directory: str):
 
     # OUTPUT
     # Numero di pazienti curati in ogni struttura
-    beds_tot = 0
-    patient_treated_mean = 0
-    length_requesters = 0
-    length_claimers = 0
-    available_quantity = 0
-    claimed_quantity = 0
-    occupancy = 0
-    with open(directory + "number_patients_treated.txt", "w") as file_number_patients_treated:
-        for key, value in structures.items():
-            beds_tot += value.n_beds
-            patient_treated_mean += (value.patients_treated_ds + value.patients_treated_dh +
-                                     value.patients_treated_do) * value.n_beds
-            length_requesters += value.beds.requesters().length.mean()
-            length_claimers += value.beds.claimers().length.mean()
-            available_quantity += value.beds.available_quantity.mean()
-            claimed_quantity += value.beds.claimed_quantity.mean()
-            occupancy += value.beds.occupancy.mean()
-        file_number_patients_treated.write("Media ponderata pazienti guariti: " + str(patient_treated_mean / beds_tot))
-
     with open(directory + "type_patients_treated.csv", "wb") as type_patients_treated:
         data = {key: [value.patients_treated_ds, value.patients_treated_dh, value.patients_treated_do]
                 for key, value in structures.items()}
         df = pd.DataFrame.from_dict(data, orient="index", columns=["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"])
         df.index.name = "STRUTTURA"
+        df["TOTALE RICOVERI"] = df["RICOVERI DS"] + df["RICOVERI DH"] + df["RICOVERI DO"]
         df.to_csv(type_patients_treated, float_format="%.15f", encoding="utf-8")
 
     with open(directory + "stats_beds.csv", "wb") as file_stats_beds_iid:
@@ -319,15 +301,3 @@ def calculate_statistics(directory: str):
         df.fillna(0, inplace=True)
         df["MEDIA"], df["VARIANZA"] = df.mean(axis=1), df.var(axis=1)
         df.to_csv(file_stats_beds_iid, float_format="%.15f", encoding="utf-8")
-
-    with open(directory + "stats_beds_mean.txt", "w") as file_stats_beds_mean:
-        file_stats_beds_mean.write(
-            f"Length of requesters of beds (sum of mean): {length_requesters / len(structures)}\n")
-        file_stats_beds_mean.write(
-            f"Length of claimers of beds (sum of mean): {length_claimers / len(structures)}\n")
-        file_stats_beds_mean.write(
-            f"Length of available quantity of beds (sum of mean): {available_quantity / len(structures)}\n")
-        file_stats_beds_mean.write(
-            f"Length of claimed quantity of beds (sum of mean): {claimed_quantity / len(structures)}\n")
-        file_stats_beds_mean.write(
-            f"Length of occupancy of beds (sum of mean): {occupancy / len(structures)}\n")

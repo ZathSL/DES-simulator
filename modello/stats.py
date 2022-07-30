@@ -48,7 +48,7 @@ def calc_hospitalization_type_stats(name: str, runs: int):
     original = pd.read_csv("../distribuzioni/empiriche/Strutture/StruttureDistribution.csv", keep_default_na=False,
                            dtype={"CODICE STRUTTURA DI RICOVERO": str}, index_col="CODICE STRUTTURA DI RICOVERO")
     with open(f"../statistiche/{name}/hospitalization_type_patients_treated_correlation.txt", "w") as f:
-        for col in ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO"]:
+        for col in ["RICOVERI DS", "RICOVERI DH", "RICOVERI DO", "TOTALE RICOVERI"]:
             pearson = concat[col + "_MEDIA"].corr(original[col], method="pearson")
             spearman = concat[col + "_MEDIA"].corr(original[col], method="spearman")
             kendall = concat[col + "_MEDIA"].corr(original[col], method="kendall")
