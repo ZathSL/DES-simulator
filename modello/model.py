@@ -262,6 +262,12 @@ def calculate_statistics(directory: str):
         values["FREQUENCY"] = values["COUNT"] / values["COUNT"].sum()
         values.to_csv(file_number_mdc_csv, float_format="%.15f", encoding="utf-8")
 
+    with open(directory + "histogram_repeat_do.txt", "w") as file_repeat_do:
+        for key, value in structures.items():
+            file_repeat_do.write("Istogramma numero di ricoveri ripetuti DO per la struttura " + key + ": \n")
+            monitor_repeat_do[key].print_histogram()
+            file_repeat_do.write("\n")
+
     # OUTPUT
     # Numero di pazienti curati in ogni struttura
     with open(directory + "type_patients_treated.csv", "wb") as type_patients_treated:
