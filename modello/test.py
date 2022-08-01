@@ -32,10 +32,10 @@ def calc_stats(name: str, runs: int):
 
 
 if __name__ == "__main__":
-    # test(range(0, 1), 1, "test", None, False)
-    test(runs=range(0, 2), duration=365, name="test", mutations=None, stats=False)
-    # test_parallel(runs=range(0, 2), duration=365, name="test", mutations=None)
+    # test(range(0, 1), 3, "test", None, False)
+    test(runs=range(0, 1), duration=10, name="test", mutations=None, stats=False)
     # calc_stats("base", 20)
+    # test(runs=range(0, 1), duration=360, mutations=change_convalescence_avg_time(14), name="test_convalescence_avg_time_14", stats=False)
     # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(5), name="increase_all_beds_5_percent")
     # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(10), name="increase_all_beds_10_percent")
     # base_test(runs=2, duration=1, mutations=decrease_all_beds_percent(5), name="decrease_all_beds_5_percent")

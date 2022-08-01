@@ -1,4 +1,6 @@
 import os
+from collections import defaultdict
+from typing import Callable
 
 import pandas as pd
 
@@ -44,32 +46,28 @@ def calculate_statistics(simulation: "Simulation", directory: str):
         df["TOTALE RICOVERI"] = df["RICOVERI DS"] + df["RICOVERI DH"] + df["RICOVERI DO"]
         df.to_csv(type_patients_treated, float_format="%.15f", encoding="utf-8")
 
-    with open(directory + "stats_beds.csv", "wb") as file_stats_beds_iid:
-        length_requesters_list = ["REQUESTERS"]
-        length_claimers_list = ["CLAIMERS"]
-        length_stay_requesters_list = ["STAY_REQUESTERS"]
-        length_stay_claimers_list = ["STAY_CLAIMERS"]
-        day_start = 30
+    calc_beds_stats(simulation, directory, "requesters",
+                    lambda day_start, period, structure:
+                    sum(structure.bed_requesters_counter[day_start:day_start + period]))
+
+    calc_beds_stats(simulation, directory, "claimers",
+                    lambda day_start, period, structure:
+                    sum(structure.bed_claimers_counter[day_start:day_start + period]))
+
+
+def calc_beds_stats(simulation: "Simulation", directory: str, stat_name: str,
+                    stat_function: Callable[[int, int, "Structure"], float]):
+    with open(directory + f"stats_beds_{stat_name}.csv", "wb") as file_stats_beds_iid:
+        rows = defaultdict(list)
+        period = 2
+        day_start = period
         for _ in range(11):
-            sum_requesters = 0
-            sum_claimers = 0
-            sum_stay_requesters = 0
-            sum_stay_claimers = 0
-            for key, value in simulation.structures.items():
-                sum_requesters += value.beds.requesters().length[day_start:day_start + 30].mean()
-                sum_claimers += value.beds.claimers().length[day_start:day_start + 30].mean()
-                sum_stay_requesters += value.beds.requesters().length_of_stay[day_start:day_start + 30].mean().real
-                sum_stay_claimers += value.beds.claimers().length_of_stay[day_start:day_start + 30].mean().real
-            length_requesters_list.append(sum_requesters / len(simulation.structures))
-            length_claimers_list.append(sum_claimers / len(simulation.structures))
-            length_stay_requesters_list.append(sum_stay_requesters / len(simulation.structures))
-            length_stay_claimers_list.append(sum_stay_claimers / len(simulation.structures))
-            day_start += 30
-        columns = ["VARIABILE CALCOLATA"]
-        columns.extend(f"MESE {i}" for i in range(2, 13))
-        df = pd.DataFrame([length_requesters_list, length_claimers_list, length_stay_requesters_list,
-                           length_stay_claimers_list], columns=columns)
-        df.set_index("VARIABILE CALCOLATA", inplace=True)
+            for structure_id, structure in simulation.structures.items():
+                rows[structure_id].append(stat_function(day_start, period, structure))
+            day_start += period
+        columns = [f"MESE {i}" for i in range(2, 13)]
+        df = pd.DataFrame.from_dict(rows, columns=columns, orient="index")
+        df.index.name = "STRUTTURA"
         df.fillna(0, inplace=True)
         df["MEDIA"], df["VARIANZA"], df["SQM"] = df.mean(axis=1), df.var(axis=1), df.std(axis=1)
         df.to_csv(file_stats_beds_iid, float_format="%.15f", encoding="utf-8")

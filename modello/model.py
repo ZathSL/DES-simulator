@@ -6,7 +6,7 @@ import pandas as pd
 import salabim as sim
 from scipy.stats import bernoulli
 
-from util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
+from model_oop.util import get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
     get_structures_distributions, get_repeated_hospitalizations_do_distribution, \
     get_accesses_per_hospitalization_distributions, \
     get_iat_distribution, get_mdc_data, get_beds_info

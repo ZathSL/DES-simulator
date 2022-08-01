@@ -11,6 +11,8 @@ class Structure(sim.Component):
     patients_treated_dh: int
     patients_treated_ds: int
     patients_treated_do: int
+    bed_requesters_counter: list[int]
+    bed_claimers_counter: list[int]
 
     # noinspection PyMethodOverriding
     def setup(self, simulation: "Simulation", code: str, name_s: str, n_beds: int):
@@ -21,6 +23,8 @@ class Structure(sim.Component):
         self.patients_treated_ds = 0
         self.patients_treated_do = 0
         self.n_beds = n_beds
+        self.bed_requesters_counter = [0 for _ in range(self.simulation.duration + 1)]
+        self.bed_claimers_counter = [0 for _ in range(self.simulation.duration + 1)]
 
     def process(self):
         while True:

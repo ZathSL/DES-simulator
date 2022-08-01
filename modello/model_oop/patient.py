@@ -1,6 +1,7 @@
 import salabim as sim
-from model_oop.structure import Structure
 from scipy.stats import bernoulli
+
+from .structure import Structure
 
 
 class Patient(sim.Component):
@@ -31,7 +32,9 @@ class Patient(sim.Component):
         self.structure.activate()
 
     def hospitalization(self):
+        self.structure.bed_requesters_counter[round(self.simulation.env.now())] += 1
         yield self.request(self.structure.beds)
+        self.structure.bed_claimers_counter[round(self.simulation.env.now())] += 1
         if self.ds > 0:
             yield self.hold(1)
             self.ds -= 1

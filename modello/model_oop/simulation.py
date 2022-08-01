@@ -1,11 +1,11 @@
 import salabim as sim
 
-from model_oop.logger import Logger
-from model_oop.mutations import Mutation, apply_mutations
-from model_oop.patient import Patient
-from model_oop.stats import calculate_statistics
-from model_oop.structure import Structure
-from util import get_mdc_data, get_beds_info, get_iat_distribution, get_structures_distributions, \
+from .logger import Logger
+from .mutations import Mutation, apply_mutations
+from .patient import Patient
+from .stats import calculate_statistics
+from .structure import Structure
+from .util import get_mdc_data, get_beds_info, get_iat_distribution, get_structures_distributions, \
     get_hospitalization_type_distributions, get_hospitalization_days_do_distributions, \
     get_accesses_per_hospitalization_distributions, get_repeated_hospitalizations_do_distribution
 
