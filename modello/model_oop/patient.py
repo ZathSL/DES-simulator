@@ -1,7 +1,6 @@
 import salabim as sim
+from model_oop.structure import Structure
 from scipy.stats import bernoulli
-
-from modello.model_oop.structure import Structure
 
 
 class Patient(sim.Component):

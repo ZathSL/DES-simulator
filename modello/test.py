@@ -1,6 +1,6 @@
 import multiprocessing
 
-from modello.model_oop.simulation import Simulation
+from model_oop.simulation import Simulation
 from stats import calc_mdc_distribution_stats, calc_hospitalization_type_stats, calc_beds_stats
 
 
@@ -9,7 +9,7 @@ def run_simulation(run: int, duration: int, name: str, mutations):
     simulation.run()
 
 
-def test(runs: range, duration: int, name: str, mutations, stats):
+def test(runs: range, duration: int, name: str, mutations, stats: bool):
     if mutations is None:
         mutations = []
     for run in runs:
@@ -32,8 +32,9 @@ def calc_stats(name: str, runs: int):
 
 
 if __name__ == "__main__":
-    test(range(0, 1), 1, "test", None, False)
-    test_parallel(runs=range(0, 5), duration=2, name="test", mutations=None)
+    # test(range(0, 1), 1, "test", None, False)
+    test(runs=range(0, 2), duration=365, name="test", mutations=None, stats=False)
+    # test_parallel(runs=range(0, 2), duration=365, name="test", mutations=None)
     # calc_stats("base", 20)
     # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(5), name="increase_all_beds_5_percent")
     # base_test(runs=2, duration=1, mutations=increase_all_beds_percent(10), name="increase_all_beds_10_percent")
