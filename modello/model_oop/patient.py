@@ -1,5 +1,4 @@
 import salabim as sim
-from scipy.stats import bernoulli
 
 from .structure import Structure
 
@@ -12,7 +11,7 @@ class Patient(sim.Component):
     ds: int
     dh: int
     do: int
-    days_do: int
+    days_do_array: list[int]
     structure: Structure
     hospitalization_type: str
 
@@ -24,12 +23,26 @@ class Patient(sim.Component):
         self.dh = 0
         self.do = 0
         self.ds = 0
-        self.days_do = 0
         self.hospitalization_type = ""
         self.structure = self.simulation.structures[self.simulation.structures_distributions[mdc].sample()]
         self.simulation.monitor_mdc.tally(mdc)  # conto il numero di pazienti per ogni mdc
         self.enter(self.structure.hospitalization_waiting)  # entro nella coda di attesa
         self.structure.activate()
+
+    def calc_days_do(self):
+        days_do = self.simulation.hospitalization_days_DO_distributions[self.mdc].sample()
+        days_counter = 0
+        self.days_do_array = []
+        while days_do > 0:
+            days_do -= 1
+            days_counter += 1
+            # se ho ancora giorni di degenza DO da scontare, controllo se devo eseguire dei ricoveri ripetuti
+            repeat = self.simulation.get_repeated_hospitalizations_do_probability(self.mdc) == 1
+            self.simulation.monitor_repeat_do[self.mdc].tally(repeat)
+            if days_do > 0 and repeat:
+                self.days_do_array.append(days_counter)
+                days_counter = 0
+        self.days_do_array.reverse()
 
     def hospitalization(self):
         self.structure.bed_requesters_counter[round(self.simulation.env.now())] += 1
@@ -42,21 +55,11 @@ class Patient(sim.Component):
             yield self.hold(1)
             self.dh -= 1
         elif self.do > 0:
-            # se non ho già generato i giorni di degenza DO, genero il numero di giorni
-            if self.days_do == 0:
-                self.days_do = self.simulation.hospitalization_days_DO_distributions[self.mdc].sample()
-            # finché non ho terminato di scontare tutti i giorni di degenza DO
-            while self.days_do > 0:
-                self.hold(1)
-                self.days_do -= 1
-                # se ho ancora giorni di degenza DO da scontare, controllo se devo eseguire dei ricoveri ripetuti
-                repeat = bernoulli.rvs(size=1,
-                                       p=self.simulation.repeated_hospitalizations_DO_distribution[self.mdc])[0] == 1
-                self.simulation.monitor_repeat_do[self.mdc].tally(repeat)
-                if self.days_do > 0 and repeat:
-                    break
+            if len(self.days_do_array) > 0:
+                days = self.days_do_array.pop()
+                yield self.hold(days)
             # se ho terminato di scontare tutti i giorni in DO, decremento il numero di ricoveri DO
-            if self.days_do <= 0:
+            if len(self.days_do_array) <= 0:
                 self.do -= 1
         # se ho terminato di scontare tutti i tipi di ricoveri, aggiungo il paziente al numero di pazienti guariti
         if self.ds <= 0 and self.dh <= 0 and self.do <= 0:

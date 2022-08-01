@@ -44,5 +44,6 @@ class Structure(sim.Component):
                     if hospitalization_type == "DO":
                         patient.hospitalization_type = "DO"
                         patient.do = 1
+                        patient.calc_days_do()
                     patient.visited_already = True
                 patient.activate(process="hospitalization")

@@ -1,4 +1,5 @@
 import salabim as sim
+from scipy.stats import bernoulli
 
 from .logger import Logger
 from .mutations import Mutation, apply_mutations
@@ -22,6 +23,8 @@ class Simulation:
     accesses_per_hospitalization_DH_distribution: dict[str, float]
     accesses_per_hospitalization_DS_distribution: dict[str, float]
 
+    repeated_hospitalizations_do_probabilities: dict[str, list[float]]
+
     iat_mdc: dict[str, float]
     info_structures: dict[str, str]
     info_mdc: dict[str, str]
@@ -40,6 +43,7 @@ class Simulation:
         self.accesses_per_hospitalization_DH_distribution, self.accesses_per_hospitalization_DS_distribution = \
             get_accesses_per_hospitalization_distributions()
         self.repeated_hospitalizations_DO_distribution = get_repeated_hospitalizations_do_distribution()
+        self.create_get_repeated_hospitalizations_do_probabilities()
 
     def __init__(
             self,
@@ -80,3 +84,14 @@ class Simulation:
 
     def log(self, *messages: str):
         print(f"Simulation '{self.name}' run {self.run_n:2} |", *messages)
+
+    def create_get_repeated_hospitalizations_do_probabilities(self):
+        self.repeated_hospitalizations_do_probabilities = {
+            mdc: bernoulli.rvs(size=self.duration * 4000, p=dist).tolist()
+            for mdc, dist in self.repeated_hospitalizations_DO_distribution.items()
+        }
+
+    def get_repeated_hospitalizations_do_probability(self, mdc: str):
+        if len(self.repeated_hospitalizations_do_probabilities[mdc]) <= 0:
+            self.create_get_repeated_hospitalizations_do_probabilities()
+        return self.repeated_hospitalizations_do_probabilities[mdc].pop()
