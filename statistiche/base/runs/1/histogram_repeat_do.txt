@@ -1,0 +1,539 @@
+Istogramma numero di ricoveri ripetuti DO per l'MDC 01: 
+Histogram of repeat do 01
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries         1333616        15458      1318158    
+mean                  0.012        1    
+std.deviation         0.107        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0       1318158      98.8  98.8 *******************************************************************************|
+        1         15458       1.2 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 02: 
+Histogram of repeat do 02
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           60282           17        60265    
+mean                  0.000        1    
+std.deviation         0.017        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         60265     100.0 100.0 *******************************************************************************|
+        1            17       0.0 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 03: 
+Histogram of repeat do 03
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          196117           91       196026    
+mean                  0.000        1    
+std.deviation         0.022        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        196026     100.0 100.0 *******************************************************************************|
+        1            91       0.0 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 04: 
+Histogram of repeat do 04
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries         1097482        22873      1074609    
+mean                  0.021        1    
+std.deviation         0.143        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0       1074609      97.9  97.9 ******************************************************************************|
+        1         22873       2.1 100   *                                                                               |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 05: 
+Histogram of repeat do 05
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries         1688999        56975      1632024    
+mean                  0.034        1    
+std.deviation         0.181        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0       1632024      96.6  96.6 *****************************************************************************| 
+        1         56975       3.4 100   **                                                                              |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 06: 
+Histogram of repeat do 06
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries         1001125        19513       981612    
+mean                  0.019        1    
+std.deviation         0.138        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        981612      98.1  98.1 ******************************************************************************|
+        1         19513       1.9 100   *                                                                               |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 07: 
+Histogram of repeat do 07
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          570319        20102       550217    
+mean                  0.035        1    
+std.deviation         0.184        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        550217      96.5  96.5 *****************************************************************************| 
+        1         20102       3.5 100   **                                                                              |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 08: 
+Histogram of repeat do 08
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries         1719095        13737      1705358    
+mean                  0.008        1    
+std.deviation         0.089        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0       1705358      99.2  99.2 *******************************************************************************|
+        1         13737       0.8 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 09: 
+Histogram of repeat do 09
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          202103         1010       201093    
+mean                  0.005        1    
+std.deviation         0.071        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        201093      99.5  99.5 *******************************************************************************|
+        1          1010       0.5 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 10: 
+Histogram of repeat do 10
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          179409          959       178450    
+mean                  0.005        1    
+std.deviation         0.073        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        178450      99.5  99.5 *******************************************************************************|
+        1           959       0.5 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 11: 
+Histogram of repeat do 11
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          509914        21846       488068    
+mean                  0.043        1    
+std.deviation         0.203        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        488068      95.7  95.7 ****************************************************************************|  
+        1         21846       4.3 100   ***                                                                             |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 12: 
+Histogram of repeat do 12
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          103082          482       102600    
+mean                  0.005        1    
+std.deviation         0.068        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        102600      99.5  99.5 *******************************************************************************|
+        1           482       0.5 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 13: 
+Histogram of repeat do 13
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          165880          118       165762    
+mean                  0.001        1    
+std.deviation         0.027        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        165762      99.9  99.9 *******************************************************************************|
+        1           118       0.1 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 14: 
+Histogram of repeat do 14
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          449246            3       449243    
+mean                  0.000        1    
+std.deviation         0.003        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        449243     100.0 100.0 *******************************************************************************|
+        1             3       0.0 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 15: 
+Histogram of repeat do 15
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          133643            0       133643    
+mean                  0                 
+std.deviation         0                 
+
+minimum               0                 
+median                0                 
+90% percentile        0                 
+95% percentile        0                 
+maximum               0                 
+
+           <=       entries     %  cum%
+        0        133643     100   100   ********************************************************************************|
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 16: 
+Histogram of repeat do 16
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          103206         1304       101902    
+mean                  0.013        1    
+std.deviation         0.112        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        101902      98.7  98.7 ******************************************************************************|
+        1          1304       1.3 100   *                                                                               |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 17: 
+Histogram of repeat do 17
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          319567        13950       305617    
+mean                  0.044        1    
+std.deviation         0.204        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        305617      95.6  95.6 ****************************************************************************|  
+        1         13950       4.4 100   ***                                                                             |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 18: 
+Histogram of repeat do 18
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          250839         2719       248120    
+mean                  0.011        1    
+std.deviation         0.104        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        248120      98.9  98.9 *******************************************************************************|
+        1          2719       1.1 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 19: 
+Histogram of repeat do 19
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          303641          262       303379    
+mean                  0.001        1    
+std.deviation         0.029        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        303379      99.9  99.9 *******************************************************************************|
+        1           262       0.1 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 20: 
+Histogram of repeat do 20
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           27408          137        27271    
+mean                  0.005        1    
+std.deviation         0.071        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         27271      99.5  99.5 *******************************************************************************|
+        1           137       0.5 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 21: 
+Histogram of repeat do 21
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           72074          424        71650    
+mean                  0.006        1    
+std.deviation         0.076        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         71650      99.4  99.4 *******************************************************************************|
+        1           424       0.6 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 22: 
+Histogram of repeat do 22
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries            5999           10         5989    
+mean                  0.002        1    
+std.deviation         0.041        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0          5989      99.8  99.8 *******************************************************************************|
+        1            10       0.2 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 23: 
+Histogram of repeat do 23
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          154122          692       153430    
+mean                  0.004        1    
+std.deviation         0.067        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        153430      99.6  99.6 *******************************************************************************|
+        1           692       0.4 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 24: 
+Histogram of repeat do 24
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           19942            8        19934    
+mean                  0.000        1    
+std.deviation         0.020        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         19934     100.0 100.0 *******************************************************************************|
+        1             8       0.0 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC 25: 
+Histogram of repeat do 25
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           21600           17        21583    
+mean                  0.001        1    
+std.deviation         0.028        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         21583      99.9  99.9 *******************************************************************************|
+        1            17       0.1 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC NA: 
+Histogram of repeat do NA
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries           12198           23        12175    
+mean                  0.002        1    
+std.deviation         0.043        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0         12175      99.8  99.8 *******************************************************************************|
+        1            23       0.2 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+
+Istogramma numero di ricoveri ripetuti DO per l'MDC PR: 
+Histogram of repeat do PR
+                        all    excl.zero         zero
+-------------- ------------ ------------ ------------
+entries          227470          514       226956    
+mean                  0.002        1    
+std.deviation         0.047        0    
+
+minimum               0            1    
+median                0            1    
+90% percentile        0            1    
+95% percentile        0            1    
+maximum               1            1    
+
+           <=       entries     %  cum%
+        0        226956      99.8  99.8 *******************************************************************************|
+        1           514       0.2 100                                                                                   |
+          inf         0       0   100                                                                                   |
+
+

@@ -59,7 +59,7 @@ def calc_beds_stats(simulation: "Simulation", directory: str, stat_name: str,
                     stat_function: Callable[[int, int, "Structure"], float]):
     with open(directory + f"stats_beds_{stat_name}.csv", "wb") as file_stats_beds_iid:
         rows = defaultdict(list)
-        period = 2
+        period = 30
         day_start = period
         for _ in range(11):
             for structure_id, structure in simulation.structures.items():
