@@ -87,7 +87,7 @@ class Simulation:
 
     def create_get_repeated_hospitalizations_do_probabilities(self):
         self.repeated_hospitalizations_do_probabilities = {
-            mdc: bernoulli.rvs(size=self.duration * 4000, p=dist).tolist()
+            mdc: bernoulli.rvs(size=4000, p=dist).tolist()
             for mdc, dist in self.repeated_hospitalizations_DO_distribution.items()
         }
 
