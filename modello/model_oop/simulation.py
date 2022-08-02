@@ -17,13 +17,13 @@ class Simulation:
     structures: dict[str, Structure] = {}
 
     structures_distributions: dict[str, sim.Pdf]
-    hospitalization_type_distributions: dict[str, sim.Pdf]
+    hospitalization_type_distributions: dict[str, dict[str, sim.Pdf]]
     hospitalization_days_DO_distributions: dict[str, sim.Pdf]
-    repeated_hospitalizations_DO_distribution: dict[str, float]
+    repeated_hospitalizations_DO_distribution: dict[str, dict[str, float]]
     accesses_per_hospitalization_DH_distribution: dict[str, float]
     accesses_per_hospitalization_DS_distribution: dict[str, float]
 
-    repeated_hospitalizations_do_probabilities: dict[str, list[float]]
+    repeated_hospitalizations_do_probabilities: dict[str, dict[str, list[float]]]
 
     iat_mdc: dict[str, float]
     info_structures: dict[str, str]
@@ -38,11 +38,11 @@ class Simulation:
         self.info_beds = get_beds_info()
         self.iat_mdc = get_iat_distribution()
         self.structures_distributions, self.info_structures = get_structures_distributions(mdc_codes)
-        self.hospitalization_type_distributions = get_hospitalization_type_distributions()
+        self.hospitalization_type_distributions = get_hospitalization_type_distributions(mdc_codes)
         self.hospitalization_days_DO_distributions = get_hospitalization_days_do_distributions(mdc_codes)
         self.accesses_per_hospitalization_DH_distribution, self.accesses_per_hospitalization_DS_distribution = \
             get_accesses_per_hospitalization_distributions()
-        self.repeated_hospitalizations_DO_distribution = get_repeated_hospitalizations_do_distribution()
+        self.repeated_hospitalizations_DO_distribution = get_repeated_hospitalizations_do_distribution(mdc_codes)
         self.create_get_repeated_hospitalizations_do_probabilities()
 
     def __init__(
@@ -87,11 +87,14 @@ class Simulation:
 
     def create_get_repeated_hospitalizations_do_probabilities(self):
         self.repeated_hospitalizations_do_probabilities = {
-            mdc: bernoulli.rvs(size=4000, p=dist).tolist()
-            for mdc, dist in self.repeated_hospitalizations_DO_distribution.items()
+            mdc: {
+                structure: bernoulli.rvs(size=4000, p=dist).tolist()
+                for structure, dist in structures.items()
+            }
+            for mdc, structures in self.repeated_hospitalizations_DO_distribution.items()
         }
 
-    def get_repeated_hospitalizations_do_probability(self, mdc: str):
-        if len(self.repeated_hospitalizations_do_probabilities[mdc]) <= 0:
+    def get_repeated_hospitalizations_do_probability(self, mdc: str, structure: str):
+        if len(self.repeated_hospitalizations_do_probabilities[mdc][structure]) <= 0:
             self.create_get_repeated_hospitalizations_do_probabilities()
-        return self.repeated_hospitalizations_do_probabilities[mdc].pop()
+        return self.repeated_hospitalizations_do_probabilities[mdc][structure].pop()

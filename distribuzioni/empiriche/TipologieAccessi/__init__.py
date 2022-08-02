@@ -24,7 +24,7 @@ def get_dataset(*columns: str):
     return df, mdcs
 
 
-def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
+def plot_data(data: pd.DataFrame, mdc: str):
     data = data.groupby(["CODICE STRUTTURA DI RICOVERO"], as_index=False).agg({
         "CODICE STRUTTURA DI RICOVERO": "last",
         "DESCRIZIONE STRUTTURA DI RICOVERO": "last",
@@ -37,6 +37,7 @@ def plot_data(data: pd.DataFrame, mdc: str, descrizione_mdc: str):
     data["RICOVERI DO"] /= data["TOTALE RICOVERI"]
     data["RICOVERI DH"] /= data["TOTALE RICOVERI"]
     data["RICOVERI DS"] /= data["TOTALE RICOVERI"]
+    data.fillna(0, inplace=True)
 
     os.makedirs(f"MDC_{mdc}", exist_ok=True)
     # Export CSV
@@ -52,7 +53,7 @@ def main():
         codice, descrizione = mdc["CODICE MDC"], mdc["DESCRIZIONE MDC"]
         print(i + 1, codice, descrizione)
         df_mdc = df[df["CODICE MDC"] == codice].drop(["CODICE MDC", "DESCRIZIONE MDC"], axis=1)
-        plot_data(df_mdc, codice, descrizione)
+        plot_data(df_mdc, codice)
 
 
 if __name__ == "__main__":
