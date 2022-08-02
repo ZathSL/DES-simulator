@@ -1,4 +1,4 @@
-from model import Mutation
+from model_oop.mutations import Mutation
 
 
 def mutations_example():

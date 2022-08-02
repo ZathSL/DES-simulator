@@ -37,7 +37,7 @@ class Patient(sim.Component):
             days_do -= 1
             days_counter += 1
             # se ho ancora giorni di degenza DO da scontare, controllo se devo eseguire dei ricoveri ripetuti
-            repeat = self.simulation.get_repeated_hospitalizations_do_probability(self.mdc) == 1
+            repeat = self.simulation.get_repeated_hospitalizations_do_probability(self.mdc, self.structure.code) == 1
             self.simulation.monitor_repeat_do[self.mdc].tally(repeat)
             if days_do > 0 and repeat:
                 self.days_do_array.append(days_counter)

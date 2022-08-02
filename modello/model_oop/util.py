@@ -1,8 +1,3 @@
-import timeit
-from datetime import timedelta
-from threading import Thread
-from time import sleep
-
 import pandas as pd
 from salabim import Pdf
 
@@ -27,20 +22,39 @@ def get_iat_distribution() -> dict[str, float]:
     return csv["INTERARRIVO IN GIORNI"].astype(float).to_dict()
 
 
-def get_hospitalization_type_distributions() -> dict[str, Pdf]:
-    csv_type = pd.read_csv("../distribuzioni/empiriche/TipologieAccessi/TipologieAccessiDistribution.csv",
-                           keep_default_na=False)
+def get_hospitalization_type_distributions(codici_mdc: list[str]) -> dict[str, dict[str, Pdf]]:
+    csvs = {
+        mdc: pd.read_csv(f"../distribuzioni/empiriche/TipologieAccessi/MDC_{mdc}/TipologieAccessiDistribution.csv",
+                         keep_default_na=False,
+                         dtype={
+                             "RICOVERI DO": float,
+                             "RICOVERI DH": float,
+                             "RICOVERI DS": float,
+                             "CODICE STRUTTURA DI RICOVERO": str,
+                         })
+        for mdc in codici_mdc
+    }
     return {
-        row["CODICE MDC"]: Pdf(("DO", "DH", "DS"), (row["RICOVERI DO"], row["RICOVERI DH"], row["RICOVERI DS"]))
-        for _, row in csv_type.iterrows()
+        mdc: {
+            row["CODICE STRUTTURA DI RICOVERO"]: Pdf(
+                ("DO", "DH", "DS"), (row["RICOVERI DO"], row["RICOVERI DH"], row["RICOVERI DS"])
+            )
+            for _, row in csv.iterrows()
+        }
+        for mdc, csv in csvs.items()
     }
 
 
-def get_repeated_hospitalizations_do_distribution() -> dict[str, float]:
-    csv = pd.read_csv("../distribuzioni/empiriche/RicoveriRipetuti/RicoveriRipetutiDistribution.csv",
-                      keep_default_na=False)
-    csv.set_index("CODICE MDC", inplace=True)
-    return csv["PROBABILITA RICOVERI RIPETUTI"].to_dict()
+def get_repeated_hospitalizations_do_distribution(codici_mdc: list[str]) -> dict[str, dict[str, float]]:
+    csvs = {
+        mdc: pd.read_csv(f"../distribuzioni/empiriche/RicoveriRipetuti/MDC_{mdc}/RicoveriRipetutiDistribution.csv",
+                         keep_default_na=False).set_index("CODICE STRUTTURA DI RICOVERO")
+        for mdc in codici_mdc
+    }
+    return {
+        mdc: csv["PROBABILITA RICOVERI RIPETUTI"].to_dict()
+        for mdc, csv in csvs.items()
+    }
 
 
 def get_accesses_per_hospitalization_distributions() -> tuple[dict[str, float], dict[str, float]]:
@@ -52,7 +66,7 @@ def get_accesses_per_hospitalization_distributions() -> tuple[dict[str, float], 
     return accessi_dh, accessi_ds
 
 
-def get_hospitalization_days_do_distributions(codici_mdc) -> dict[str, Pdf]:
+def get_hospitalization_days_do_distributions(codici_mdc: list[str]) -> dict[str, Pdf]:
     csvs = {
         mdc: pd.read_csv(f"../distribuzioni/empiriche/GiornateDegenzaDO/MDC_{mdc}/GiornateDegenzaDO-{mdc}.csv",
                          keep_default_na=False)
@@ -64,7 +78,7 @@ def get_hospitalization_days_do_distributions(codici_mdc) -> dict[str, Pdf]:
     }
 
 
-def get_structures_distributions(codici_mdc) -> tuple[dict[str, Pdf], dict[str, str]]:
+def get_structures_distributions(codici_mdc: list[str]) -> tuple[dict[str, Pdf], dict[str, str]]:
     strutture = {}
     csvs = {
         mdc: pd.read_csv(f"../distribuzioni/empiriche/Strutture/MDC_{mdc}/StruttureDistribution.csv",
@@ -81,23 +95,3 @@ def get_structures_distributions(codici_mdc) -> tuple[dict[str, Pdf], dict[str, 
         for mdc, csv in csvs.items()
     }
     return distributions, strutture
-
-
-class CodeTimer:
-    def __enter__(self):
-        self.start = timeit.default_timer()
-        self.running = True
-        self.thread = Thread(target=self.progress)
-        self.thread.start()
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.running = False
-        stop = timeit.default_timer()
-        print("\rTempo di esecuzione: ", timedelta(seconds=stop - self.start))
-
-    def progress(self):
-        while self.running:
-            delta = timedelta(seconds=timeit.default_timer() - self.start)
-            print("\rTempo di esecuzione: ", str(delta).split(".")[0], end="")
-            sleep(1)
-            print("\b", end="")
