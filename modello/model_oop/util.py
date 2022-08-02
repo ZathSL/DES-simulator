@@ -1,8 +1,3 @@
-import timeit
-from datetime import timedelta
-from threading import Thread
-from time import sleep
-
 import pandas as pd
 from salabim import Pdf
 
@@ -81,23 +76,3 @@ def get_structures_distributions(codici_mdc) -> tuple[dict[str, Pdf], dict[str, 
         for mdc, csv in csvs.items()
     }
     return distributions, strutture
-
-
-class CodeTimer:
-    def __enter__(self):
-        self.start = timeit.default_timer()
-        self.running = True
-        self.thread = Thread(target=self.progress)
-        self.thread.start()
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.running = False
-        stop = timeit.default_timer()
-        print("\rTempo di esecuzione: ", timedelta(seconds=stop - self.start))
-
-    def progress(self):
-        while self.running:
-            delta = timedelta(seconds=timeit.default_timer() - self.start)
-            print("\rTempo di esecuzione: ", str(delta).split(".")[0], end="")
-            sleep(1)
-            print("\b", end="")
