@@ -57,13 +57,20 @@ def get_repeated_hospitalizations_do_distribution(codici_mdc: list[str]) -> dict
     }
 
 
-def get_accesses_per_hospitalization_distributions() -> tuple[dict[str, float], dict[str, float]]:
-    csv = pd.read_csv("../distribuzioni/empiriche/AccessiPerRicovero/AccessiPerRicoveroDistribution.csv",
-                      keep_default_na=False)
-    csv.set_index("CODICE MDC", inplace=True)
-    accessi_dh = csv["ACCESSI PER RICOVERO DH"].to_dict()
-    accessi_ds = csv["ACCESSI PER RICOVERO DS"].to_dict()
-    return accessi_dh, accessi_ds
+def get_accesses_per_hospitalization_distributions(codici_mdc: list[str]) -> tuple[
+    dict[str, dict[str, float]], dict[str, dict[str, float]]]:
+    csvs = {
+        mdc: pd.read_csv(f"../distribuzioni/empiriche/AccessiPerRicovero/MDC_{mdc}/AccessiPerRicoveroDistribution.csv",
+                         keep_default_na=False).set_index("CODICE STRUTTURA DI RICOVERO")
+        for mdc in codici_mdc
+    }
+    return {
+               mdc: csv["ACCESSI PER RICOVERO DH"].to_dict()
+               for mdc, csv in csvs.items()
+           }, {
+               mdc: csv["ACCESSI PER RICOVERO DS"].to_dict()
+               for mdc, csv in csvs.items()
+           }
 
 
 def get_hospitalization_days_do_distributions(codici_mdc: list[str]) -> dict[str, Pdf]:

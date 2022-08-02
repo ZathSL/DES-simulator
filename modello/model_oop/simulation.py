@@ -20,8 +20,8 @@ class Simulation:
     hospitalization_type_distributions: dict[str, dict[str, sim.Pdf]]
     hospitalization_days_DO_distributions: dict[str, sim.Pdf]
     repeated_hospitalizations_DO_distribution: dict[str, dict[str, float]]
-    accesses_per_hospitalization_DH_distribution: dict[str, float]
-    accesses_per_hospitalization_DS_distribution: dict[str, float]
+    accesses_per_hospitalization_DH_distribution: dict[str, dict[str, float]]
+    accesses_per_hospitalization_DS_distribution: dict[str, dict[str, float]]
 
     repeated_hospitalizations_do_probabilities: dict[str, dict[str, list[float]]]
 
@@ -41,7 +41,7 @@ class Simulation:
         self.hospitalization_type_distributions = get_hospitalization_type_distributions(mdc_codes)
         self.hospitalization_days_DO_distributions = get_hospitalization_days_do_distributions(mdc_codes)
         self.accesses_per_hospitalization_DH_distribution, self.accesses_per_hospitalization_DS_distribution = \
-            get_accesses_per_hospitalization_distributions()
+            get_accesses_per_hospitalization_distributions(mdc_codes)
         self.repeated_hospitalizations_DO_distribution = get_repeated_hospitalizations_do_distribution(mdc_codes)
         self.create_get_repeated_hospitalizations_do_probabilities()
 
