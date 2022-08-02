@@ -20,6 +20,7 @@ def validate_mdc():
         "VARIANZA": concat.var(),
         "STD": concat.std(),
     }, orient="index")], axis=0)
+    concat.index.name = "MDC"
     concat.to_csv("mdc_distribution_diff.csv", float_format="%.15f", encoding="utf-8")
 
 
