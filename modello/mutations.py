@@ -20,13 +20,15 @@ def delete_5_biggest_structures():
     ]
 
 
+# eliminate le strutture con meno di 15.000 ricoveri, uno in ogni ats,
+# in una zona comunque fornita da altre strutture
 def delete_5_smallest_structures():
     return [
-        Mutation(type="structure", id="030070-00", ops={"delete": True}),
-        Mutation(type="structure", id="030071-00", ops={"delete": True}),
-        Mutation(type="structure", id="030071-01", ops={"delete": True}),
-        Mutation(type="structure", id="030075-00", ops={"delete": True}),
-        Mutation(type="structure", id="030079-00", ops={"delete": True})
+        Mutation(type="structure", id="030938-00", ops={"delete": True}),
+        Mutation(type="structure", id="030178-00", ops={"delete": True}),
+        Mutation(type="structure", id="030154-01", ops={"delete": True}),
+        Mutation(type="structure", id="030032-00", ops={"delete": True}),
+        Mutation(type="structure", id="030910-00", ops={"delete": True})
     ]
 
 
