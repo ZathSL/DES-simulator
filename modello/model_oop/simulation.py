@@ -95,6 +95,8 @@ class Simulation:
         }
 
     def get_repeated_hospitalizations_do_probability(self, mdc: str, structure: str):
+        if structure not in self.repeated_hospitalizations_do_probabilities[mdc]:
+            return 0.0
         if len(self.repeated_hospitalizations_do_probabilities[mdc][structure]) <= 0:
             self.create_get_repeated_hospitalizations_do_probabilities()
         return self.repeated_hospitalizations_do_probabilities[mdc][structure].pop()
