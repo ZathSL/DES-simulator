@@ -13,7 +13,7 @@ def validate_mdc():
     generated.set_index("MDC", inplace=True)
     generated = generated["FREQUENCY"].rename("GENERATO")
     concat = pd.concat([original, generated], axis=1)
-    concat["DIFF"] = np.absolute(concat["ORIGINALE"] - concat["GENERATO"])
+    concat["DIFF"] = np.absolute((concat["ORIGINALE"] - concat["GENERATO"]))/concat["ORIGINALE"] * 10
     concat.drop(["ORIGINALE", "GENERATO"], axis=1, inplace=True)
     concat = pd.concat([concat, pd.DataFrame.from_dict({
         "MEDIA": concat.mean(),
