@@ -1,5 +1,5 @@
-import numpy as np
 import pandas as pd
+from numpy import sqrt
 
 
 def calc_mdc_distribution_stats(name: str, runs: int):
@@ -37,9 +37,10 @@ def calc_hospitalization_type_stats(name: str, runs: int):
         df = df.transpose()
         df_mean = df.mean().rename(key + "_MEDIA")
         df_var = df.var().rename(key + "_VARIANZA")
-        df_lower_conf = (df_mean - (0.8159 * (np.sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA INFERIORE")
-        df_upper_conf = (df_mean + (0.8159 * (np.sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA SUPERIORE")
-        df = pd.concat([df_mean, df_var, df_lower_conf, df_upper_conf], axis=1)
+        df_std = df.std().rename(key + "_STD")
+        df_lower_conf = (df_mean - (0.8159 * (sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA INFERIORE")
+        df_upper_conf = (df_mean + (0.8159 * (sqrt(df_var / runs)))).rename(key + "_INTERVALLO CONFIDENZA SUPERIORE")
+        df = pd.concat([df_mean, df_var, df_std, df_lower_conf, df_upper_conf], axis=1)
         dfs.append(df)
     concat = pd.concat(dfs, axis=1)
     concat.sort_index(inplace=True)
@@ -62,18 +63,18 @@ def calc_hospitalization_type_stats(name: str, runs: int):
 
 
 def calc_beds_stats(name: str, runs: int):
+    calc_beds_stat(name, runs, "requesters")
+    calc_beds_stat(name, runs, "claimers")
+
+
+def calc_beds_stat(name: str, runs: int, stat_name: str):
     stats: list[pd.DataFrame] = []
     for i in range(runs):
-        csv = pd.read_csv(f"../statistiche/{name}/runs/{i}/stats_beds.csv", keep_default_na=False,
-                          index_col="VARIABILE CALCOLATA").transpose()
+        csv = pd.read_csv(f"../statistiche/{name}/runs/{i}/stats_beds_{stat_name}.csv", keep_default_na=False,
+                          index_col="STRUTTURA")
         stats.append(csv)
-    dfs = []
-    for key in stats[0].columns:
-        df = pd.concat((df[key].rename(str(i)).astype(float) for i, df in enumerate(stats)), axis=1)
-        df = df.transpose().mean().rename(key)
-        dfs.append(df)
-    frame = pd.concat(dfs, axis=1).transpose()
-    frame.index.name = "VARIABILE CALCOLATA"
-    frame["INTERVALLO CONFIDENZA INFERIORE"] = frame["MEDIA"] - (0.8159 * (np.sqrt(frame["VARIANZA"] / runs)))
-    frame["INTERVALLO CONFIDENZA SUPERIORE"] = frame["MEDIA"] + (0.8159 * (np.sqrt(frame["VARIANZA"] / runs)))
-    frame.to_csv(f"../statistiche/{name}/stats_beds_mean.csv", float_format="%.15f", encoding="utf-8")
+    frame = pd.concat((df["MEDIA"].rename(f"RUN {i}").astype(float) for i, df in enumerate(stats)), axis=1)
+    frame["MEDIA"], frame["VARIANZA"], frame["STD"] = frame.mean(axis=1), frame.var(axis=1), frame.std(axis=1)
+    frame["INTERVALLO CONFIDENZA INFERIORE"] = frame["MEDIA"] - (0.8159 * (sqrt(frame["VARIANZA"] / runs)))
+    frame["INTERVALLO CONFIDENZA SUPERIORE"] = frame["MEDIA"] + (0.8159 * (sqrt(frame["VARIANZA"] / runs)))
+    frame.to_csv(f"../statistiche/{name}/stats_beds_{stat_name}_mean.csv", float_format="%.15f", encoding="utf-8")

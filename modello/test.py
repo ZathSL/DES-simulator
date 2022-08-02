@@ -22,8 +22,13 @@ def test(runs: range, duration: int, name: str, mutations, stats: bool):
 def test_parallel(runs: range, duration: int, name: str, mutations):
     if mutations is None:
         mutations = []
+    processes = []
     for run in runs:
-        multiprocessing.Process(target=run_simulation, args=(run, duration, name, mutations)).start()
+        process = multiprocessing.Process(target=run_simulation, args=(run, duration, name, mutations))
+        processes.append(process)
+        process.start()
+    for process in processes:
+        process.join()
 
 
 def calc_stats(name: str, runs: int):
